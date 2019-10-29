@@ -1,2 +1,2 @@
 # Shopware-plugin
-Repository containing the shopware plugin by Buckaroo
+Repository containing the Shopware plugin by Buckaroo
