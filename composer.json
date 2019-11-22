@@ -1,0 +1,11 @@
+{
+	"name": "buckaroo/payment",
+	"type": "shopware-plugin",
+	"description": "Buckaroo payment provider plugin for Shopware",
+    "scripts": {
+    	"test": "../../../vendor/bin/phpunit"
+    },
+    "require": {
+        "cmpayments/iban": "^1.1"
+    }
+}

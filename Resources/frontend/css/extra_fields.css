@@ -1,0 +1,34 @@
+/**
+ * Input
+ */
+.buckaroo-input-wrapper {
+	margin-bottom: 10px;
+}
+
+.buckaroo-label {
+	float: left;
+	line-height: 40px;
+	width: 40%;
+}
+
+.buckaroo-input {
+	width: 60%;
+}
+
+
+/**
+ * Errors
+ */
+.buckaroo-errors-wrapper {
+	float: left;
+	width: 100%;
+}
+
+.buckaroo-error-message {
+	color: #e74c3c;
+	margin-bottom: 10px;
+}
+
+.buckaroo-has-error {
+	border: 1px solid #e74c3c !important;
+}

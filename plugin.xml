@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+
+    <label lang="en">Buckaroo</label>
+    <label lang="de">Buckaroo</label>
+
+    <version>1.10.4</version>
+    <copyright>(c) Buckaroo B.V.</copyright>
+    <author>Buckaroo</author>
+    <link>https://www.buckaroo.nl</link>
+
+    <compatibility minVersion="5.2.13"/>
+
+    <changelog version="1.0.0">
+        <changes lang="de">Erste Version</changes>
+        <changes lang="en">First version</changes>
+    </changelog>
+
+    <changelog version="1.1.0">
+        <changes lang="de">Erste Version</changes>
+        <changes lang="en">First version</changes>
+    </changelog>
+
+    <changelog version="1.2.0">
+        <changes lang="de">
+            - Implemented new Payment methods 
+                - Carte Bleue
+                - Carte Bancaire 
+            - Implemented partial refund functionality for all applicable payment methods.
+            - Code optimizations, Refatoring, Renaming.
+            - Implemented new configuration options        
+        </changes>
+        <changes lang="en">
+            - Implemented new Payment methods 
+                - Carte Bleue
+                - Carte Bancaire 
+            - Implemented partial refund functionality for all applicable payment methods.
+            - Code optimizations, Refatoring, Renaming.
+            - Implemented new configuration options        
+        </changes>
+    </changelog>
+
+    <changelog version="1.3.0">
+        <changes lang="de">
+            Implemented partial capture for
+                - Klarna
+                - Afterpay
+                - Achteraf betalen
+            - Implemented new Payment methods 
+                - Payconiq
+                - Giftcard        
+        </changes>
+        <changes lang="en">
+            Implemented partial capture for
+                - Klarna
+                - Afterpay
+                - Achteraf betalen
+            - Implemented new Payment methods 
+                - Payconiq
+                - Giftcard         
+        </changes>
+    </changelog>
+
+    <changelog version="1.3.1">
+        <changes lang="de">Fixed issue with model name.</changes>
+        <changes lang="en">Fixed issue with model name.</changes>
+    </changelog>
+
+    <changelog version="1.4.0">
+        <changes lang="de">Improved Shopware compatibility with the Community-Store.</changes>
+        <changes lang="en">Improved Shopware compatibility with the Community-Store.</changes>
+    </changelog>
+
+    <changelog version="1.4.1">
+        <changes lang="de">
+            Bug fixes
+                - refund push messages.
+                - Order push messages.
+                - Confirmation email after the payment is completed.
+                - Several small fixes     
+        </changes>
+        <changes lang="en">
+            Bug fixes
+                - refund push messages.
+                - Order push messages.
+                - Confirmation email after the payment is completed.
+                - Several small fixes             
+        </changes>
+    </changelog>
+
+
+    <changelog version="1.4.2">
+        <changes lang="de">
+            Bug fixes
+                - Fix for failed push message in rare scenarios for Klarna reserve action.
+                - Fixed region error in multistore environments on push receive.
+        </changes>
+        <changes lang="en">
+            Bug fixes
+                - Fix for failed push message in rare scenarios for Klarna reserve action.  
+                - Fixed region error in multistore environments on push receive.
+        </changes>
+    </changelog>
+
+    <changelog version="1.5.0">
+        <changes lang="de">
+            - Added 5 new payment methods:
+                - Nexi
+                - Maestro
+                - Visa Electron
+                - VPay
+                - Dankort
+            - Fixed Paypay issue with Italian billing address.
+        </changes>
+        <changes lang="en">
+            - Added 5 new payment methods:
+                - Nexi
+                - Maestro
+                - Visa Electron
+                - VPay
+                - Dankort
+            - Fixed Paypay issue with Italian billing address.
+        </changes>
+    </changelog>
+
+    <changelog version="1.6.0">
+        <changes lang="de">
+            - Shopware 5.5.6 compatibility.
+            - Removed BIC, IBAN and Chamber of commerce fields from register form.
+        </changes>
+        <changes lang="en">
+            - Shopware 5.5.6 compatibility.
+            - Removed BIC, IBAN and Chamber of commerce fields from register form.
+        </changes>
+    </changelog>
+
+    <changelog version="1.7.0">
+        <changes lang="de">
+            - Structural changes in the plugin due to Shopware 5.5.7 version update.
+            - Billing and shipping extra fields validation is done while selecting payment method.
+            - Stock gets reserved when customer initiates payment process.
+            - Klarna auto capture is supported if enabled in Merchant Buckaroo account.
+            - API messages made translatable via backend snippet manager.
+            - All build in extra field validation messages made translatable via backend snippet manager.
+        </changes>
+        <changes lang="en">
+            - Structural changes in the plugin due to Shopware 5.5.7 version update.
+            - Billing and shipping extra fields validation is done while selecting payment method.
+            - Stock gets reserved when customer initiates payment process.
+            - Klarna auto capture is supported if enabled in Merchant Buckaroo account.
+            - API messages made translatable via backend snippet manager.
+            - All build in extra field validation messages made translatable via backend snippet manager.
+        </changes>
+    </changelog>
+
+    <changelog version="1.8.0">
+        <changes lang="de">
+            - New payment method Afterpay (new version) added.
+        </changes>
+        <changes lang="en">
+            - New payment method Afterpay (new version) added.
+        </changes>
+    </changelog>
+
+    <changelog version="1.8.1">
+        <changes lang="de">
+            - Improving Shopware 5.5.8 compatibility.
+            - Solved issue with Payconiq push message.
+        </changes>
+        <changes lang="en">
+            - Improving Shopware 5.5.8 compatibility.
+            - Solved issue with Payconiq push message.
+        </changes>
+    </changelog>
+
+    <changelog version="1.8.2">
+        <changes lang="de">
+            - Implemented Klarna auto capture push url based on module settings in instead of the push url settings in the Buckaroo plaza. 
+            - Implemented change so empty housenumber extension is not send to AfterPay for Belgium adresses.
+            - Improved Belgium phonenumber formatting and validation
+        </changes>
+        <changes lang="en">
+            - Implemented Klarna auto capture push url based on module settings in instead of the push url in the Buckaroo plaza. 
+            - Implemented change that housenumber extensions are not send to AfterPay for Belgium adresses.
+            - Improved Belgium phonenumber formatting and validation
+        </changes>
+    </changelog>
+
+    <changelog version="1.9.0">
+        <changes lang="de">
+            - Implementation of inline credit card payments
+        </changes>
+        <changes lang="en">
+            - Implementation of inline credit card payments
+        </changes>
+    </changelog>
+
+    <changelog version="1.10.0">
+        <changes lang="de">
+            - Implementation of Apple Pay
+        </changes>
+        <changes lang="en">
+            - Implementation of Apple Pay
+        </changes>
+    </changelog>
+
+    <changelog version="1.10.1">
+        <changes lang="de">
+            - Fixed issue on new installations with adding Ideal database columns. 
+        </changes>
+        <changes lang="en">
+            - Fixed issue on new installations with adding Ideal database columns. 
+        </changes>
+    </changelog>
+
+    <changelog version="1.10.2">
+        <changes lang="de">
+            - Fixed issue where in some scenarios / specific installations the order is stored in the wrong store. 
+        </changes>
+        <changes lang="en">
+            - Fixed issue where in some scenarios / specific installations the order is stored in the wrong store. 
+        </changes>
+    </changelog>
+
+    <changelog version="1.10.3">
+        <changes lang="de">
+            - Modify the error messages so that they are understood by the user.
+            - Add a restriction on the payment method so that it is allowed depending on the minimum and maximum limit of the order amount.
+            - Fix wrong error message when no bank is selected with iDeal.
+            - Add "CustomerCardName" parameter to API call based on SDK response.
+            - ApplePay don't calculate shipping costs for downloadable products.
+            - Klarna, add shipping phonenumber to validation.
+            - Shopware 5.6 compatibility.
+        </changes>
+        <changes lang="en">
+            - Modify the error messages so that they are understood by the user.
+            - Add a restriction on the payment method so that it is allowed depending on the minimum and maximum limit of the order amount.
+            - Fix wrong error message when no bank is selected with iDeal.
+            - Add "CustomerCardName" parameter to API call based on SDK response.
+            - ApplePay don't calculate shipping costs for downloadable products.
+            - Klarna, add shipping phonenumber to validation.
+            - Shopware 5.6 compatibility.
+        </changes>
+    </changelog>
+
+    <changelog version="1.10.4">
+        <changes lang="de">
+            - afterpay(new) Fix target checkout url based on environment(test/live).
+        </changes>
+        <changes lang="en">
+            - afterpay(new) Fix target checkout url based on environment(test/live).
+        </changes>
+    </changelog>    
+
+</plugin>
+
+
+
+    

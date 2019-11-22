@@ -1,0 +1,1438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+
+        <element required="true" type="text" scope="shop">
+            <name>buckaroo_websiteKey</name>
+            <label lang="de">Website key</label>
+            <label lang="en">Website key</label>
+            <label lang="nl">Website key</label>
+            <description lang="de">Website key</description>
+            <description lang="en">Website key</description>
+            <description lang="nl">Website key</description>
+        </element>
+
+        <element required="true" type="text" scope="shop">
+            <name>buckaroo_secretKey</name>
+            <label lang="de">Secret key</label>
+            <label lang="en">Secret key</label>
+            <label lang="nl">Secret key</label>
+            <description lang="de">Secret key</description>
+            <description lang="en">Secret key</description>
+            <description lang="nl">Secret key</description>
+        </element>
+
+        <element required="true" type="text" scope="shop">
+            <name>buckaroo_giftCards</name>
+            <label lang="de">Gift Cards</label>
+            <label lang="en">Gift Cards</label>
+            <label lang="nl">Gift Cards</label>
+            <value>ideal,boekenbon,digitalebioscoopbon,fashioncheque,ippies,nationaleentertainmentcard,podiumcadeaukaart,vvvgiftcard,webshopgiftcard,yourgift</value>
+            <description lang="de">Gift Cards, comma separated</description>
+            <description lang="en">Gift Cards, comma separated</description>
+            <description lang="nl">Gift Cards, comma separated</description>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_environment</name>
+            <label lang="de">Environment</label>
+            <label lang="en">Environment</label>
+            <label lang="nl">Environment</label>
+            <value>test</value>
+            <description lang="de">Environment</description>
+            <description lang="en">Environment</description>
+            <description lang="nl">Environment</description>
+            <store>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_ideal_env</name>
+            <label lang="de">iDEAL</label>
+            <label lang="en">iDEAL</label>
+            <label lang="nl">iDEAL</label>
+            <value>test</value>
+            <description lang="de">iDEAL</description>
+            <description lang="en">iDEAL</description>
+            <description lang="nl">iDEAL</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_giropay_env</name>
+            <label lang="de">Giropay</label>
+            <label lang="en">Giropay</label>
+            <label lang="nl">Giropay</label>
+            <value>test</value>
+            <description lang="de">Giropay</description>
+            <description lang="en">Giropay</description>
+            <description lang="nl">Giropay</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_amex_env</name>
+            <label lang="de">American Express</label>
+            <label lang="en">American Express</label>
+            <label lang="nl">American Express</label>
+            <value>test</value>
+            <description lang="de">American Express</description>
+            <description lang="en">American Express</description>
+            <description lang="nl">American Express</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_cartebancaire_env</name>
+            <label lang="de">Carte Bancaire</label>
+            <label lang="en">Cartes Bancaires</label>
+            <label lang="nl">Cartes Bancaires</label>
+            <value>test</value>
+            <description lang="de">Carte Bancaire</description>
+            <description lang="en">Carte Bancaire</description>
+            <description lang="nl">Carte Bancaire</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_cartebleue_env</name>
+            <label lang="de">Carte Bleue</label>
+            <label lang="en">Carte Bleue</label>
+            <label lang="nl">Carte Bleue</label>
+            <value>test</value>
+            <description lang="de">Carte Bleue</description>
+            <description lang="en">Carte Bleue</description>
+            <description lang="nl">Carte Bleue</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_giftcard_env</name>
+            <label lang="de">Giftcard</label>
+            <label lang="en">Giftcard</label>
+            <label lang="nl">Giftcard</label>
+            <value>test</value>
+            <description lang="de">Giftcard</description>
+            <description lang="en">Giftcard</description>
+            <description lang="nl">Giftcard</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_mastercard_env</name>
+            <label lang="de">MasterCard</label>
+            <label lang="en">MasterCard</label>
+            <label lang="nl">MasterCard</label>
+            <value>test</value>
+            <description lang="de">MasterCard</description>
+            <description lang="en">MasterCard</description>
+            <description lang="nl">MasterCard</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_visa_env</name>
+            <label lang="de">Visa</label>
+            <label lang="en">Visa</label>
+            <label lang="nl">Visa</label>
+            <value>test</value>
+            <description lang="de">Visa</description>
+            <description lang="en">Visa</description>
+            <description lang="nl">Visa</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_dankort_env</name>
+            <label lang="de">Dankort</label>
+            <label lang="en">Dankort</label>
+            <label lang="nl">Dankort</label>
+            <value>test</value>
+            <description lang="de">Dankort</description>
+            <description lang="en">Dankort</description>
+            <description lang="nl">Dankort</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_maestro_env</name>
+            <label lang="de">Maestro</label>
+            <label lang="en">Maestro</label>
+            <label lang="nl">Maestro</label>
+            <value>test</value>
+            <description lang="de">Maestro</description>
+            <description lang="en">Maestro</description>
+            <description lang="nl">Maestro</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_nexi_env</name>
+            <label lang="de">Nexi</label>
+            <label lang="en">Nexi</label>
+            <label lang="nl">Nexi</label>
+            <value>test</value>
+            <description lang="de">Nexi</description>
+            <description lang="en">Nexi</description>
+            <description lang="nl">Nexi</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_vpay_env</name>
+            <label lang="de">Vpay</label>
+            <label lang="en">Vpay</label>
+            <label lang="nl">Vpay</label>
+            <value>test</value>
+            <description lang="de">Vpay</description>
+            <description lang="en">Vpay</description>
+            <description lang="nl">Vpay</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_visaelectron_env</name>
+            <label lang="de">Visa Electron</label>
+            <label lang="en">Visa Electron</label>
+            <label lang="nl">Visa Electron</label>
+            <value>test</value>
+            <description lang="de">Visa Electron</description>
+            <description lang="en">Visa Electron</description>
+            <description lang="nl">Visa Electron</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_paypal_env</name>
+            <label lang="de">PayPal</label>
+            <label lang="en">PayPal</label>
+            <label lang="nl">PayPal</label>
+            <value>test</value>
+            <description lang="de">PayPal</description>
+            <description lang="en">PayPal</description>
+            <description lang="nl">PayPal</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_bancontact_env</name>
+            <label lang="de">Bancontact</label>
+            <label lang="en">Bancontact</label>
+            <label lang="nl">Bancontact</label>
+            <value>test</value>
+            <description lang="de">Bancontact</description>
+            <description lang="en">Bancontact</description>
+            <description lang="nl">Bancontact</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_sofort_env</name>
+            <label lang="de">Sofort</label>
+            <label lang="en">Sofort</label>
+            <label lang="nl">Sofort</label>
+            <value>test</value>
+            <description lang="de">Sofort</description>
+            <description lang="en">Sofort</description>
+            <description lang="nl">Sofort</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_eps_env</name>
+            <label lang="de">EPS</label>
+            <label lang="en">EPS</label>
+            <label lang="nl">EPS</label>
+            <value>test</value>
+            <description lang="de">EPS</description>
+            <description lang="en">EPS</description>
+            <description lang="nl">EPS</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_klarna_env</name>
+            <label lang="de">Klarna</label>
+            <label lang="en">Klarna</label>
+            <label lang="nl">Klarna</label>
+            <value>test</value>
+            <description lang="de">Klarna</description>
+            <description lang="en">Klarna</description>
+            <description lang="nl">Klarna</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_payconiq_env</name>
+            <label lang="de">Payconiq</label>
+            <label lang="en">Payconiq</label>
+            <label lang="nl">Payconiq</label>
+            <value>test</value>
+            <description lang="de">Payconiq</description>
+            <description lang="en">Payconiq</description>
+            <description lang="nl">Payconiq</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_p24_env</name>
+            <label lang="de">Przelewy24</label>
+            <label lang="en">Przelewy24</label>
+            <label lang="nl">Przelewy24</label>
+            <value>test</value>
+            <description lang="de">Przelewy24</description>
+            <description lang="en">Przelewy24</description>
+            <description lang="nl">Przelewy24</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_kbc_env</name>
+            <label lang="de">KBC/CBC</label>
+            <label lang="en">KBC/CBC</label>
+            <label lang="nl">KBC/CBC</label>
+            <value>test</value>
+            <description lang="de">KBC/CBC</description>
+            <description lang="en">KBC/CBC</description>
+            <description lang="nl">KBC/CBC</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_klarna_pay_invoice_send</name>
+            <label lang="de">Klarna invoice</label>
+            <label lang="en">Klarna invoice</label>
+            <label lang="nl">Klarna invoice</label>
+            <value>email</value>
+            <description lang="de">Klarna invoice</description>
+            <description lang="en">Klarna invoice</description>
+            <description lang="nl">Klarna invoice</description>
+            <store>
+                <option>
+                    <value>mail</value>
+                    <label lang="de">Per Post senden</label>
+                    <label lang="en">Send by mail</label>
+                    <label lang="nl">Stuur via de post</label>
+                </option>
+                <option>
+                    <value>email</value>
+                    <label lang="de">E-Mail senden</label>
+                    <label lang="en">Send e-mail</label>
+                    <label lang="nl">Stuur e-mail</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpay_env</name>
+            <label lang="de">Afterpay (old)</label>
+            <label lang="en">Afterpay (old)</label>
+            <label lang="nl">Afterpay (old)</label>
+            <value>test</value>
+            <description lang="de">Afterpay (old)</description>
+            <description lang="en">Afterpay (old)</description>
+            <description lang="nl">Afterpay (old)</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpaynew_env</name>
+            <label lang="de">Afterpay (new)</label>
+            <label lang="en">Afterpay (new)</label>
+            <label lang="nl">Afterpay (new)</label>
+            <value>test</value>
+            <description lang="de">Afterpay (new)</description>
+            <description lang="en">Afterpay (new)</description>
+            <description lang="nl">Afterpay (new)</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_applepay_env</name>
+            <label lang="de">Apple Pay</label>
+            <label lang="en">Apple Pay</label>
+            <label lang="nl">Apple Pay</label>
+            <value>test</value>
+            <description lang="de">Apple Pay</description>
+            <description lang="en">Apple Pay</description>
+            <description lang="nl">Apple Pay</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpay_handling</name>
+            <label lang="de">Afterpay methode (old)</label>
+            <label lang="en">Afterpay method (old)</label>
+            <label lang="nl">Afterpay methode (old)</label>
+            <value>pay</value>
+            <description lang="de">Afterpay methode (old)</description>
+            <description lang="en">Afterpay method (old)</description>
+            <description lang="nl">Afterpay method (old)</description>
+            <store>
+                <option>
+                    <value>pay</value>
+                    <label lang="de">Pay</label>
+                    <label lang="en">Pay</label>
+                    <label lang="nl">Pay</label>
+                </option>
+                <option>
+                    <value>authorize_capture</value>
+                    <label lang="de">Authorize/Capture</label>
+                    <label lang="en">Authorize/Capture</label>
+                    <label lang="nl">Authorize/Capture</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_creditcard_handling</name>
+            <label lang="de">Creditcard methode</label>
+            <label lang="en">Creditcard method</label>
+            <label lang="nl">Creditcard methode</label>
+            <value>redirect</value>
+            <description lang="de">Creditcard methode</description>
+            <description lang="en">Creditcard method</description>
+            <description lang="nl">Creditcard method</description>
+            <store>
+                <option>
+                    <value>redirect</value>
+                    <label lang="de">Redirect</label>
+                    <label lang="en">Redirect</label>
+                    <label lang="nl">Redirect</label>
+                </option>
+                <option>
+                    <value>encrypt</value>
+                    <label lang="de">Encrypt</label>
+                    <label lang="en">Encrypt</label>
+                    <label lang="nl">Encrypt</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpay_new_handling</name>
+            <label lang="de">Afterpay methode (new)</label>
+            <label lang="en">Afterpay method (new)</label>
+            <label lang="nl">Afterpay methode (new)</label>
+            <value>pay</value>
+            <description lang="de">Afterpay methode (new)</description>
+            <description lang="en">Afterpay method (new)</description>
+            <description lang="nl">Afterpay method (new)</description>
+            <store>
+                <option>
+                    <value>pay</value>
+                    <label lang="de">Pay</label>
+                    <label lang="en">Pay</label>
+                    <label lang="nl">Pay</label>
+                </option>
+                <option>
+                    <value>authorize_capture</value>
+                    <label lang="de">Authorize/Capture</label>
+                    <label lang="en">Authorize/Capture</label>
+                    <label lang="nl">Authorize/Capture</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_send_status_mail</name>
+            <label lang="de">Statusmail senden</label>
+            <label lang="en">Send status mail</label>
+            <label lang="nl">Stuur status e-mail</label>
+            <value>yes</value>
+            <description lang="de">Statusmail senden</description>
+            <description lang="en">Send status mail</description>
+            <description lang="nl">Stuur status e-mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_send_refund_status_mail</name>
+            <label lang="de">Erstattungsstatus senden</label>
+            <label lang="en">Send refund status mail</label>
+            <label lang="nl">Stuur restitutiestatus mail</label>
+            <value>yes</value>
+            <description lang="de">Erstattungsstatus senden</description>
+            <description lang="en">Send refund status mail</description>
+            <description lang="nl">Stuur restitutiestatus mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_klarna_send_pay_status_mail</name>
+            <label lang="de">Senden Klarna Pay Status Mail</label>
+            <label lang="en">Send Klarna pay status mail</label>
+            <label lang="nl">Verstuur Klarna betaalstatus mail</label>
+            <value>yes</value>
+            <description lang="de">Senden Klarna Pay Status Mail</description>
+            <description lang="en">Send Klarna pay status mail</description>
+            <description lang="nl">Verstuur Klarna betaalstatus mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_klarna_send_cancel_status_mail</name>
+            <label lang="de">Senden Sie Klarna Stornierungs-Reservierungsstatus E-Mail</label>
+            <label lang="en">Send Klarna cancel reservation status mail</label>
+            <label lang="nl">Verstuur Klarna annuleer reservatie status mail</label>
+            <value>yes</value>
+            <description lang="de">Senden Sie Klarna Stornierungs-Reservierungsstatus E-Mail</description>
+            <description lang="en">Send Klarna cancel reservation status mail</description>
+            <description lang="nl">Verstuur Klarna annuleer reservatie status mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpay_send_capture_status_mail</name>
+            <label lang="de">Senden Afterpay capture Status Mail</label>
+            <label lang="en">Send Afterpay capture status mail</label>
+            <label lang="nl">Verstuur Afterpay capture mail</label>
+            <value>yes</value>
+            <description lang="de">Senden Afterpay capture Status Mail</description>
+            <description lang="en">Send Afterpay capture status mail</description>
+            <description lang="nl">Verstuur Afterpay capture mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_afterpay_send_cancel_status_mail</name>
+            <label lang="de">Senden Sie die Afterpay Autorisierungsstatus E-Mail</label>
+            <label lang="en">Send Afterpay cancel authorization status mail</label>
+            <label lang="nl">Verstuur Afterpay annuleer authorisatie status mail</label>
+            <value>yes</value>
+            <description lang="de">Senden Sie die Afterpay Autorisierungsstatus E-Mail</description>
+            <description lang="en">Send Afterpay cancel authorization status mail</description>
+            <description lang="nl">Verstuur Afterpay annuleer authorisatie status mail</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_use_additional_address_field</name>
+            <label lang="de">Use additional address field</label>
+            <label lang="en">Use additional address field</label>
+            <label lang="nl">Use additional address field</label>
+            <value>yes</value>
+            <description lang="de">Use additional address field</description>
+            <description lang="en">Use additional address field</description>
+            <description lang="nl">Use additional address field</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_guarantee_payment_invite</name>
+            <label lang="de">AchterafBetalen method</label>
+            <label lang="en">AchterafBetalen method</label>
+            <label lang="nl">AchterafBetalen method</label>
+            <value>yes</value>
+            <description lang="de">AchterafBetalen method</description>
+            <description lang="en">AchterafBetalen method</description>
+            <description lang="nl">AchterafBetalen method</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Payment Invitation</label>
+                    <label lang="en">Payment Invitation</label>
+                    <label lang="nl">Payment Invitation</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Separate Order and Invoice</label>
+                    <label lang="en">Separate Order and Invoice</label>
+                    <label lang="nl">Separate Order and Invoice</label>
+                </option>
+            </store>
+        </element>
+
+        <element required="true" type="text" scope="shop">
+            <name>buckaroo_female_salutations</name>
+            <label lang="de">Weibliche Anrede</label>
+            <label lang="en">Female salutations</label>
+            <label lang="nl">Vrouwelijke begroetingen</label>
+            <value>mrs, ms, miss, ma'am, frau, mevrouw, mevr</value>
+            <description lang="de">Weibliche Anrede</description>
+            <description lang="en">Female salutations</description>
+            <description lang="nl">Vrouwelijke begroetingen</description>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_applepay_show_product</name>
+            <label lang="de">Show Apple Pay button on product page</label>
+            <label lang="en">Show Apple Pay button on product page</label>
+            <label lang="nl">Show Apple Pay button on product page</label>
+            <value>yes</value>
+            <description lang="de">Allow the user to place an order from the product page.</description>
+            <description lang="en">Allow the user to place an order from the product page.</description>
+            <description lang="nl">Allow the user to place an order from the product page.</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_applepay_show_cart</name>
+            <label lang="de">Show Apple Pay button in the cart</label>
+            <label lang="en">Show Apple Pay button in the cart</label>
+            <label lang="nl">Show Apple Pay button in the cart</label>
+            <value>yes</value>
+            <description lang="de">Allow the user to place an order from the cart page.</description>
+            <description lang="en">Allow the user to place an order from the cart page.</description>
+            <description lang="nl">Allow the user to place an order from the cart page.</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_applepay_show_checkout</name>
+            <label lang="de">Show Apple Pay button in the checkout</label>
+            <label lang="en">Show Apple Pay button in the checkout</label>
+            <label lang="nl">Show Apple Pay button in the checkout</label>
+            <value>yes</value>
+            <description lang="de">Allow the user to place an order from the checkout page.</description>
+            <description lang="en">Allow the user to place an order from the checkout page.</description>
+            <description lang="nl">Allow the user to place an order from the checkout page.</description>
+            <store>
+                <option>
+                    <value>yes</value>
+                    <label lang="de">Ja</label>
+                    <label lang="en">Yes</label>
+                    <label lang="nl">Ja</label>
+                </option>
+                <option>
+                    <value>no</value>
+                    <label lang="de">Nein</label>
+                    <label lang="en">No</label>
+                    <label lang="nl">Nee</label>
+                </option>
+            </store>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_ideal_min_order_amount</name>
+            <label lang="de">Ideal min order amount</label>
+            <label lang="en">Ideal min order amount</label>
+            <label lang="nl">Ideal min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_ideal_max_order_amount</name>
+            <label lang="de">Ideal max order amount</label>
+            <label lang="en">Ideal max order amount</label>
+            <label lang="nl">Ideal max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpaydigiaccept_min_order_amount</name>
+            <label lang="de">AfterPayDigiAccept min order amount</label>
+            <label lang="en">AfterPayDigiAccept min order amount</label>
+            <label lang="nl">AfterPayDigiAccept min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpaydigiaccept_max_order_amount</name>
+            <label lang="de">AfterPayDigiAccept max order amount</label>
+            <label lang="en">AfterPayDigiAccept max order amount</label>
+            <label lang="nl">AfterPayDigiAccept max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpayb2bdigiaccept_min_order_amount</name>
+            <label lang="de">Afterpayb2bdigiaccept min order amount</label>
+            <label lang="en">Afterpayb2bdigiaccept min order amount</label>
+            <label lang="nl">Afterpayb2bdigiaccept min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpayb2bdigiaccept_max_order_amount</name>
+            <label lang="de">Afterpayb2bdigiaccept max order amount</label>
+            <label lang="en">Afterpayb2bdigiaccept max order amount</label>
+            <label lang="nl">Afterpayb2bdigiaccept max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpayacceptgiro_min_order_amount</name>
+            <label lang="de">afterpayacceptgiro min order amount</label>
+            <label lang="en">afterpayacceptgiro min order amount</label>
+            <label lang="nl">afterpayacceptgiro min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpayacceptgiro_max_order_amount</name>
+            <label lang="de">afterpayacceptgiro max order amount</label>
+            <label lang="en">afterpayacceptgiro max order amount</label>
+            <label lang="nl">afterpayacceptgiro max order amount</label>
+        </element>
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpaynew_min_order_amount</name>
+            <label lang="de">Afterpay min order amount</label>
+            <label lang="en">Afterpay min order amount</label>
+            <label lang="nl">Afterpay min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_afterpaynew_max_order_amount</name>
+            <label lang="de">Afterpay max order amount</label>
+            <label lang="en">Afterpay max order amount</label>
+            <label lang="nl">Afterpay max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_amex_min_order_amount</name>
+            <label lang="de">Amex min order amount</label>
+            <label lang="en">Amex min order amount</label>
+            <label lang="nl">Amex min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_amex_max_order_amount</name>
+            <label lang="de">Amex max order amount</label>
+            <label lang="en">Amex max order amount</label>
+            <label lang="nl">Amex max order amount</label>
+        </element>
+
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_bancontact_min_order_amount</name>
+            <label lang="de">Bancontact min order amount</label>
+            <label lang="en">Bancontact min order amount</label>
+            <label lang="nl">Bancontact min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_bancontact_max_order_amount</name>
+            <label lang="de">Bancontact max order amount</label>
+            <label lang="en">Bancontact max order amount</label>
+            <label lang="nl">Bancontact max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_cartebancaire_min_order_amount</name>
+            <label lang="de">cartebancaire min order amount</label>
+            <label lang="en">cartebancaire min order amount</label>
+            <label lang="nl">cartebancaire min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_cartebancaire_max_order_amount</name>
+            <label lang="de">cartebancaire max order amount</label>
+            <label lang="en">cartebancaire max order amount</label>
+            <label lang="nl">cartebancaire max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_cartebleue_min_order_amount</name>
+            <label lang="de">cartebleue min order amount</label>
+            <label lang="en">cartebleue min order amount</label>
+            <label lang="nl">cartebleue min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_cartebleue_max_order_amount</name>
+            <label lang="de">cartebleue max order amount</label>
+            <label lang="en">cartebleue max order amount</label>
+            <label lang="nl">cartebleue max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_giftcard_min_order_amount</name>
+            <label lang="de">giftcard min order amount</label>
+            <label lang="en">giftcard min order amount</label>
+            <label lang="nl">giftcard min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_giftcard_max_order_amount</name>
+            <label lang="de">giftcard max order amount</label>
+            <label lang="en">giftcard max order amount</label>
+            <label lang="nl">giftcard max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_mastercard_min_order_amount</name>
+            <label lang="de">mastercard min order amount</label>
+            <label lang="en">mastercard min order amount</label>
+            <label lang="nl">mastercard min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_mastercard_max_order_amount</name>
+            <label lang="de">mastercard max order amount</label>
+            <label lang="en">mastercard max order amount</label>
+            <label lang="nl">mastercard max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_visa_min_order_amount</name>
+            <label lang="de">Visa min order amount</label>
+            <label lang="en">Visa min order amount</label>
+            <label lang="nl">Visa min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_visa_max_order_amount</name>
+            <label lang="de">Visa max order amount</label>
+            <label lang="en">Visa max order amount</label>
+            <label lang="nl">Visa max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_eps_min_order_amount</name>
+            <label lang="de">Eps min order amount</label>
+            <label lang="en">Eps min order amount</label>
+            <label lang="nl">Eps min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_eps_max_order_amount</name>
+            <label lang="de">Eps max order amount</label>
+            <label lang="en">Eps max order amount</label>
+            <label lang="nl">Visa max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_giropay_min_order_amount</name>
+            <label lang="de">Giropay min order amount</label>
+            <label lang="en">Giropay min order amount</label>
+            <label lang="nl">Giropay min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_giropay_max_order_amount</name>
+            <label lang="de">Giropay max order amount</label>
+            <label lang="en">Giropay max order amount</label>
+            <label lang="nl">Giropay max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_klarna_min_order_amount</name>
+            <label lang="de">Klarna min order amount</label>
+            <label lang="en">Klarna min order amount</label>
+            <label lang="nl">Klarna min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_klarna_max_order_amount</name>
+            <label lang="de">Klarna max order amount</label>
+            <label lang="en">Klarna max order amount</label>
+            <label lang="nl">Klarna max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_paypal_min_order_amount</name>
+            <label lang="de">Paypal min order amount</label>
+            <label lang="en">Paypal min order amount</label>
+            <label lang="nl">Paypal min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_paypal_max_order_amount</name>
+            <label lang="de">Paypal max order amount</label>
+            <label lang="en">Paypal max order amount</label>
+            <label lang="nl">Paypal max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_sofort_min_order_amount</name>
+            <label lang="de">Sofort min order amount</label>
+            <label lang="en">Sofort min order amount</label>
+            <label lang="nl">Sofort min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_sofort_max_order_amount</name>
+            <label lang="de">Sofort max order amount</label>
+            <label lang="en">Sofort max order amount</label>
+            <label lang="nl">Sofort max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_paymentguarantee_min_order_amount</name>
+            <label lang="de">Paymentguarantee min order amount</label>
+            <label lang="en">Paymentguarantee min order amount</label>
+            <label lang="nl">Paymentguarantee min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_paymentguarantee_max_order_amount</name>
+            <label lang="de">paymentguarantee max order amount</label>
+            <label lang="en">paymentguarantee max order amount</label>
+            <label lang="nl">paymentguarantee max order amount</label>
+        </element>
+
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_payconiq_min_order_amount</name>
+            <label lang="de">payconiq min order amount</label>
+            <label lang="en">payconiq min order amount</label>
+            <label lang="nl">payconiq min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_payconiq_max_order_amount</name>
+            <label lang="de">payconiq max order amount</label>
+            <label lang="en">payconiq max order amount</label>
+            <label lang="nl">payconiq max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_kbc_min_order_amount</name>
+            <label lang="de">Kbc min order amount</label>
+            <label lang="en">Kbc min order amount</label>
+            <label lang="nl">Kbc min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_kbc_max_order_amount</name>
+            <label lang="de">Kbc max order amount</label>
+            <label lang="en">Kbc max order amount</label>
+            <label lang="nl">Kbc max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_p24_min_order_amount</name>
+            <label lang="de">P24 min order amount</label>
+            <label lang="en">P24 min order amount</label>
+            <label lang="nl">P24 min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_p24_max_order_amount</name>
+            <label lang="de">P24 max order amount</label>
+            <label lang="en">P24 max order amount</label>
+            <label lang="nl">P24 max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_dankort_min_order_amount</name>
+            <label lang="de">Dankort min order amount</label>
+            <label lang="en">Dankort min order amount</label>
+            <label lang="nl">Dankort min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_dankort_max_order_amount</name>
+            <label lang="de">Dankort max order amount</label>
+            <label lang="en">Dankort max order amount</label>
+            <label lang="nl">Dankort max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_maestro_min_order_amount</name>
+            <label lang="de">Maestro min order amount</label>
+            <label lang="en">Maestro min order amount</label>
+            <label lang="nl">Maestro min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_maestro_max_order_amount</name>
+            <label lang="de">Maestro max order amount</label>
+            <label lang="en">Maestro max order amount</label>
+            <label lang="nl">Maestro max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_nexi_min_order_amount</name>
+            <label lang="de">Nexi min order amount</label>
+            <label lang="en">Nexi min order amount</label>
+            <label lang="nl">Nexi min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_nexi_max_order_amount</name>
+            <label lang="de">Nexi max order amount</label>
+            <label lang="en">Nexi max order amount</label>
+            <label lang="nl">Nexi max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_vpay_min_order_amount</name>
+            <label lang="de">vpay min order amount</label>
+            <label lang="en">vpay min order amount</label>
+            <label lang="nl">vpay min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_vpay_max_order_amount</name>
+            <label lang="de">vpay max order amount</label>
+            <label lang="en">vpay max order amount</label>
+            <label lang="nl">vpay max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_visaelectron_min_order_amount</name>
+            <label lang="de">visaelectron min order amount</label>
+            <label lang="en">visaelectron min order amount</label>
+            <label lang="nl">visaelectron min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_visaelectron_max_order_amount</name>
+            <label lang="de">visaelectron max order amount</label>
+            <label lang="en">visaelectron max order amount</label>
+            <label lang="nl">visaelectron max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_applepay_min_order_amount</name>
+            <label lang="de">Applepay min order amount</label>
+            <label lang="en">Applepay min order amount</label>
+            <label lang="nl">Applepay min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_applepay_max_order_amount</name>
+            <label lang="de">Applepay max order amount</label>
+            <label lang="en">Applepay max order amount</label>
+            <label lang="nl">Applepay max order amount</label>
+        </element>
+
+        <element required="false" type="text" scope="shop">
+            <name>buckaroo_applepay_merchant_guid</name>
+            <label lang="de">Your Buckaroo Merchant ID</label>
+            <label lang="en">Your Buckaroo Merchant ID</label>
+            <label lang="nl">Your Buckaroo Merchant ID</label>
+            <description lang="de">Your ID can be found in the Buckaroo Plaza</description>
+            <description lang="en">Your ID can be found in the Buckaroo Plaza</description>
+            <description lang="nl">Your ID can be found in the Buckaroo Plaza</description>
+        </element>
+
+    </elements>
+</config>

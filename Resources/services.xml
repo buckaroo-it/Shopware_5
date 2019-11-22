@@ -1,0 +1,293 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="buckaroo_payment.make_validator" class="BuckarooPayment\Components\Validation\Validator"
+                 shared="false">
+            <argument type="service" id="snippets" on-invalid="null"/>
+        </service>
+
+        <service id="buckaroo_payment.plugin_info" class="BuckarooPayment\Components\PluginInfo">
+        </service>
+
+        <service id="buckaroo_payment.schema" class="BuckarooPayment\Components\Schema">
+            <argument type="service" id="models"/>
+        </service>
+
+        <service id="buckaroo_payment.adapter.session" class="BuckarooPayment\Components\Adapter\SessionAdapter">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="buckaroo_payment.session_locking_helper" class="BuckarooPayment\Components\SessionLockingHelper">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="buckaroo_payment.flash" class="BuckarooPayment\Components\Flash">
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.no_cache_config" class="BuckarooPayment\Components\NoCacheConfig">
+            <argument type="service" id="db"/>
+        </service>
+
+        <service id="buckaroo_payment.config" class="BuckarooPayment\Components\Config">
+            <argument type="service" id="shopware.plugin.cached_config_reader"/>
+        </service>
+
+        <service id="buckaroo_payment.payment_result" class="BuckarooPayment\Components\JsonApi\Payload\PaymentResult">
+            <argument type="service" id="front"/>
+            <argument type="service" id="buckaroo_payment.config"/>
+        </service>
+
+        <service id="buckaroo_payment.attributes" class="BuckarooPayment\Components\Attributes">
+            <argument type="service" id="models"/>
+            <argument type="service" id="shopware_attribute.crud_service"/>
+            <argument type="service" id="shopware_attribute.data_persister"/>
+            <argument type="service" id="shopware_attribute.data_loader"/>
+        </service>
+
+        <service id="buckaroo_payment.transaction_manager" class="BuckarooPayment\Components\TransactionManager">
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.capture_manager" class="BuckarooPayment\Components\CaptureManager">
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.partial_transaction_manager" class="BuckarooPayment\Components\PartialTransactionManager">
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.apple_pay_button_subscriber" class="BuckarooPayment\Subscriber\ApplePayButtonSubscriber">
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.apple_pay_finish_order_subscribter" class="BuckarooPayment\Subscriber\ApplePayFinishOrderSubscriber">
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <!-- JM NEW !!! -->
+        <service id="buckaroo_payment.subscriber.filter_payment" class="BuckarooPayment\Subscriber\FilterPaymentSubscriber">
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.add_payment_class" class="BuckarooPayment\Subscriber\AddPaymentClassSubscriber">
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.frontend_view" class="BuckarooPayment\Subscriber\FrontendViewSubscriber">
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.checkout_flash"
+                 class="BuckarooPayment\Subscriber\CheckoutFlashSubscriber">
+            <argument type="service" id="buckaroo_payment.flash"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.checkout" class="BuckarooPayment\Subscriber\CheckoutSubscriber">
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.subscriber.payment_extrafields_subscriber"
+                 class="BuckarooPayment\Subscriber\PaymentExtraFieldsSubscriber">
+            <argument type="service" id="front"/>
+            <argument type="service" id="buckaroo_payment.payment_methods.buckaroo"/>
+            <argument type="service" id="buckaroo_payment.extra_fields_loader"/>
+            <argument type="service" id="buckaroo_payment.extra_fields_persister"/>
+            <tag name="shopware.event_subscriber"/>
+        </service>
+
+        <service id="buckaroo_payment.jsonapi.hmac_header" class="BuckarooPayment\Components\JsonApi\HmacHeader">
+            <argument type="service" id="buckaroo_payment.config"/>
+        </service>
+
+        <service id="buckaroo_payment.jsonapi.software_header" class="BuckarooPayment\Components\JsonApi\SoftwareHeader">
+            <argument type="service" id="buckaroo_payment.plugin_info"/>
+        </service>
+
+        <service id="buckaroo_payment.jsonapi.culture_header" class="BuckarooPayment\Components\JsonApi\CultureHeader"/>
+
+        <service id="buckaroo_payment.api" class="BuckarooPayment\Components\JsonApi\Api">
+            <argument type="service" id="buckaroo_payment.jsonapi.hmac_header"/>
+            <argument type="service" id="buckaroo_payment.jsonapi.software_header"/>
+            <argument type="service" id="buckaroo_payment.jsonapi.culture_header"/>
+        </service>
+
+        <service id="buckaroo_payment.extra_fields_loader" class="BuckarooPayment\Components\ExtraFieldsLoader">
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.extra_fields_persister" class="BuckarooPayment\Components\ExtraFieldsPersister">
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+        </service>
+
+        <service id="buckaroo_payment.payment_methods.buckaroo"
+                 class="BuckarooPayment\PaymentMethods\BuckarooPaymentMethods">
+            <argument type="service" id="service_container"/>
+        </service>
+
+        <service id="buckaroo_payment.payment_methods.base_payment_method" abstract="true">
+            <argument type="service" id="buckaroo_payment.config"/>
+            <argument type="service" id="buckaroo_payment.adapter.session"/>
+            <argument type="service" id="shopware_attribute.data_persister"/>
+            <argument type="service" id="shopware_attribute.data_loader"/>
+            <argument type="service" id="buckaroo_payment.api"/>
+            <argument type="service" id="buckaroo_payment.session_locking_helper"/>
+            <argument type="service" id="models"/>
+            <argument type="service" id="buckaroo_payment.make_validator"/>
+        </service>
+
+        <service id="buckaroo_payment.payment_methods.bancontact"
+                 class="BuckarooPayment\PaymentMethods\Bancontact"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.amex"
+                 class="BuckarooPayment\PaymentMethods\Amex"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.kbc"
+                 class="BuckarooPayment\PaymentMethods\Kbc"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.p24"
+                 class="BuckarooPayment\PaymentMethods\P24"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.cartebleue"
+                 class="BuckarooPayment\PaymentMethods\CarteBleue"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.giftcard"
+                 class="BuckarooPayment\PaymentMethods\Giftcard"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.cartebancaire"
+                 class="BuckarooPayment\PaymentMethods\CarteBancaire"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.paymentguarantee"
+                 class="BuckarooPayment\PaymentMethods\PaymentGuarantee"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.payconiq"
+                 class="BuckarooPayment\PaymentMethods\Payconiq"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.mastercard"
+                 class="BuckarooPayment\PaymentMethods\Mastercard"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.visa"
+                 class="BuckarooPayment\PaymentMethods\Visa"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.dankort"
+                 class="BuckarooPayment\PaymentMethods\Dankort"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.maestro"
+                 class="BuckarooPayment\PaymentMethods\Maestro"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.nexi"
+                 class="BuckarooPayment\PaymentMethods\Nexi"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.vpay"
+                 class="BuckarooPayment\PaymentMethods\Vpay"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.visaelectron"
+                 class="BuckarooPayment\PaymentMethods\VisaElectron"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.eps"
+                 class="BuckarooPayment\PaymentMethods\Eps"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.giropay"
+                 class="BuckarooPayment\PaymentMethods\Giropay"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.ideal"
+                 class="BuckarooPayment\PaymentMethods\Ideal"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.klarna"
+                 class="BuckarooPayment\PaymentMethods\Klarna"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.paypal"
+                 class="BuckarooPayment\PaymentMethods\PayPal"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.sofort"
+                 class="BuckarooPayment\PaymentMethods\Sofort"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.afterpayacceptgiro"
+                 class="BuckarooPayment\PaymentMethods\AfterPayAcceptgiro"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.afterpaydigiaccept"
+                 class="BuckarooPayment\PaymentMethods\AfterPayDigiAccept"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.afterpayb2bacceptgiro"
+                 class="BuckarooPayment\PaymentMethods\AfterPayB2BAcceptgiro"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.afterpayb2bdigiaccept"
+                 class="BuckarooPayment\PaymentMethods\AfterPayB2BDigiAccept"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+        
+        <service id="buckaroo_payment.payment_methods.afterpaynew"
+                 class="BuckarooPayment\PaymentMethods\AfterPayNew"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+        <service id="buckaroo_payment.payment_methods.applepay"
+                 class="BuckarooPayment\PaymentMethods\ApplePay"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
+    </services>
+</container>
