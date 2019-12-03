@@ -2,6 +2,7 @@
 
 namespace BuckarooPayment\Components;
 
+use Shopware\Bundle\AttributeBundle\Service\DataPersister;
 use Shopware\Components\Model\ModelManager;
 use Zend_Session_Abstract;
 use Exception;
@@ -28,10 +29,14 @@ class ExtraFieldsPersister
 
     private static $temporary_fields = [ 'buckaroo_encrypted_data', 'buckaroo_card_name', 'buckaroo_card_number', 'buckaroo_card_cvc', 'buckaroo_card_expiration_year', 'buckaroo_card_expiration_month'];
 
-    public function __construct(ModelManager $em, Zend_Session_Abstract $session)
+    /** @var DataPersister */
+    private $_dataPersister;
+
+    public function __construct(ModelManager $em, Zend_Session_Abstract $session, DataPersister $_dataPersister)
     {
         $this->em = $em;
         $this->session = $session;
+        $this->_dataPersister = $_dataPersister;
     }
 
     /**
@@ -192,15 +197,13 @@ class ExtraFieldsPersister
                 ]);
                 $this->em->getConnection()->executeQuery($sql, $newAttrUser);
             } else {
-                $sql = join(' ', [
-                    'UPDATE s_user_attributes',
-                    'SET',
-                    join(', ', array_map(function ($key) {
-                        return $key . ' = :' . $key;
-                    }, $userAttrColumns)),
-                    'WHERE userID = :id',
-                ]);
-                $this->em->getConnection()->executeQuery($sql, $newAttrUser);
+                $userId = $userAttrData['id'];
+
+                unset($userAttrData['id']);
+
+                foreach ($userAttrData as $attribute => $value) {
+                    $this->_dataPersister->persist([$attribute => $value], 's_user_attributes', $userId);
+                }
             }
         }
         /**
