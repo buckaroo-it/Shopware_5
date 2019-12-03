@@ -186,24 +186,14 @@ class ExtraFieldsPersister
 
         if( !empty($userAttrColumns) && !empty($userAttrData) )
         {
-           $newAttrUser = array_merge((array)$oldUserAttr, (array)$userAttrData);//$userAttrData   $oldUserAttr
-            if (!isset($newAttrUser['id'])) {
-                $sql = join(' ', [
-                    'INSERT INTO s_user_attributes (',
-                    implode(", ", array_keys($userAttrData)),
-                    ')', 'VALUES(',
-                    implode(", ", array_values($userAttrData)),
-                    ')'
-                ]);
-                $this->em->getConnection()->executeQuery($sql, $newAttrUser);
-            } else {
-                $userId = $userAttrData['id'];
+            $newAttrUser = array_merge((array)$oldUserAttr, (array)$userAttrData);//$userAttrData   $oldUserAttr
 
-                unset($userAttrData['id']);
+            $userId = $userAttrData['id'];
 
-                foreach ($userAttrData as $attribute => $value) {
-                    $this->_dataPersister->persist([$attribute => $value], 's_user_attributes', $userId);
-                }
+            unset($userAttrData['id']);
+
+            foreach ($userAttrData as $attribute => $value) {
+                $this->_dataPersister->persist([$attribute => $value], 's_user_attributes', $userId);
             }
         }
         /**
