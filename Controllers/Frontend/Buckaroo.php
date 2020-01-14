@@ -182,8 +182,12 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 
         // Add single product to cart 
         // so we can determine to give discount or not. 
-        if ($basket_items === null && isset($_GET['product_id'])) {
-            $fake_item_id = $basket->sAddArticle($_GET['product_id'], 1);
+        if (isset($_GET['product_id'])) {                    
+            foreach ($basket_items as $item) {
+                $basket->sDeleteArticle($item['id']);
+            }
+
+            $fake_item_id = $basket->sAddArticle($_GET['product_id'], $_GET['article_qty']);            
         }   
         
         $payment_method = $this->getPaymentMethodIdByCode($_GET['payment_method']);
@@ -192,18 +196,13 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         $country['id'] = $admin->sGetCountry($selected_country_code)['id'];
         
         $dispatches = $admin->sGetPremiumDispatches($country['id'], $payment_method); 
-        
-        if (isset($fake_item_id)) {
-            $basket->sDeleteArticle($fake_item_id);
-        }
-        
-        $shipping_methods = array_map(function ($method) {
-            $shipping_cost_db = $this->getShippingCost(
+                                
+        $shipping_methods = array_map(function ($method) use ($basket) {
+            $shipping_cost = $this->getShippingCost(
                 $method['amount_display'], 
-                $method['id']
+                $method['id'], 
+                $basket
             )['value'];
-
-            $shipping_cost = $shipping_cost_db !== null  ? $shipping_cost_db : 0;
 
             return [
                 'identifier' => $method['id'],
@@ -213,6 +212,14 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             ];
         }, $dispatches);
         
+        if (isset($fake_item_id)) {
+            $basket->sDeleteArticle($fake_item_id);
+
+            foreach ($basket_items as $item) {
+                $basket->sAddArticle($item['ordernumber'], $item['quantity']);
+            }
+        }
+
         sort($shipping_methods);
         echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
         exit;
@@ -230,18 +237,41 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             : $default_code;
     }
 
-    public function getShippingCost($from, $dispatch)
-    {
-        return Shopware()->Db()->fetchRow('
+
+    public function getShippingCost($from, $dispatch_id, $basket)
+    {             
+        $dispatch = Shopware()->Db()->fetchAll('
+            SELECT *
+            FROM s_premium_dispatch 
+            WHERE id = ?', [$dispatch_id]
+        );   
+
+        if (empty($dispatch)) {
+            return 0;
+        }
+
+        $premium_dispatch = $dispatch[0];    
+        $basket_total = $basket->sGetBasket()['AmountNumeric'];
+        $shipping_free = $premium_dispatch['shippingfree'];   
+
+        if ($basket_total >= (float) $shipping_free) {
+            return 0;
+        }
+
+        $shipping_cost_db = Shopware()->Db()->fetchRow('
             SELECT `value` , `factor`
             FROM `s_premium_shippingcosts`
             WHERE `from` <= ?
             AND `dispatchID` = ?
             ORDER BY `from` DESC
             LIMIT 1',
-            [$from, $dispatch]
+            [$from, $dispatch_id]
         );
-    }    
+
+        return $shipping_cost_db !== null 
+            ? $shipping_cost_db 
+            : 0;
+    }
 
     public function getPaymentMethodIdByCode($code) 
     {
@@ -252,7 +282,6 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             [$code]
         );
     }
-
 
     public function getPaymentMethodSurchargeByCode($code, $country_code) 
     {   

@@ -252,6 +252,16 @@
         </changes>
     </changelog>    
 
+    <changelog version="1.10.5">
+        <changes lang="de">
+            - Fixed issue with free shipping above a specified amount in combination with ApplePay.
+            - Translated Ideal error message to Dutch.
+        </changes>
+        <changes lang="en">
+            - Fixed issue with free shipping above a specified amount in combination with ApplePay.
+            - Translated Ideal error message to Dutch.
+        </changes>
+    </changelog>    
 </plugin>
 
 

@@ -246,7 +246,7 @@ class Ideal extends AbstractPaymentMethod
             $checkData['sErrorMessages'][] = '';//implode('<br />', $validator->getMessages());
             if ((strpos($validator->getMessages()[0], 'User should have an birthday') !== false) ||
                 (strpos($validator->getMessages()[0], 'Parameter "issuer" is empty') !== false)) {
-                $checkData['sErrorMessages'][] = 'You need to select a bank to complete your payment.';
+                $checkData['sErrorMessages'][] = 'Selecteer een bank om de betaling af te ronden.';
             } else {
                 $checkData['sErrorMessages'][] = implode('<br />', $validator->getMessages());
             }
