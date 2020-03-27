@@ -131,6 +131,7 @@
         <service id="buckaroo_payment.extra_fields_persister" class="BuckarooPayment\Components\ExtraFieldsPersister">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
+            <argument type="service" id="shopware_attribute.data_persister"/>
         </service>
 
         <service id="buckaroo_payment.payment_methods.buckaroo"
