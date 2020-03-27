@@ -267,7 +267,7 @@ class Ideal extends AbstractPaymentMethod
                 [
                     'buckaroo_payment_ideal_issuer', 
                     'notEmpty', 
-                    $validationMessages->get('ValidationUserBirthdayRequired', 'iDeal issuer should be set'), 
+                    $validationMessages->get('ValidationUserIdealIssuerRequired', 'iDeal issuer should be set'),
                     'ValidationUserIdealIssuerRequired'],
             ],
         ];
