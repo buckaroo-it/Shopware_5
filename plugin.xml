@@ -266,9 +266,11 @@
     <changelog version="1.11.">
         <changes lang="de">
             - compatibility with Shopware 5.6.6
+            - Merged pull requests from GitHub
         </changes>
         <changes lang="en">
             - compatibility with Shopware 5.6.6
+            - Merged pull requests from GitHub
         </changes>
     </changelog>       
 </plugin>
