@@ -1,3 +1,6 @@
+# Shopware-plugin
+Repository containing the Shopware plugin by Buckaroo
+
 iDEAL, Bancontact, PayPal, credit cards and other payment methods in your Shopware webshop? Download our free plug-in. Select various payment methods and create a seamless check-out.
 Our Shopware plug-in includes a wide variety of payment methods:
 
@@ -40,3 +43,6 @@ The Buckaroo Technical Support team is available for all your questions regardin
 support@buckaroo.nl
 +31  030 7115050
 (We are best available during work days from 08.30 till 17.00)
+
+
+https://www.buckaroo-payments.com/integration/plugins/shopware/  

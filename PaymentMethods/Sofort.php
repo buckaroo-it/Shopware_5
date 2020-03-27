@@ -35,7 +35,7 @@ class Sofort extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validate($checkPayment) {
+    public function validate($checkPayment, $validatorClass = null) {
         $checkData = [];
         return $checkData;
     }

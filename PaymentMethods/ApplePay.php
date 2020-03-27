@@ -49,18 +49,7 @@ class ApplePay extends AbstractPaymentMethod
         $request->setServiceParameter('PaymentData', $request->getPaymentData());
         $request->setServiceParameter('CustomerCardName', $request->getCustomerCardName());
 
-        // close session for writes
-        // to allow push actions to proceed without failing with a timeout expired due to session locking
-        // https://developers.shopware.com/sysadmins-guide/sessions/#session-locking
         $url = $this->getTransactionUrl();
         return $this->api->post($url, $request, 'BuckarooPayment\Components\JsonApi\Payload\TransactionResponse');
-        //Hidden at 2-september2019 by Rashid bcs: its give api 503 error
-//        return $this->sessionLockingHelper->doWithoutSession(function() use ($request) {
-//            $url = $this->getTransactionUrl();
-//            return $this->api->post($url, $request, 'BuckarooPayment\Components\JsonApi\Payload\TransactionResponse');
-//        });
-
     }
 }
-
-//Get shipping methods: Shopware()->Modules()->Admin()

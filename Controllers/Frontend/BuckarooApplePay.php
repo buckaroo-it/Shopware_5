@@ -25,19 +25,10 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
     public $CustomerCardName;
 
-    public function testAction() {
-
-        $_POST['paymentData'] = json_decode('{ "billingContact": { "addressLines": [ "Generaal Vetterstraat" ], "administrativeArea": "", "country": "Netherlands", "countryCode": "nl", "familyName": "yards", "givenName": "9yards", "locality": "Amsterdam", "phoneticFamilyName": "", "phoneticGivenName": "", "postalCode": "1059 BS", "subAdministrativeArea": "", "subLocality": "" }, "shippingContact": { "addressLines": [ "Generaal Vetterstraat" ], "administrativeArea": "", "country": "Netherlands", "countryCode": "nl", "emailAddress": "applepay@mahn.it", "familyName": "yards", "givenName": "9yards", "locality": "Amsterdam", "phoneticFamilyName": "", "phoneticGivenName": "", "postalCode": "1059 BS", "subAdministrativeArea": "", "subLocality": "" }, "token": { "paymentData": { "version": "EC_v1", "data": "2KTU/7a9ITSqyBv/XX5IAtg/EH81RsKsxfcFiSvWSizooOKDh8wlIKJFV7REBWo+OrmFhmcOJhV20vqyJeejcsyrEw4l48UFl23bNEbhz4DkYj/z7isO7rqIpeFwgerzRFMjX8sgVnycFjFcyOO5DJ8QEEQ1VhYsnZ3yLl8RiFaDgUMkyGokv0BjJp5u1VldM32MFr3yoz9KcA4NK6udEnyAtC0UXK/b6ptAOFJk2dcjiQMzB6X/SUrXHFwsSV4lplsA+9428UFlaivBcHDp3GomtORvLzqQ9FlWYt2WyeXxhz61EHGGIfH6vKD9j9rTXf8hoJl/Oc1bASLPCF4yq57ORPUxCLGrtHCXRcw7T3Mcx1iV0SxhimC8Dlsjk3L35ecIu0mjmguk3g==", "signature": "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", "header": { "ephemeralPublicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEEoSudm6HLKgDq54YQOEKRwU7YvL8KxTYdcV1IQ7bADJcSb52Jsk/C7uxIJX+6GFYqMnUIAxG7KLb2+q8cPplLQ==", "publicKeyHash": "3s1dCXhxAeXLBsrbkR6tZbrxgJiAJQeCj5zCjgKzxVc=", "transactionId": "c861a44b9d57329044f10610933364450097e8a45bfae0ec7c50b9cf631bea9d" } }, "paymentMethod": { "displayName": "MasterCard 5414", "network": "MasterCard", "type": "debit" }, "transactionIdentifier": "C861A44B9D57329044F10610933364450097E8A45BFAE0EC7C50B9CF631BEA9D" } }', true);
-        $_POST['selected_shipping_method'] = 9;
-        $_POST['amount'] = 47.45;
-        $_POST['items'] = '[ { "id": "6016", "name": "Main product with resources", "price": "5.99", "qty": 1, "order_number": "SW10008", "type": "product" }, { "id": "6019", "name": "Warenkorbrabatt", "price": "-2.00", "qty": 1, "order_number": "SHIPPINGDISCOUNT", "type": "product" }, { "id": "6022", "name": "Mindermengenzuschlag", "price": "5.00", "qty": 1, "order_number": "sw-surcharge", "type": "product" }, { "id": "99999", "name": "Payment fee", "price": "9", "qty": 1, "order_number": "99999", "type": "product" } ]';
-
-        return $this->saveOrderAction();
-    }
-
     public function saveOrderAction()
     {
         $paymentData = $_POST['paymentData'];
+
         $this->CustomerCardName = $paymentData['billingContact']['givenName'] .' '. $paymentData['billingContact']['familyName'];
 
         $token = $paymentData['token'];
@@ -197,6 +188,9 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
         $shippingCosts = $admin->sGetPremiumShippingcosts($countryId);
 
+
+
+
         //Basket data
         $basketData = $basket->sGetBasket();
 
@@ -227,7 +221,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $order->sDispatch = $admin->sGetPremiumDispatch($shippingMethod);
         $order->sPayment = $admin->sGetPaymentMeanById($payment);
         $order->bookingId = $this->getQuoteNumber();
-
+        
         try {
             $created_order_number = $order->sSaveOrder();
             $created_order_id = $this->getOrderId($created_order_number);
@@ -245,6 +239,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             die($e->getMessage());
         }
     }
+
 
     /**
      * Create a new base Transaction
@@ -360,13 +355,13 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $address['lastname'] = $address['familyName'];
 
 
-        if (version_compare(Shopware::VERSION, '4.4.0', '>=') && version_compare(Shopware::VERSION, '5.2.0', '<')) {
+        if (version_compare(Shopware()->Config()->get('Version'), '4.4.0', '>=') && version_compare(Shopware()->Config()->get('Version'), '5.2.0', '<')) {
             $address['street'] = $address['addressLines'][0];
 
             if (!empty($address['addressLiens'][0])) {
                 $address['additional_address_line1'] = $address['addressLiens'][0];
             }
-        } elseif (Shopware::VERSION === '___VERSION___' || version_compare(Shopware::VERSION, '5.2.0', '>=')) {
+        } elseif (Shopware()->Config()->get('Version') === '___VERSION___' || version_compare(Shopware()->Config()->get('Version'), '5.2.0', '>=')) {
             $address['street'] = $address['addressLines'][0];
         } else {
             $street = explode(' ', $address['addressLines'][0]);

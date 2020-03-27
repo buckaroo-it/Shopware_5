@@ -60,7 +60,7 @@ class Giropay extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validate($checkPayment) {
+    public function validate($checkPayment, $validatorClass = null) {
         
         $checkData = [];
         $extraFields = $checkPayment['buckaroo-extra-fields'][$this::KEY];
