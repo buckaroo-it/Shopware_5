@@ -4,7 +4,7 @@
     <label lang="en">Buckaroo</label>
     <label lang="de">Buckaroo</label>
 
-    <version>1.10.4</version>
+    <version>1.11.0</version>
     <copyright>(c) Buckaroo B.V.</copyright>
     <author>Buckaroo</author>
     <link>https://www.buckaroo.nl</link>
@@ -262,6 +262,15 @@
             - Translated Ideal error message to Dutch.
         </changes>
     </changelog>    
+
+    <changelog version="1.11.">
+        <changes lang="de">
+            - compatibility with Shopware 5.6.6
+        </changes>
+        <changes lang="en">
+            - compatibility with Shopware 5.6.6
+        </changes>
+    </changelog>       
 </plugin>
 
 

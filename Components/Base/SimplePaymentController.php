@@ -136,11 +136,9 @@ abstract class SimplePaymentController extends AbstractPaymentController
     protected function fillRequest(AbstractPaymentMethod $paymentMethod, Request $request)
     {
         $request->setDescription( $paymentMethod->getPaymentDescription($this->getQuoteNumber()) ); // description for on a bank statement
-
-        $request->setReturnURL( $this->Front()->Router()->assemble(array_merge($paymentMethod->getActionParts(), [ 'action' => 'pay_return', 'forceSecure' => true ])) );
-
+        $request->setReturnURL( $this->assembleSessionUrl(array_merge($paymentMethod->getActionParts(), [ 'action' => 'pay_return', 'forceSecure' => true ])) );
+        
         $pushUrl = $this->assembleSessionUrl(array_merge($paymentMethod->getActionParts(), [ 'action' => 'pay_push' ]));
-
         $request->setPushURL( $pushUrl );
 
         $request->setServiceName($paymentMethod->getBuckarooKey());
@@ -509,6 +507,15 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payReturnAction()
     {
+        if (!$sessionId = $this->Request()->getParam('session_id')) {
+            throw new Exception('session_id is missing');
+        }
+
+        // Session got lost sometimes since 5.6.6
+        \Enlight_Components_Session::writeClose();
+        \Enlight_Components_Session::setId($sessionId);
+        \Enlight_Components_Session::start();
+
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
 

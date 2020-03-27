@@ -155,7 +155,7 @@ class Shopware_Controllers_Frontend_BuckarooGiftcard extends SimplePaymentContro
         $request->setContinueOnIncomplete('RedirectToHTML');
 
         $request->setDescription($paymentMethod->getPaymentDescription($this->getQuoteNumber()));
-        $request->setReturnURL($this->Front()->Router()->assemble(array_merge($paymentMethod->getActionParts(), ['action' => 'pay_return', 'forceSecure' => true])));
+        $request->setReturnURL($this->assembleSessionUrl(array_merge($paymentMethod->getActionParts(), ['action' => 'pay_return', 'forceSecure' => true])));
         $request->setPushURL($this->assembleSessionUrl(array_merge($paymentMethod->getActionParts(), ['action' => 'pay_push'])));
 
         return $request;
@@ -287,6 +287,15 @@ class Shopware_Controllers_Frontend_BuckarooGiftcard extends SimplePaymentContro
      */
     public function payReturnAction()
     {
+        if (!$sessionId = $this->Request()->getParam('session_id')) {
+            throw new Exception('session_id is missing');
+        }
+
+        // Session got lost sometimes since 5.6.6
+        \Enlight_Components_Session::writeClose();
+        \Enlight_Components_Session::setId($sessionId);
+        \Enlight_Components_Session::start();
+
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
 

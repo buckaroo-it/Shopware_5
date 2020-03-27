@@ -253,24 +253,24 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         $premium_dispatch = $dispatch[0];    
         $basket_total = $basket->sGetBasket()['AmountNumeric'];
         $shipping_free = $premium_dispatch['shippingfree'];   
-
+        
         if ($basket_total >= (float) $shipping_free) {
-            return 0;
+            $shipping_cost_db = Shopware()->Db()->fetchRow('
+                SELECT `value` , `factor`
+                FROM `s_premium_shippingcosts`
+                WHERE `from` <= ?
+                AND `dispatchID` = ?
+                ORDER BY `from` DESC
+                LIMIT 1',
+                [$from, $dispatch_id]
+            );
+
+            return $shipping_cost_db !== null 
+                ? $shipping_cost_db 
+                : 0;   
         }
 
-        $shipping_cost_db = Shopware()->Db()->fetchRow('
-            SELECT `value` , `factor`
-            FROM `s_premium_shippingcosts`
-            WHERE `from` <= ?
-            AND `dispatchID` = ?
-            ORDER BY `from` DESC
-            LIMIT 1',
-            [$from, $dispatch_id]
-        );
-
-        return $shipping_cost_db !== null 
-            ? $shipping_cost_db 
-            : 0;
+        return 0;
     }
 
     public function getPaymentMethodIdByCode($code) 
