@@ -28,7 +28,7 @@
             <label lang="de">Gift Cards</label>
             <label lang="en">Gift Cards</label>
             <label lang="nl">Gift Cards</label>
-            <value>ideal,boekenbon,digitalebioscoopbon,fashioncheque,ippies,nationaleentertainmentcard,podiumcadeaukaart,vvvgiftcard,webshopgiftcard,yourgift</value>
+            <value>ideal,boekenbon,digitalebioscoopbon,fashioncheque,ippies,nationaleentertainmentcard,podiumcadeaukaart,vvvgiftcard,webshopgiftcard,yourgift,customgiftcard,customgiftcard2,customgiftcard3</value>
             <description lang="de">Gift Cards, comma separated</description>
             <description lang="en">Gift Cards, comma separated</description>
             <description lang="nl">Gift Cards, comma separated</description>
