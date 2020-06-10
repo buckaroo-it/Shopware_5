@@ -154,7 +154,7 @@ class BuckarooPaymentMethods
                 'action' => $paymentMean->getAction(),
                 'position' => $paymentMean->getPosition(),
                 'description' => !empty($payment) ? $payment->getDescription() : $paymentMean->getDescription(),
-                'active' => 1,
+                'active' => !empty($payment) ? $this->getPaymentActiveByName($payment->getName()) : 0,
                 'additionalDescription' => 
                     '<img style="height: 40px" src="{link file=\'frontend/_resources/images/' . $paymentMean->getImageName() . '\' fullPath}" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
             ];
@@ -335,4 +335,14 @@ class BuckarooPaymentMethods
             return $this->getByPaymentName($payment['name']);
         }, $payments);
     }
+
+    protected function getPaymentActiveByName($name)
+    {
+        if(isset($_SESSION['BRQ_PMD']) && isset($_SESSION['BRQ_PMD'][$name])){
+            $value = $_SESSION['BRQ_PMD'][$name]; unset($_SESSION['BRQ_PMD'][$name]);
+            return $value;
+        }
+        return false;
+    }
+
 }

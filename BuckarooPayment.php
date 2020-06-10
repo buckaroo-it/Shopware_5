@@ -295,12 +295,28 @@ class BuckarooPayment extends Plugin
         return $buckaroo->getPaymentOptions();
     }
 
+    protected function savePaymentActive()
+    {
+        $em = $this->container->get('models');
+        $table = $em->getClassMetadata('Shopware\Models\Payment\Payment')->getTableName();
+
+        $payments = $em->getConnection()->fetchAll('SELECT name, active FROM ' . $table);
+
+        foreach ($payments as $payment) {
+            if(isset($_SESSION['BRQ_PMD']) && isset($_SESSION['BRQ_PMD'][$payment['name']])){
+                continue;
+            }
+            $_SESSION['BRQ_PMD'][$payment['name']] = $payment['active'];
+        }
+    }
+
     /**
      * Deactivate all buckaroo payment methods
      *
      */
     protected function deactivatePayments()
     {
+        $this->savePaymentActive();
         $em = $this->container->get('models');
 
         $qb = $em->createQueryBuilder();
