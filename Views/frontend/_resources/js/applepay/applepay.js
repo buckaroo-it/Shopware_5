@@ -4,26 +4,38 @@ import Buckaroo      from './buckaroo.js';
 
 export default class ApplePay {
   constructor() {
+    this.log('1');
     this.buckaroo = new Buckaroo;
     this.shopware = new Shopware;
     this.store_info = this.shopware.getStoreInformation();
+    this.log('2');
     this.selected_shipping_method = null;
     this.selected_shipping_amount = null;
     this.total_price = null;
     this.country_id = this.store_info.country_code;
-    this.is_downloadable = document.getElementById('is_downloadable').value;
+    this.is_downloadable = document.getElementById('is_downloadable') ? document.getElementById('is_downloadable').value : '';
   }
 
   rebuild() {
+    this.log('6');
     $('.applepay-button-container div').remove();
     $('.applepay-button-container').append('<div>');
   }
 
   init() {
+    this.log('7');
+    this.mode =  false;
     BuckarooSdk.ApplePay
       .checkApplePaySupport(this.store_info.merchant_id)
       .then((is_applepay_supported) => {
+        this.log('8', is_applepay_supported);
         if (is_applepay_supported && location.protocol === 'https:') {
+          this.log('9');
+          if (document.querySelector('.main--actions button[type="submit"]')) {
+            this.mode = 'checkout';
+            document.querySelector('.main--actions button[type="submit"]').disabled = false;
+          }
+
           const cart_items = this.getItems();
           const shipping_methods = this.shopware.getShippingMethods(this.country_id);
           const first_shipping_item = this.getFirstShippingItem(shipping_methods);
@@ -46,8 +58,34 @@ export default class ApplePay {
           }
           this.total_price = total_to_pay;
 
-          const applepay_options = new BuckarooSdk.ApplePay.ApplePayOptions(this.store_info.store_name, this.store_info.country_code, this.store_info.currency_code, this.store_info.culture_code, this.store_info.merchant_id, all_items, total_item, 'shipping', shipping_methods, this.processApplepayCallback.bind(this), this.processShippingMethodsCallback.bind(this), this.processChangeContactInfoCallback.bind(this))
-          const applepay_payment = new BuckarooSdk.ApplePay.ApplePayPayment(".applepay-button-container div", applepay_options);
+          let requiredBillingContactFields = null;
+          let requiredShippingContactFields = null;
+
+          if (this.mode == 'checkout') {
+            requiredBillingContactFields = ["postalAddress"];
+            requiredShippingContactFields = [];
+          }
+
+          const applepay_options = new BuckarooSdk.ApplePay.ApplePayOptions(
+              this.store_info.store_name,
+              this.store_info.country_code,
+              this.store_info.currency_code,
+              this.store_info.culture_code,
+              this.store_info.merchant_id,
+              all_items,
+              total_item,
+              'shipping',
+              shipping_methods,
+              this.processApplepayCallback.bind(this),
+              this.mode == 'checkout' ? null : this.processShippingMethodsCallback.bind(this),
+              this.mode == 'checkout' ? null : this.processChangeContactInfoCallback.bind(this),
+              requiredBillingContactFields,
+              requiredShippingContactFields
+          );
+          const applepay_payment = new BuckarooSdk.ApplePay.ApplePayPayment(
+              ".applepay-button-container div",
+              applepay_options
+          );
          
           applepay_payment.showPayButton("black");
         }
@@ -126,13 +164,33 @@ export default class ApplePay {
   }
 
   processApplepayCallback(payment) {
+    this.log('10', this.mode);
     const authorization_result = {
       status: ApplePaySession.STATUS_SUCCESS,
       errors: []
     }
 
     if (authorization_result.status === ApplePaySession.STATUS_SUCCESS) {
-      this.buckaroo.createTransaction(payment, this.total_price, this.selected_shipping_method, this.selected_shipping_amount);
+      if (this.mode == 'checkout') {
+        this.log('11');
+        if (payment) {
+          this.log('13');
+          var result = this.buckaroo.savePaymentInfo(payment);
+          this.log('15', result);
+          if (result) {
+            this.log('16');
+            if (document.querySelector('#confirm--form')) {
+              this.log('17');
+              window.buckaroo.submit = true;
+              document.querySelector('#confirm--form').submit();
+              return Promise.resolve(authorizationSuccessResult);
+            }
+          }
+        }
+      } else {
+        this.log('12');
+        this.buckaroo.createTransaction(payment, this.total_price, this.selected_shipping_method, this.selected_shipping_amount);
+      }
     }
     else {
       const errors = authorization_result.errors.map((error) => { 
@@ -197,5 +255,13 @@ export default class ApplePay {
         "Shipping is not available for the selected country"
       )] 
     };
+  }
+
+  log(id, variable) {
+    //return false;
+    console.log("====applepay====" + id);
+    if (variable !== undefined) {
+      console.log(variable);
+    }
   }
 }

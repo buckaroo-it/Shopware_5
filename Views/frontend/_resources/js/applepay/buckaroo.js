@@ -32,4 +32,27 @@ export default class Buckaroo {
       );
     });
   }
+
+  savePaymentInfo(payment_data) {
+    var result;
+    $.ajax({
+      url: "/BuckarooApplePay/savePaymentInfo",
+      method: "post",
+      data: {
+        payment_data: JSON.stringify(payment_data)
+      },
+      dataType: "json",
+      async: false
+    })
+        .done(() => {
+          result = true;
+        })
+        .fail((error) => {
+          this.shopware.displayErrorMessage(
+              "Something went wrong while processing your payment."
+          );
+          result = false;
+        });
+    return result;
+  }
 }

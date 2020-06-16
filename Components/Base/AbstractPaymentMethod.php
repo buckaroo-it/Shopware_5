@@ -7,6 +7,7 @@ use BuckarooPayment\Components\Constants\Urls;
 use BuckarooPayment\Components\JsonApi\Payload\Request;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionResponse;
+use BuckarooPayment\Components\SimpleLog;
 use BuckarooPayment\Components\Validation\Validator;
 use BuckarooPayment\Components\Helpers;
 use BuckarooPayment\Components\SessionLockingHelper;
@@ -347,10 +348,8 @@ abstract class AbstractPaymentMethod
     public function pay(TransactionRequest $request)
     {
         $url = $this->getTransactionUrl();
-
-        $result = $this->api->post($url, $request, 'BuckarooPayment\Components\JsonApi\Payload\TransactionResponse');
-
-        return $result;
+        SimpleLog::log(__METHOD__ . "|1|", [$url, $request]);
+        return $this->api->post($url, $request, 'BuckarooPayment\Components\JsonApi\Payload\TransactionResponse');
     }
 
     /**

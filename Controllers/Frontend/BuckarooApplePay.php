@@ -1,7 +1,9 @@
 <?php
 
+use BuckarooPayment\Components\Base\AbstractPaymentMethod;
 use BuckarooPayment\Components\Base\SimplePaymentController;
 
+use BuckarooPayment\Components\JsonApi\Payload\Request;
 use Shopware\Components\CSRFWhitelistAware;
 use Shopware\Models\Order\Order;
 use Shopware\Models\Order\Status as OrderStatus;
@@ -20,7 +22,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 {
     const PAYMENT_COMPLETE_CODE = 12;
 
-    const ORDER_FAILED_CODE   = 0;
+    const ORDER_FAILED_CODE = 0;
     const PAYMENT_FAILED_CODE = 17;
 
     public $CustomerCardName;
@@ -29,7 +31,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
     {
         $paymentData = $_POST['paymentData'];
 
-        $this->CustomerCardName = $paymentData['billingContact']['givenName'] .' '. $paymentData['billingContact']['familyName'];
+        $this->CustomerCardName = $paymentData['billingContact']['givenName'] . ' ' . $paymentData['billingContact']['familyName'];
 
         $token = $paymentData['token'];
         $created_order = $this->createOrder();
@@ -43,22 +45,22 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $this->completeOrder($amount, $token, $user_id, $order, $order_id, $order_number, $this->CustomerCardName);
     }
 
-    private function completeOrder($amount, $token, $userId, $order, $order_id, $order_number, $CustomerCardName) {
+    private function completeOrder($amount, $token, $userId, $order, $order_id, $order_number, $CustomerCardName)
+    {
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
 
         $amount = number_format($amount, 2);
 
         $this->setAmount($amount);
-        try
-        {
+        try {
             $request = $this->createApplePayRequest($amount, $token);
             $paymentMethod = $this->getPaymentMethodClass();
 
             $this->fillRequest($paymentMethod, $request);
             $paymentId = $this->getPaymentMethodId();
 
-            $transaction = $this->createNewTransaction($paymentId, $userId,$CustomerCardName);
+            $transaction = $this->createNewTransaction2($paymentId, $userId, $CustomerCardName);
             $transaction->setAmount($amount);
             $transactionManager->save($transaction);
 
@@ -79,8 +81,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
             $transactionManager->save($transaction);
 
-            if( $response->isSuccess() )
-            {
+            if ($response->isSuccess()) {
                 $order->setOrderStatus($order_id, OrderStatus::ORDER_STATE_OPEN);
                 $order->setPaymentStatus($order_id, self::PAYMENT_COMPLETE_CODE, false/*Do not send mail*/);
                 $this->setOrderSession($order);
@@ -113,11 +114,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
             echo json_encode($result);
             exit;
-        }
-        catch(Exception $ex)
-        {
-            if( $transaction )
-            {
+        } catch (Exception $ex) {
+            if ($transaction) {
                 $transaction->setException($ex->getMessage());
                 $transaction->setOrderNumber($order_number);
                 $transactionManager->save($transaction);
@@ -164,7 +162,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         //Fill basket with our values
         $basket = Shopware()->Modules()->Basket();
 
-        if(count($items) > 0) {
+        if (count($items) > 0) {
             $basket->clearBasket();
             foreach ($items as $item) {
                 if ($item['type'] === 'product') {
@@ -187,8 +185,6 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $userData['additional']['charge_vat'] = false;
 
         $shippingCosts = $admin->sGetPremiumShippingcosts($countryId);
-
-
 
 
         //Basket data
@@ -221,7 +217,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $order->sDispatch = $admin->sGetPremiumDispatch($shippingMethod);
         $order->sPayment = $admin->sGetPaymentMeanById($payment);
         $order->bookingId = $this->getQuoteNumber();
-        
+
         try {
             $created_order_number = $order->sSaveOrder();
             $created_order_id = $this->getOrderId($created_order_number);
@@ -229,13 +225,11 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             return [
                 'user_id' => $user_id,
                 'order' => $order,
-                'order_id' =>  $created_order_id,
+                'order_id' => $created_order_id,
                 'order_number' => $created_order_number,
                 'amount' => $order->sAmount
             ];
-        }
-
-        catch (\Exception $e){
+        } catch (\Exception $e) {
             die($e->getMessage());
         }
     }
@@ -246,7 +240,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
      *
      * @return Transaction
      */
-    protected function createNewTransaction($payment_id, $user_id, $CustomerCardName)
+    protected function createNewTransaction2($payment_id, $user_id, $CustomerCardName)
     {
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
 
@@ -270,10 +264,10 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
     {
         $request = new TransactionRequest;
         $request->setCustomerCardName($this->CustomerCardName);
-        $request->setInvoice( $this->getQuoteNumber() );
-        $request->setCurrency( $this->getCurrencyShortName() );
-        $request->setAmountDebit( $amount );
-        $request->setOrder( $this->getQuoteNumber() );
+        $request->setInvoice($this->getQuoteNumber());
+        $request->setCurrency($this->getCurrencyShortName());
+        $request->setAmountDebit($amount);
+        $request->setOrder($this->getQuoteNumber());
 
         $request->setPaymentData(base64_encode(json_encode($token)));
         $request->setToken($this->generateToken());
@@ -292,7 +286,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $billing_address = $this->flattenAddress($billing_address);
         $shipping_address = $this->flattenAddress($shipping_address);
 
-        foreach($billing_address as $field => $value) {
+        foreach ($billing_address as $field => $value) {
             $auth[$field] = $value;
         }
 
@@ -349,7 +343,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         return $customerId !== null && !empty($customerId);
     }
 
-    private function flattenAddress($address) {
+    private function flattenAddress($address)
+    {
         $address['salutation'] = 'mr';
         $address['firstname'] = $address['givenName'];
         $address['lastname'] = $address['familyName'];
@@ -390,26 +385,27 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $session = Shopware()->Session();
 
         $session->offsetSet('sOrderVariables', new \ArrayObject([
-            "sUserLoggedIn"             => true,
-            "sUserData"                 => $order->sUserData,
-            "theme"                     => [],
-            "sPayment"                  => $order->sPayment,
-            "sDispatch"                 => $order->sDispatch,
-            "sBasket"                   => $order->sBasketData,
-            "sOrderNumber"              => $order->sOrderNumber,
+            "sUserLoggedIn" => true,
+            "sUserData" => $order->sUserData,
+            "theme" => [],
+            "sPayment" => $order->sPayment,
+            "sDispatch" => $order->sDispatch,
+            "sBasket" => $order->sBasketData,
+            "sOrderNumber" => $order->sOrderNumber,
             "confirmMailDeliveryFailed" => false,
-            "sAmount"                   => $order->sAmount,
-            "sAmountNumeric"            => $order->sAmountNumeric,
-            "sAmountNetNumeric"         => $order->sAmountNetNumeric,
-            "sShippingcosts"            => $order->sShippingcosts,
-            "sShippingcostsNumericNet"  => $order->sShippingcostsNumericNet,
-            "sShippingcostsNumeric"     => $order->sShippingcostsNumeric
+            "sAmount" => $order->sAmount,
+            "sAmountNumeric" => $order->sAmountNumeric,
+            "sAmountNetNumeric" => $order->sAmountNetNumeric,
+            "sShippingcosts" => $order->sShippingcosts,
+            "sShippingcostsNumericNet" => $order->sShippingcostsNumericNet,
+            "sShippingcostsNumeric" => $order->sShippingcostsNumeric
             // "invoice_shipping_net"      => $order->sShippingcostsNumericNet
         ]));
     }
 
-    private function formatAmount($amount) {
-        if(strpos($amount, ',') !== false && strpos($amount, '.') !== false ) {
+    private function formatAmount($amount)
+    {
+        if (strpos($amount, ',') !== false && strpos($amount, '.') !== false) {
             $amount = str_replace('.', '', $amount);
         }
         $amount = str_replace(',', '.', $amount);
@@ -481,4 +477,44 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Applepay-payPush', $data);
     }
+
+    public function savePaymentInfoAction()
+    {
+        SimpleLog::log(__METHOD__ . "|1|");
+        $result = false;
+        if ($this->Request()->getParam('payment_data') !== null) {
+            SimpleLog::log(__METHOD__ . "|2|");
+            $session = Shopware()->Session();
+            $session['buckaroo_applepay_payment_data'] = $this->Request()->getParam('payment_data');
+            $result = true;
+        }
+        $this->sendResponse($result);
+    }
+
+    protected function fillRequest(AbstractPaymentMethod $paymentMethod, Request $request)
+    {
+        SimpleLog::log(__METHOD__ . "|1|");
+        $result = parent::fillRequest($paymentMethod, $request);
+        $session = Shopware()->Session();
+        if (!empty($session['buckaroo_applepay_payment_data'])) {
+            SimpleLog::log(__METHOD__ . "|2|");
+            if (
+                ($applePayInfo = json_decode($session['buckaroo_applepay_payment_data']))
+                &&
+                !empty($applePayInfo->billingContact)
+                &&
+                !empty($applePayInfo->token)
+            ) {
+                SimpleLog::log(__METHOD__ . "|3|");
+                if (!empty($applePayInfo->billingContact->givenName) && !empty($applePayInfo->billingContact->familyName)) {
+                    $request->setCustomerCardName($applePayInfo->billingContact->givenName . ' ' . $applePayInfo->billingContact->familyName
+                    );
+                }
+
+                $request->setPaymentData(base64_encode(json_encode($applePayInfo->token)));
+            }
+        }
+        return $result;
+    }
+
 }

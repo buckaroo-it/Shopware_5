@@ -65,6 +65,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function indexAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         // only handle if it is a Buckaroo payment
         if( !Helpers::stringContains($this->getPaymentShortName(), 'buckaroo_') )
         {
@@ -97,6 +99,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     protected function createRequest()
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         $request = new TransactionRequest;
         $request->setInvoice( $this->getQuoteNumber() );
         $request->setCurrency( $this->getCurrencyShortName() );
@@ -159,6 +163,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
 
@@ -180,6 +186,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // send pay request
             $response = $paymentMethod->pay($request);
 
+            SimpleLog::log(__METHOD__ . "|2|", $response);
+
             // Reopen session
             session_start();
 
@@ -188,6 +196,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
             $transaction->addExtraInfo(array_merge($response->getCustomParameters(), $response->getServiceParameters()));
 
             $transactionManager->save($transaction);
+
+            SimpleLog::log(__METHOD__ . "|3|");
 
             if($paymentMethod->getBuckarooKey() == 'payconiq'){
                 return $this->redirect([ 'controller' => 'buckaroo_payconiq_qrcode',
@@ -204,6 +214,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // redirect to Buckaroo
             if( $response->hasRedirect() )
             {
+                SimpleLog::log(__METHOD__ . "|4|");
+
                 $this->removeArticlesStock();
                 $transaction->setNeedsRestock(1);
     
@@ -214,6 +226,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // redirect to finish if the payment has no redirect (EPS, AfterPay)
             if( $response->isSuccess() )
             {
+                SimpleLog::log(__METHOD__ . "|5|");
+
                 if( !$this->hasOrder() )
                 {
                     // Signature can only be checked once

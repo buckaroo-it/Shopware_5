@@ -1,5 +1,48 @@
 {extends file="parent:frontend/checkout/confirm.tpl"}
 
+{block name='frontend_checkout_confirm_confirm_table_actions'}
+    {$smarty.block.parent}
+    {if $paymentName eq 'buckaroo_applepay'}
+        <div id="applepay-button-container" class="applepay-button-container" style="display:none;">
+            <div></div>
+        </div>
+        <script>
+            if (!window.buckaroo) {
+                window.buckaroo = {
+                    submit: false
+                };
+            }
+            setTimeout(function() {
+                var submitButton = document.querySelector('.main--actions button[type="submit"]');
+                var form = document.querySelector('#confirm--form');
+                console.log("====applepay====order submit1", submitButton, form);
+                if (submitButton && form) {
+                    console.log("====applepay====order submit2");
+                    submitButton.disabled = true;
+                    form.addEventListener('submit', function(e){
+                        console.log("====applepay====order submit4");
+                        if (window.buckaroo.submit) {
+                            console.log("====applepay====order submit5");
+                            //allow to submit
+                            return true;
+                        } else {
+                            console.log("====applepay====order submit6");
+                            //don't allow to submit
+                            e.preventDefault();
+                            var child = document.querySelector('.apple-pay-button');
+                            if (child) {
+                                console.log("====applepay====order submit7");
+                                child.click();
+                            }
+                        }
+                    });
+                }
+            }, 500)
+        </script>
+        <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
+    {/if}
+{/block}
+
 {* Right of revocation notice *}
 {block name='frontend_checkout_confirm_tos_revocation_notice'}
     {$smarty.block.parent}

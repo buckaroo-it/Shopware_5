@@ -11,16 +11,16 @@ class SimpleLog
 		return dirname(__DIR__) . '/logs';
 	}
 
-    public static function log($name, $message)
+    public static function log($name, $message = '')
     {
-    	if( !isset(static::$logFiles[$name]) )
-    	{
-    		static::$logFiles[$name] = static::getLogDir() . '/' . $name . '-' . date('YmdHis') . '.log';
-    	}
-
-        if( is_object($message) || is_array($message) )
-        {
-            $message = print_r($message, true);
+        //return false;
+        if (!file_exists(static::getLogDir())) {
+            mkdir(static::getLogDir());
         }
+        file_put_contents(
+            static::getLogDir() . '/' . date('Ymd') . '.log',
+            "\n".date("Y-m-d H:i:s")."===".$name.": ".var_export($message, true),
+            FILE_APPEND
+        );
     }
 }

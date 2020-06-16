@@ -19,9 +19,6 @@
     <div class="panel--body is--wide block-group">
         {foreach $sPayments as $payment_mean}
         
-        {if $payment_mean.name neq 'buckaroo_applepay'}
-        
-
             <div class="payment--method block{if $payment_mean@last} method_last{else} method{/if}">
 
                 {* Radio Button *}
@@ -55,7 +52,7 @@
                     {/if}
                 {/block}
             </div>
-            {/if}
+
         {/foreach}
     </div>
 

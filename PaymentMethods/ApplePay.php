@@ -45,11 +45,9 @@ class ApplePay extends AbstractPaymentMethod
     }
 
     public function Pay(TransactionRequest $request) {
-
         $request->setServiceParameter('PaymentData', $request->getPaymentData());
         $request->setServiceParameter('CustomerCardName', $request->getCustomerCardName());
 
-        $url = $this->getTransactionUrl();
-        return $this->api->post($url, $request, 'BuckarooPayment\Components\JsonApi\Payload\TransactionResponse');
+        return parent::Pay($request);
     }
 }
