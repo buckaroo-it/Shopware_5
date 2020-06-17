@@ -37,7 +37,7 @@ export default class ApplePay {
           }
 
           const cart_items = this.getItems();
-          const shipping_methods = this.shopware.getShippingMethods(this.country_id);
+          const shipping_methods = this.shopware.getShippingMethods(this.country_id, (this.mode == 'checkout'));
           const first_shipping_item = this.getFirstShippingItem(shipping_methods);
 
           const all_items = first_shipping_item !== null 
@@ -75,7 +75,7 @@ export default class ApplePay {
               all_items,
               total_item,
               'shipping',
-              shipping_methods,
+              this.mode == 'checkout' ? [] : shipping_methods,
               this.processApplepayCallback.bind(this),
               this.mode == 'checkout' ? null : this.processShippingMethodsCallback.bind(this),
               this.mode == 'checkout' ? null : this.processChangeContactInfoCallback.bind(this),

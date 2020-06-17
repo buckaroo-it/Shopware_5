@@ -55,7 +55,7 @@ export default class Shopware {
     }
   }
 
-  getShippingMethods(country_code) {
+  getShippingMethods(country_code, isCheckout = false) {
     const product_params = (() => {
       if (typeof is_product_detail_page !== "undefined" && is_product_detail_page === true) {
         const qty = $("#sQuantity").val() 
@@ -71,7 +71,8 @@ export default class Shopware {
 
     const url_params = {
       payment_method: 'buckaroo_applepay',
-      country_code: country_code
+      country_code: country_code,
+      is_checkout: (isCheckout ? 1 : 0)
     }
 
     var methods;

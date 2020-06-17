@@ -4,8 +4,8 @@ use BuckarooPayment\Components\Base\SimplePaymentController;
 use Shopware\Components\Cart\Struct\CartItemStruct;
 
 class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
-{  
-    public function getShopInformationAction() 
+{
+    public function getShopInformationAction()
     {        
         $shop   = Shopware()->Shop();
         $config = $this->container->get('buckaroo_payment.config');
@@ -175,9 +175,42 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             echo json_encode([]);
             exit;
         }
-        
+
         $basket = Shopware()->Modules()->Basket();
-        
+
+        /////////////
+        if (!empty($_GET['is_checkout'])) {
+            $selectedShippingInfo = Shopware()->Db()->fetchRow(
+                'SELECT dispatchID, invoice_shipping
+            FROM s_order
+            WHERE temporaryID = ?',
+                [Shopware()->Session()->get('sessionId')]
+            );
+
+            if (!empty($selectedShippingInfo['dispatchID'])) {
+                $selectedShipping = Shopware()->Db()->fetchRow('
+                SELECT * 
+                FROM `s_premium_dispatch`
+                WHERE `id` = ?
+                LIMIT 1',
+                    [$selectedShippingInfo['dispatchID']]
+                );
+                if ($selectedShipping) {
+                    $shipping_methods = [
+                        [
+                            'identifier' => $selectedShipping['id'],
+                            'detail'     => "",
+                            'label'      => $selectedShipping['name'],
+                            'amount'     => (float) $selectedShippingInfo['invoice_shipping']
+                        ]
+                    ];
+                    echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
+                    exit;
+                }
+            }
+        }
+        //////////////
+
         $basket_items = $basket->sGetBasket()['content'];
 
         // Add single product to cart 
@@ -195,8 +228,8 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         $country = [];
         $country['id'] = $admin->sGetCountry($selected_country_code)['id'];
         
-        $dispatches = $admin->sGetPremiumDispatches($country['id'], $payment_method); 
-                                
+        $dispatches = $admin->sGetPremiumDispatches($country['id'], $payment_method);
+
         $shipping_methods = array_map(function ($method) use ($basket) {
             $shipping_cost = $this->getShippingCost(
                 $method['amount_display'], 
