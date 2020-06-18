@@ -146,6 +146,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $billing_address = $_POST['paymentData']['billingContact'];
         $shipping_address = $_POST['paymentData']['shippingContact'];
         $shippingMethod = $_POST['selected_shipping_method'];
+        $shippingAmount = $_POST['selected_shipping_amount'];
 
         $session->offsetSet('sDispatch', $shippingMethod);
 
@@ -188,6 +189,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $countryId = $userData['additional']['countryShipping']['id'];
         $userData['additional']['charge_vat'] = false;
 
+        $session->offsetSet('sDispatch', $shippingMethod);
+
         $shippingCosts = $admin->sGetPremiumShippingcosts($countryId);
 
         SimpleLog::log(__METHOD__ . "|2|", [$basketData, $shippingCosts]);
@@ -198,6 +201,19 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         //Sometimes shopware gives us numbers with comma as decimal sep.
         $basketData['Amount'] = $this->formatAmount($basketData['Amount']);
         $basketData['AmountNet'] = $this->formatAmount($basketData['AmountNet']);
+
+        if (
+            ($shippingCosts['netto'] === 0)
+            &&
+            ($shippingCosts['brutto'] === 0)
+            &&
+            $shippingAmount
+        ) {
+            SimpleLog::log(__METHOD__ . "|3|");
+            $shippingCosts['netto'] = $shippingAmount;
+            $shippingCosts['brutto'] = $shippingAmount;
+        }
+
         $shippingCosts['netto'] = $this->formatAmount($shippingCosts['netto']);
         $shippingCosts['brutto'] = $this->formatAmount($shippingCosts['brutto']);
 
@@ -205,7 +221,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $basketData['AmountNumeric'] += $shippingCosts['brutto'];
         $basketData['AmountNet'] += $shippingCosts['netto'];
 
-        SimpleLog::log(__METHOD__ . "|3|", $basketData);
+        SimpleLog::log(__METHOD__ . "|4|", [$basketData['Amount'],$basketData['AmountNet']]);
 
         //Fill order with our values
         $order = Shopware()->Modules()->Order();
