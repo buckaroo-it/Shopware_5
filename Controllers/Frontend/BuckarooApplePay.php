@@ -29,6 +29,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
     public function saveOrderAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         $paymentData = $_POST['paymentData'];
 
         $this->CustomerCardName = $paymentData['billingContact']['givenName'] . ' ' . $paymentData['billingContact']['familyName'];
@@ -135,6 +137,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
     private function createOrder()
     {
+        SimpleLog::log(__METHOD__ . "|1|", $_POST);
+
         $admin = Shopware()->Modules()->Admin();
         $session = Shopware()->Session();
 
@@ -186,6 +190,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
         $shippingCosts = $admin->sGetPremiumShippingcosts($countryId);
 
+        SimpleLog::log(__METHOD__ . "|2|", [$basketData, $shippingCosts]);
 
         //Basket data
         $basketData = $basket->sGetBasket();
@@ -199,6 +204,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
         $basketData['Amount'] += $shippingCosts['brutto'];
         $basketData['AmountNumeric'] += $shippingCosts['brutto'];
         $basketData['AmountNet'] += $shippingCosts['netto'];
+
+        SimpleLog::log(__METHOD__ . "|3|", $basketData);
 
         //Fill order with our values
         $order = Shopware()->Modules()->Order();
