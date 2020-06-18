@@ -8,7 +8,6 @@ export default class ApplePay {
     this.buckaroo = new Buckaroo;
     this.shopware = new Shopware;
     this.store_info = this.shopware.getStoreInformation();
-    this.log('2');
     this.selected_shipping_method = null;
     this.selected_shipping_amount = null;
     this.total_price = null;
@@ -17,7 +16,6 @@ export default class ApplePay {
   }
 
   rebuild() {
-    this.log('6');
     $('.applepay-button-container div').remove();
     $('.applepay-button-container').append('<div>');
   }
@@ -28,8 +26,7 @@ export default class ApplePay {
     BuckarooSdk.ApplePay
       .checkApplePaySupport(this.store_info.merchant_id)
       .then((is_applepay_supported) => {
-        this.log('8', is_applepay_supported);
-        if (location.protocol === 'https:') {
+        if (is_applepay_supported && location.protocol === 'https:') {
           this.log('9');
           if (document.querySelector('.main--actions button[type="submit"]')) {
             this.mode = 'checkout';
@@ -164,7 +161,7 @@ export default class ApplePay {
   }
 
   processApplepayCallback(payment) {
-    this.log('10', this.mode);
+    this.log('10');
     const authorization_result = {
       status: ApplePaySession.STATUS_SUCCESS,
       errors: []
@@ -172,13 +169,10 @@ export default class ApplePay {
 
     if (authorization_result.status === ApplePaySession.STATUS_SUCCESS) {
       if (this.mode == 'checkout') {
-        this.log('11');
         if (payment) {
           this.log('13');
           var result = this.buckaroo.savePaymentInfo(payment);
-          this.log('15', result);
           if (result) {
-            this.log('16');
             if (document.querySelector('#confirm--form')) {
               this.log('17');
               window.buckaroo.submit = true;
