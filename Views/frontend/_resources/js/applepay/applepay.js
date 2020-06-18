@@ -29,7 +29,7 @@ export default class ApplePay {
       .checkApplePaySupport(this.store_info.merchant_id)
       .then((is_applepay_supported) => {
         this.log('8', is_applepay_supported);
-        if (is_applepay_supported && location.protocol === 'https:') {
+        if (location.protocol === 'https:') {
           this.log('9');
           if (document.querySelector('.main--actions button[type="submit"]')) {
             this.mode = 'checkout';
@@ -58,8 +58,8 @@ export default class ApplePay {
           }
           this.total_price = total_to_pay;
 
-          let requiredBillingContactFields = null;
-          let requiredShippingContactFields = null;
+          let requiredBillingContactFields = undefined;
+          let requiredShippingContactFields = undefined;
 
           if (this.mode == 'checkout') {
             requiredBillingContactFields = ["postalAddress"];
