@@ -49,6 +49,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
     private function completeOrder($amount, $token, $userId, $order, $order_id, $order_number, $CustomerCardName)
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
 
@@ -75,6 +77,8 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             $response = $paymentMethod->pay($request);
             // Reopen session
             session_start();
+
+            SimpleLog::log(__METHOD__ . "|2|", $response);
 
             // save transactionId
             $transaction->setTransactionId($response->getTransactionKey());
@@ -106,13 +110,18 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             $snippetManager = Shopware()->Container()->get('snippets');
             $validationMessages = $snippetManager->getNamespace('frontend/buckaroo/validation');
 
-            $message = $validationMessages->get($response->getSomeError(), $response->getSomeError());
+            //$message = $validationMessages->get($response->getSomeError(), $response->getSomeError());
+
+            $message = 'payment failed';
+            if ($response->getSubCodeMessage()) {
+                $message = $response->getSubCodeMessage();
+            }
 
             $order->setOrderStatus($order_id, self::ORDER_FAILED_CODE);
             $order->setPaymentStatus($order_id, self::PAYMENT_FAILED_CODE, false/*Do not send mail*/);
             $this->setOrderSession($order);
             $order->sSaveOrder();
-            $result = ['result' => 'failure', 'redirect' => '', 'message' => 'payment failed'];
+            $result = ['result' => 'failure', 'redirect' => '', 'message' => $message];
 
             echo json_encode($result);
             exit;
