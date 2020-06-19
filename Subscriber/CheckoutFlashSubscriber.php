@@ -5,6 +5,8 @@ namespace BuckarooPayment\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs;
 use BuckarooPayment\Components\Flash;
+use BuckarooPayment\Components\SimpleLog;
+
 
 class CheckoutFlashSubscriber implements SubscriberInterface
 {
@@ -32,6 +34,8 @@ class CheckoutFlashSubscriber implements SubscriberInterface
      */
     public function onCheckout(Enlight_Event_EventArgs $args)
     {
+        SimpleLog::log(__METHOD__ . "|1|", $this->flash->hasMessages());
+
         $controller = $args->getSubject();
         $view = $controller->View();
 
@@ -49,7 +53,11 @@ class CheckoutFlashSubscriber implements SubscriberInterface
 
             if( $this->flash->hasErrorMessages() )
             {
-                $view->assign('buckarooErrors', $this->flash->getErrorMessages());
+                if (Shopware()->Front()->Request()->getActionName() === 'shippingPayment') {
+                    $view->assign('sErrorMessages', $this->flash->getErrorMessages());
+                } else {
+                    $view->assign('buckarooErrors', $this->flash->getErrorMessages());
+                }
             }
 
             $view->addTemplateDir(__DIR__ . '/../Views');

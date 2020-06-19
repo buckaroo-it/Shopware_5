@@ -79,6 +79,9 @@ abstract class SimplePaymentController extends AbstractPaymentController
         $key = $paymentMethod->getName();
         $creditCards = AbstractPaymentMethod::isCreditcard();
 
+        $result = $this->indexActionPreHandler();
+        if ($result !==true) return $result;
+
         $data = [
             'user' => SessionCase::sessionToUser($this->getAdditionalUser()),
             'billing' => SessionCase::sessionToAddress($this->getBillingAddress()),
@@ -90,6 +93,11 @@ abstract class SimplePaymentController extends AbstractPaymentController
         $action = ($isEncrypted && in_array($key, $creditCards))  ? 'payEncrypted' : 'pay';
 
         return $this->redirect([ 'action' => $action, 'forceSecure' => true ]);
+    }
+
+    public function indexActionPreHandler()
+    {
+        return true;
     }
 
     /**

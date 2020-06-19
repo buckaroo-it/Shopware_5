@@ -4,9 +4,20 @@ use BuckarooPayment\Components\Base\SimplePaymentController;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
 use BuckarooPayment\Components\Base\AbstractPaymentMethod;
 use BuckarooPayment\Components\JsonApi\Payload\Request;
+use BuckarooPayment\Components\SimpleLog;
 
 class Shopware_Controllers_Frontend_BuckarooIdeal extends SimplePaymentController
 {
+    public function indexActionPreHandler()
+    {
+        SimpleLog::log(__METHOD__ . "|1|" , $this->getPaymentMethodClass()->getSelectedIssuer());
+        if ($this->getPaymentMethodClass()->getSelectedIssuer()) {
+            return true;
+        } else {
+            return $this->redirectBackToPaymentAndShippingSelection()->addMessage('Please select a card issuer');
+        }
+    }
+
     /**
      * Get the paymentmethod-class with the payment name
      * 

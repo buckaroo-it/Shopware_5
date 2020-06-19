@@ -433,6 +433,16 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
     }
 
     /**
+     * Redirect back to the payment & shipping selection
+     * Return flash class for method chaining
+     */
+    protected function redirectBackToPaymentAndShippingSelection()
+    {
+        $this->redirect([ 'controller' => 'checkout', 'action' => 'shippingPayment' ]);
+        return $this->container->get('buckaroo_payment.flash');
+    }
+
+    /**
      * Redirect to success page
      * Return flash class for method chaining
      */
