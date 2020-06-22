@@ -11,6 +11,7 @@ use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
 use Shopware\Models\Article\Detail as ArticleDetail;
 use Shopware\Models\Article\Article as Article;
 use BuckarooPayment\Components\Constants\VatCategory;
+use BuckarooPayment\Components\SimpleLog;
 
 class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_Api_Rest implements CSRFWhitelistAware
 {
@@ -29,6 +30,8 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
 
     public function indexAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|");
+
         try {
             $em = $this->container->get('models');
             $statusMessages = $this->container->get('snippets')->getNamespace('backend/buckaroo/refund');
@@ -54,6 +57,9 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
             }
 
             $payment = $order->getPayment();
+            $config = $this->container->get('buckaroo_payment.config');
+            $config->setShop($order->getShop());
+
 
             // check if order is a buckaroo order
             // buckaroo payment methods are prefixed with 'buckaroo_' in Shopware

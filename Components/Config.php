@@ -3,6 +3,7 @@
 namespace BuckarooPayment\Components;
 
 use Shopware\Components\Plugin\ConfigReader;
+use Shopware\Models\Shop\Shop;
 
 class Config
 {
@@ -15,6 +16,8 @@ class Config
      * @var array
      */
     protected $data = null;
+
+    private $shop;
 
     public function __construct(ConfigReader $configReader)
     {
@@ -36,6 +39,9 @@ class Config
                 $shop = Shopware()->Shop();
             } else {
                 $shop = null;
+                if ($this->shop) {
+                    $shop = $this->shop;
+                }
             }
 
             // get config for shop or for main if shopid is null
@@ -52,11 +58,17 @@ class Config
         return $this->data;
     }
 
+    public function setShop(Shop $shop)
+    {
+        $this->shop = $shop;
+    }
+
     /**
      * @return string
      */
     public function websiteKey()
     {
+        SimpleLog::log(__METHOD__ . "|1|" , $this->get('buckaroo_websiteKey'));
         return $this->get('buckaroo_websiteKey');
     }
 
@@ -239,7 +251,7 @@ class Config
      */
     public function applepayButtonShowProduct()
     {
-        return $this->get('buckaroo_applepay_show_product', "no") == 'yes';        
+        return $this->get('buckaroo_applepay_show_product', "no") == 'yes';
     }
 
     /**
@@ -249,7 +261,7 @@ class Config
      */
     public function applepayButtonShowCart()
     {
-        return $this->get('buckaroo_applepay_show_cart', "no") == 'yes';        
+        return $this->get('buckaroo_applepay_show_cart', "no") == 'yes';
     }
 
     /**
@@ -259,7 +271,7 @@ class Config
      */
     public function applepayButtonShowCheckout()
     {
-        return $this->get('buckaroo_applepay_show_checkout', "no") == 'yes';        
+        return $this->get('buckaroo_applepay_show_checkout', "no") == 'yes';
     }
 
 
@@ -271,5 +283,5 @@ class Config
     public function applepayMerchantGUID()
     {
         return $this->get('buckaroo_applepay_merchant_guid');
-    }    
+    }
 }
