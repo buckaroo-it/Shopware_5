@@ -51,6 +51,8 @@ class Shopware_Controllers_Backend_BuckarooGiftcardRefund extends Shopware_Contr
             }
 
             $payment = $order->getPayment();
+            $config = $this->container->get('buckaroo_payment.config');
+            $config->setShop($order->getShop());
 
             // check if order is a buckaroo order
             // buckaroo payment methods are prefixed with 'buckaroo_' in Shopware
