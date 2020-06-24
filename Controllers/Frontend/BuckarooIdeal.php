@@ -14,7 +14,10 @@ class Shopware_Controllers_Frontend_BuckarooIdeal extends SimplePaymentControlle
         if ($this->getPaymentMethodClass()->getSelectedIssuer()) {
             return true;
         } else {
-            return $this->redirectBackToPaymentAndShippingSelection()->addMessage('Please select a card issuer');
+            $namespace = $this->container->get('snippets')->getNamespace('frontend/buckaroo/status_messages');
+            return $this->redirectBackToPaymentAndShippingSelection()->addMessage(
+                $namespace->get('ValidationIdealIssuerRequired2', 'Select a bank to continue')
+            );
         }
     }
 
