@@ -252,7 +252,7 @@ export default class ApplePay {
   }
 
   log(id, variable) {
-    //return false;
+    return false;
     console.log("====applepay====" + id);
     if (variable !== undefined) {
       console.log(variable);

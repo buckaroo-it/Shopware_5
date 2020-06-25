@@ -16,21 +16,16 @@
                 var submitButton = document.querySelector('.main--actions button[type="submit"]');
                 var form = document.querySelector('#confirm--form');
                 if (submitButton && form) {
-                    console.log("====applepay====order submit1");
                     submitButton.disabled = true;
                     form.addEventListener('submit', function(e){
-                        console.log("====applepay====order submit2");
                         if (window.buckaroo.submit) {
-                            console.log("====applepay====order submit3");
                             //allow to submit
                             return true;
                         } else {
-                            console.log("====applepay====order submit4");
                             //don't allow to submit
                             e.preventDefault();
                             var child = document.querySelector('.apple-pay-button');
                             if (child) {
-                                console.log("====applepay====order submit5");
                                 child.click();
                             }
                         }

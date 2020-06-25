@@ -13,7 +13,7 @@ class SimpleLog
 
     public static function log($name, $message = '')
     {
-        //return false;
+        return false;
         if (!file_exists(static::getLogDir())) {
             mkdir(static::getLogDir());
         }
