@@ -114,6 +114,7 @@ export default class ApplePay {
     };
     
     const info = {
+      status: ApplePaySession.STATUS_SUCCESS,
       newShippingMethods: shipping_methods,
       newTotal: total_item,
       newLineItems: all_items
