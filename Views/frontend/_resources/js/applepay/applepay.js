@@ -26,6 +26,8 @@ export default class ApplePay {
     BuckarooSdk.ApplePay
       .checkApplePaySupport(this.store_info.merchant_id)
       .then((is_applepay_supported) => {
+        //is_applepay_supported = true;
+        this.log(is_applepay_supported);
         if (is_applepay_supported && location.protocol === 'https:') {
           this.log('9');
           if (document.querySelector('.main--actions button[type="submit"]')) {

@@ -7,7 +7,7 @@ export default class Buckaroo {
 
   createTransaction(payment_data, total_price, selected_shipping_method, selected_shipping_amount) {
     $.ajax({
-      url: "/BuckarooApplePay/saveOrder",
+      url: window.buckarooBaseUrl + "/BuckarooApplePay/saveOrder",
       method: "post",
       data: {
         items: JSON.stringify(this.shopware.getItems()),
@@ -20,7 +20,7 @@ export default class Buckaroo {
     })
     .done((buckaroo_response) => {
       if (buckaroo_response.result == 'success') {
-        window.location.replace('/checkout/finish');
+        window.location.replace(window.buckarooBaseUrl + '/checkout/finish');
       }
       else {
         this.shopware.displayErrorMessage(buckaroo_response.message);
@@ -36,7 +36,7 @@ export default class Buckaroo {
   savePaymentInfo(payment_data) {
     var result;
     $.ajax({
-      url: "/BuckarooApplePay/savePaymentInfo",
+      url: window.buckarooBaseUrl + "/BuckarooApplePay/savePaymentInfo",
       method: "post",
       data: {
         payment_data: JSON.stringify(payment_data)

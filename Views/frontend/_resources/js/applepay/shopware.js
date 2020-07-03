@@ -11,7 +11,7 @@ export default class Shopware {
       }
       
       $.ajax({
-        url: "/Buckaroo/getItemsFromDetailPage",
+        url: window.buckarooBaseUrl + "/Buckaroo/getItemsFromDetailPage",
         data: send_data,
         async: false,
         dataType: "json"
@@ -34,7 +34,7 @@ export default class Shopware {
     else {
       var cart_items = [];
       $.ajax({
-        url: "/Buckaroo/getCartItems",
+        url: window.buckarooBaseUrl + "/Buckaroo/getCartItems",
         data: { country_code: country_code },
         async: false,
         dataType: "json"
@@ -77,7 +77,7 @@ export default class Shopware {
 
     var methods;
     $.ajax({
-      url: '/Buckaroo/getShippingMethods',
+      url: window.buckarooBaseUrl + '/Buckaroo/getShippingMethods',
       data: Object.assign(url_params, product_params),
       dataType: "json",
       async: false
@@ -90,7 +90,7 @@ export default class Shopware {
   getStoreInformation() {
     var information = [];
     $.ajax({
-      url: "/Buckaroo/getShopInformation",
+      url: window.buckarooBaseUrl + "/Buckaroo/getShopInformation",
       async: false,
       dataType: "json"
     })

@@ -17,6 +17,7 @@
             <script type="text/javascript">
                 var is_product_detail_page = true;
                 var order_number = '{$sArticle.ordernumber}';
+                var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
             </script>
         {/if}
     {/if}

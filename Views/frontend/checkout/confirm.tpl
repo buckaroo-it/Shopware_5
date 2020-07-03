@@ -12,6 +12,7 @@
                     submit: false
                 };
             }
+            var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
             setTimeout(function() {
                 var submitButton = document.querySelector('.main--actions button[type="submit"]');
                 var form = document.querySelector('#confirm--form');

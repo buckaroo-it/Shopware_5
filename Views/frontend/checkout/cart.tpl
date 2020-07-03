@@ -30,6 +30,9 @@
             <div></div>
         </div>
         <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
+        <script type="text/javascript">
+            var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
+        </script>
     {/if}
 {/block}
 
