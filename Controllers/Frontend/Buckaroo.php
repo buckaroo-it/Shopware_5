@@ -2,6 +2,7 @@
 
 use BuckarooPayment\Components\Base\SimplePaymentController;
 use Shopware\Components\Cart\Struct\CartItemStruct;
+use BuckarooPayment\Components\SimpleLog;
 
 class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 {
@@ -165,6 +166,8 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
     
     public function getShippingMethodsAction() 
     {
+        SimpleLog::log(__METHOD__ . "|1|", $_GET['country_code']);
+
         $admin = Shopware()->Modules()->Admin();
 
         $selected_country_code   = strtoupper($_GET['country_code']);
@@ -175,6 +178,8 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             echo json_encode([]);
             exit;
         }
+
+        SimpleLog::log(__METHOD__ . "|2|");
 
         $basket = Shopware()->Modules()->Basket();
 
@@ -204,6 +209,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
                             'amount'     => (float) $selectedShippingInfo['invoice_shipping']
                         ]
                     ];
+                    SimpleLog::log(__METHOD__ . "|3|", $shipping_methods);
                     echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
                     exit;
                 }
@@ -254,6 +260,8 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         }
 
         sort($shipping_methods);
+        SimpleLog::log(__METHOD__ . "|4|", $shipping_methods);
+
         echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
         exit;
     }
