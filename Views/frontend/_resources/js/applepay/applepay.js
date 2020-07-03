@@ -93,6 +93,8 @@ export default class ApplePay {
   }
 
   processChangeContactInfoCallback(contact_info) {
+    this.log('21');
+
     this.country_id = contact_info.countryCode
 
     const cart_items = this.getItems();
@@ -134,6 +136,8 @@ export default class ApplePay {
   }
 
   processShippingMethodsCallback(selected_method) {
+    this.log('22');
+
     const cart_items = this.getItems();
     const shipping_item = {
       type: 'final',
