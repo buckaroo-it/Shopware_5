@@ -185,6 +185,8 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 
         /////////////
         if (!empty($_GET['is_checkout'])) {
+            $this->getFreeShippingResponse($basket->sGetBasket()['content']);
+
             $selectedShippingInfo = Shopware()->Db()->fetchRow(
                 'SELECT dispatchID, invoice_shipping
             FROM s_order
@@ -221,13 +223,23 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 
         // Add single product to cart 
         // so we can determine to give discount or not. 
-        if (isset($_GET['product_id'])) {                    
+        if (isset($_GET['product_id'])) {
+            SimpleLog::log(__METHOD__ . "|4|");
+
             foreach ($basket_items as $item) {
                 $basket->sDeleteArticle($item['id']);
             }
 
-            $fake_item_id = $basket->sAddArticle($_GET['product_id'], $_GET['article_qty']);            
-        }   
+            $fake_item_id = $basket->sAddArticle($_GET['product_id'], $_GET['article_qty']);
+
+            $this->getFreeShippingResponse($basket->sGetBasket()['content']);
+        } else {
+            if (empty($_GET['is_checkout'])) {
+                //cart mode
+                SimpleLog::log(__METHOD__ . "|5|");
+                $this->getFreeShippingResponse($basket_items);
+            }
+        }
         
         $payment_method = $this->getPaymentMethodIdByCode($_GET['payment_method']);
 
@@ -260,13 +272,35 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         }
 
         sort($shipping_methods);
-        SimpleLog::log(__METHOD__ . "|4|", $shipping_methods);
+        SimpleLog::log(__METHOD__ . "|9|", $shipping_methods);
 
         echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
         exit;
     }
 
-    public function getCountryCode() 
+    private function getFreeShippingResponse($basket_items)
+    {
+        SimpleLog::log(__METHOD__ . "|1|", [empty($basket_items) , sizeof($basket_items)]);
+        if ($basket_items && (sizeof($basket_items) == 1)) {
+            foreach ($basket_items as $item) {
+                if ($item['shippingfree']) {
+                    SimpleLog::log(__METHOD__ . "|4|", $item);
+                    $shipping_methods = [
+                        [
+                            'identifier' => 0,
+                            'detail' => "",
+                            'label' => 'No shipping fee',
+                            'amount' => 0
+                        ]
+                    ];
+                    echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
+                    exit;
+                }
+            }
+        }
+    }
+
+    public function getCountryCode()
     {
         $default_code = 'NL';
         $locale = Shopware()->Shop()->getLocale()->getLocale();
