@@ -24,15 +24,16 @@
 
 {block name="frontend_checkout_actions_confirm_bottom_checkout"}
     {$smarty.block.parent}
-
-    {if {config name=buckaroo_applepay_show_cart} eq 'yes'}
-        <div class="applepay-button-container">
-            <div></div>
-        </div>
-        <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
-        <script type="text/javascript">
-            var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
-        </script>
+    {if $smarty.server.HTTP_USER_AGENT|stristr:"safari" and !$smarty.server.HTTP_USER_AGENT|stristr:"chrome"}
+        {if {config name=buckaroo_applepay_show_cart} eq 'yes'}
+            <div class="applepay-button-container">
+                <div></div>
+            </div>
+            <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
+            <script type="text/javascript">
+                var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
+            </script>
+        {/if}
     {/if}
 {/block}
 

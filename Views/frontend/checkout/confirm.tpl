@@ -34,7 +34,13 @@
                 }
             }, 500)
         </script>
-        <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
+        {if $smarty.server.HTTP_USER_AGENT|stristr:"safari" and !$smarty.server.HTTP_USER_AGENT|stristr:"chrome"}
+            <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
+        {else}
+            <script>
+                alert('ApplePay is available only in Safari browser!');
+            </script>
+        {/if}
     {/if}
 {/block}
 

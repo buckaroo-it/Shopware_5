@@ -18,7 +18,7 @@
 
     <div class="panel--body is--wide block-group">
         {foreach $sPayments as $payment_mean}
-        
+            {if ($payment_mean.name == 'buckaroo_applepay' and $smarty.server.HTTP_USER_AGENT|stristr:"safari" and !$smarty.server.HTTP_USER_AGENT|stristr:"chrome") or $payment_mean.name != 'buckaroo_applepay'}
             <div class="payment--method block{if $payment_mean@last} method_last{else} method{/if}">
 
                 {* Radio Button *}
@@ -52,6 +52,7 @@
                     {/if}
                 {/block}
             </div>
+            {/if}
 
         {/foreach}
     </div>
