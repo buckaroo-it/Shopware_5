@@ -29,8 +29,12 @@
             <div class="applepay-button-container">
                 <div></div>
             </div>
-            <script type="module" src="{link file="frontend/_resources/js/applepay/index.js"}"></script>
             <script type="text/javascript">
+                var el = document.createElement('script');
+                el.type='module';
+                el.src = '{link file="frontend/_resources/js/applepay/index.js"}?v={$smarty.server.REQUEST_TIME}';
+                document.head.appendChild( el );
+
                 var buckarooBaseUrl = '{$Shop->getBaseUrl()}';
             </script>
         {/if}
