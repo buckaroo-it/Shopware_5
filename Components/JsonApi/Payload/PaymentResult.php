@@ -120,6 +120,16 @@ class PaymentResult implements ArrayAccess, Arrayable
             // payconiq validation breaks if you use urldecode();
             $valueToValidate = ($data['brq_transaction_method'] == "Payconiq") || ($data['brq_payment_method'] == "Payconiq") ? $value : urldecode($value);
 
+            if (
+                stristr($key, 'payeremail') ||
+                stristr($key, 'customer_name') ||
+                stristr($key, 'payerfirstname') ||
+                stristr($key, 'accountholdername') ||
+                stristr($key, 'consumername')
+            ) {
+                $valueToValidate = $value;
+            }
+
             // sorting should be case-insensitive, so just make all keys uppercase
             $uppercaseKey = strtoupper($key);
 
