@@ -71,12 +71,7 @@ class SessionAdapter extends Zend_Session_Abstract
 
     public static function __callStatic($method, $args)
     {
-        if( $this->hasInstance() )
-        {
-            return call_user_func_array([ '\Enlight_Components_Session_Namespace', $method ], $args);
-        }
-
-        return null;
+       return call_user_func_array([ '\Enlight_Components_Session_Namespace', $method ], $args);
     }
 
     public function & __get($name)
