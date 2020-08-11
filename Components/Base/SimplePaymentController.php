@@ -427,6 +427,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payPushAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|", $this->Request());
+
         $this->restoreSession();
         $this->setActiveShop();
 
@@ -436,6 +438,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
         try
         {
             $data = $this->container->get('buckaroo_payment.payment_result');
+
+            SimpleLog::log(__METHOD__ . "|2|");
 
             // Workaround for refunds bug with push url
             // Push is sent to the original push url instead of the refund url.
@@ -449,9 +453,13 @@ abstract class SimplePaymentController extends AbstractPaymentController
                 $dataTransaction = $transactionManager->getByQuoteNumber($data->getInvoice());
             }
 
+            SimpleLog::log(__METHOD__ . "|3|", $dataTransaction);
+
             if( !$data->isValid() ) return $this->responseError('POST data invalid');
 
             if( !$this->checkAmountPush($data->getAmount(), $dataTransaction) ) return $this->responseError('Amount invalid');
+
+            SimpleLog::log(__METHOD__ . "|4|");
 
             // get transaction with the quoteNumber
             $transaction = $transactionManager->get( $data->getInvoice(), $data->getTransactionKey() );
@@ -471,8 +479,12 @@ abstract class SimplePaymentController extends AbstractPaymentController
             $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
             $hasOrder = count($order);
 
+            SimpleLog::log(__METHOD__ . "|5|");
+
             if ($hasOrder)
             {
+                SimpleLog::log(__METHOD__ . "|6|");
+
                 // check if transaction is refunded or partially refunded
                 // if so don't update
                 $noChangeOnPayPush = array(PaymentStatus::REFUNDED, PaymentStatus::PARTIALLY_PAID);
@@ -486,16 +498,21 @@ abstract class SimplePaymentController extends AbstractPaymentController
                     return $this->sendResponse('OK');
                 }
 
+                SimpleLog::log(__METHOD__ . "|7|");
+
                 $this->savePaymentStatus(
                     $data->getInvoice(),
                     $this->generateToken(),
                     $this->getPaymentStatus($data->getStatusCode()),
                     $sendEmail // sendStatusMail
                 );
+
+                SimpleLog::log(__METHOD__ . "|8|");
             }
             else if( $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode())) )
             {
- 
+                SimpleLog::log(__METHOD__ . "|9|");
+
                 $orderNumber = $this->saveOrder(
                     $data->getInvoice(),
                     $this->generateToken(),
@@ -503,15 +520,21 @@ abstract class SimplePaymentController extends AbstractPaymentController
                     false // sendStatusMail
                 );
                 $transaction->setOrderNumber($orderNumber);
+
+                SimpleLog::log(__METHOD__ . "|10|", $orderNumber);
             }
 
             $transaction->setStatus($this->getPaymentStatus($data->getStatusCode()));
             $transactionManager->save($transaction);
 
+            SimpleLog::log(__METHOD__ . "|11|");
+
             return $this->sendResponse('OK');
         }
         catch(Exception $ex)
         {
+            SimpleLog::log(__METHOD__ . "|12|", $ex->getMessage());
+
             if( !is_null($transaction) )
             {
                 $transaction->setException($ex->getMessage());
@@ -529,6 +552,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payReturnAction()
     {
+        SimpleLog::log(__METHOD__ . "|1|", $this->Request());
+
         if (!$sessionId = $this->Request()->getParam('session_id')) {
             throw new Exception('session_id is missing');
         }
@@ -544,6 +569,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
         try
         {
             $data = $this->container->get('buckaroo_payment.payment_result');
+
+            SimpleLog::log(__METHOD__ . "|2|");
 
             if(
                 !$data->isValid() ||
@@ -566,6 +593,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
                 $this->addArticlesStock();
                 $transaction->setNeedsRestock(NULL);
             }
+
+            SimpleLog::log(__METHOD__ . "|3|");
 
             if( $this->hasOrder() )
             {
@@ -599,15 +628,21 @@ abstract class SimplePaymentController extends AbstractPaymentController
             $transaction->setStatus($this->getPaymentStatus($data->getStatusCode()));
             $transactionManager->save($transaction);
 
+            SimpleLog::log(__METHOD__ . "|4|");
+
             if( $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode())) )
             {
+                SimpleLog::log(__METHOD__ . "|5|");
+
                 return $this->redirectToFinish();
             }
-            
+
             return $this->redirectBackToCheckout()->addMessage($this->getErrorStatusUserMessage($data->getStatusCode()));
         }
         catch(Exception $ex)
         {
+            SimpleLog::log(__METHOD__ . "|6|", $ex->getMessage());
+
             if( !is_null($transaction) )
             {
                 $transaction->setException($ex->getMessage());

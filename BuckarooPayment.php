@@ -55,6 +55,8 @@ class BuckarooPayment extends Plugin
         'buckaroo_applepay'
     );
 
+    private static $buckarooConfig;
+
     /**
      * Return Shopware events subscribed to
      */
@@ -500,4 +502,11 @@ class BuckarooPayment extends Plugin
         return !empty($column);
     }
 
+    public static function getBuckarooConfig()
+    {
+        if (!isset(self::$buckarooConfig)) {
+            self::$buckarooConfig = require __DIR__ . '/config.php';
+        }
+        return self::$buckarooConfig;
+    }
 }

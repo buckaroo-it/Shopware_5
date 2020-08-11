@@ -2,6 +2,8 @@
 
 namespace BuckarooPayment\Components;
 
+require_once(__DIR__ . '/../BuckarooPayment.php');
+
 class SimpleLog
 {
 	protected static $logFiles = [];
@@ -13,7 +15,12 @@ class SimpleLog
 
     public static function log($name, $message = '')
     {
-        return false;
+        $config = \BuckarooPayment\BuckarooPayment::getBuckarooConfig();
+
+        if (empty($config) || empty($config['log'])) {
+            return false;
+        }
+
         if (!file_exists(static::getLogDir())) {
             mkdir(static::getLogDir());
         }
