@@ -148,6 +148,7 @@ class BuckarooPaymentMethods
         {
             $payment = $paymentRepo->findOneBy([ 'name' => $paymentMean->getName() ]);
 
+            $img_url = $_SERVER['REQUEST_URI'] . '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
             $option = [
                 'name' => $paymentMean->getName(),
                 'class' => $paymentMean->getName(),
@@ -156,7 +157,8 @@ class BuckarooPaymentMethods
                 'description' => !empty($payment) ? $payment->getDescription() : $paymentMean->getDescription(),
                 'active' => !empty($payment) ? $this->getPaymentActiveByName($payment->getName()) : 0,
                 'additionalDescription' => 
-                    '<img style="height: 40px" src="{link file=\'frontend/_resources/images/' . $paymentMean->getImageName() . '\' fullPath}" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
+                    // '<img style="height: 40px" src="{link file=\'frontend/_resources/images/' . $paymentMean->getImageName() . '\' fullPath}" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
+                    '<img style="height: 40px" src="'.$img_url.'" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
             ];
 
             /**

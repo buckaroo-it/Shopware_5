@@ -11,6 +11,8 @@ use BuckarooPayment\Components\Helpers;
 use BuckarooPayment\Components\SessionCase;
 use BuckarooPayment\Components\SimpleLog;
 use Shopware\Bundle\StoreFrontBundle\Struct\Currency;
+use Shopware\Models\Order\Order;
+use Shopware\Models\Order\Status as OrderStatus;
 
 use Exception;
 
@@ -444,7 +446,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // Workaround for refunds bug with push url
             // Push is sent to the original push url instead of the refund url.
             if ($data->getAmountCredit() != null) {
-                return $this->refundPushAction();
+                return $this->refundPushAction($data);
             }            
 
             $dataTransaction = $transactionManager->getByTransactionKey($data->getTransactionKey());
@@ -655,8 +657,14 @@ abstract class SimplePaymentController extends AbstractPaymentController
         }
     }
 
-    public function refundPushAction()
+    public function refundPushAction($data)
     {
+        $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
+        if(count($order)){
+            $refundOrder = Shopware()->Modules()->Order();
+            $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
+        }
+
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('refundPush', $data);
         return $this->sendResponse('Refund Push - OK');

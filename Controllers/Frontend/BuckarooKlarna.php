@@ -121,7 +121,8 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
                 $transactionManager->save($transaction);
 
-                return $this->redirectToFinish();
+                return $this->redirect($response->getRedirectUrl());
+                //return $this->redirectToFinish();
             }
 
             if ($response->hasConsumerMessage()) {
@@ -230,7 +231,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         $request->setServiceParameter('OperatingCountry', $billingCountryIso); // Required
         $request->setServiceParameter('Pno', $birthDay); // birthdate DDMMYYYY // Required
         $request->setServiceParameter('ShippingSameAsBilling', $this->isShippingSameAsBilling() ? 'true' : 'false');
-        $request->setServiceParameter('Encoding', $billingCountryName);
+        // $request->setServiceParameter('Encoding', $billingCountryName);
         $request->setServiceParameter('Gender', $billingGender);
 
     }
