@@ -442,6 +442,10 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
 
     public function payPushAction()
     {
+        $data = $this->container->get('buckaroo_payment.payment_result');
+        if ($data->getAmountCredit() != null) {
+            return $this->refundPushAction($data);
+        }
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Afterpay-payPush', $data);
     }
