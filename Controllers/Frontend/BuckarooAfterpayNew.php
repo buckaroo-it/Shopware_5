@@ -555,8 +555,14 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
         SimpleLog::log('Afterpay-capturePush', $data);
     }
 
-    public function refundPushAction()
+    public function refundPushAction($data)
     {
+        $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
+        if(count($order)){
+            $refundOrder = Shopware()->Modules()->Order();
+            $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
+        }
+
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Afterpay-refundPush', $data);
     }
