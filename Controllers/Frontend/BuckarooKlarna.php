@@ -24,6 +24,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             'autoCapturePush',
             'cancelReservationPush',
             'refundPush',
+            'payReturn',
         ];
     }
 
@@ -193,6 +194,8 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
         // Set shipping address parameters to request
         $this->setShippingAddressParameters($request, $user);
+
+        $request->setReturnURL( $this->assembleSessionUrl(array_merge($paymentMethod->getActionParts(), [ 'action' => 'pay_return', 'forceSecure' => true ])) );
     }
 
     /**
@@ -534,5 +537,95 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
     }
 
+    /**
+     * Action when a customer is redirected back to the shop
+     * Save or update the order status
+     * Then redirect to finish
+     *
+     * Overwriting SimplePaymentController::payReturnAction()
+     * Removes $this->checkAmount($data->getAmount()) because the value is never the same
+     */
+    public function payReturnAction()
+    {
+        if (!$sessionId = $this->Request()->getParam('session_id')) {
+            throw new Exception('session_id is missing');
+        }
+
+        // Session got lost sometimes since 5.6.6
+        \Enlight_Components_Session::writeClose();
+        \Enlight_Components_Session::setId($sessionId);
+        \Enlight_Components_Session::start();
+
+        $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
+        $transaction = null;
+
+        try {
+            $data = $this->container->get('buckaroo_payment.payment_result');
+
+            if (
+                !$data->isValid()
+            ) {
+                return $this->redirectBackToCheckout()->addMessage('Error validating data');
+            }
+
+            // get transaction with the quoteNumber and the sessionId
+            $transaction = $transactionManager->getByQuoteNumber( $data->getInvoice());
+
+            // set extra info
+            $transaction->addExtraInfo($data->getServiceParameters());
+
+            if($transaction->getStatus() == PaymentStatus::COMPLETELY_PAID){
+                // return url should not update transaction status if already 'completely paid'
+                $transactionStatus = PaymentStatus::COMPLETELY_PAID;
+            } elseif ($data->getStatusCode() == 190){
+                // return url updates transaction status to 'completely invoiced'
+                // if response status is success and transaction status is not completely paid
+                $transactionStatus = PaymentStatus::COMPLETELY_INVOICED;
+            } else {
+                $transactionStatus = $this->getPaymentStatus($data->getStatusCode());
+            }
+
+            if ($this->hasOrder()) {
+                $this->savePaymentStatus(
+                    $data->getInvoice(),
+                    $this->generateToken(),
+                    $transactionStatus,
+                    false // sendStatusMail
+                );
+            } else if ($this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode()))) {
+                // Signature can only be checked once
+                // So only do it when saving an order
+                if (!$this->checkSignature($data->getSignature())) {
+                    return $this->redirectBackToCheckout()->addMessage('Signature not valid');
+                }
+                $orderNumber = $this->saveOrder(
+                    $data->getInvoice(),
+                    $this->generateToken(),
+                    $transactionStatus,
+                    false // sendStatusMail
+                );
+                $transaction->setOrderNumber($orderNumber);
+            }
+
+            $transaction->setStatus($transactionStatus);
+            $transactionManager->save($transaction);
+
+            if ($this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode()))) {
+                return $this->redirectToFinish();
+            }
+
+            return $this->redirectBackToCheckout()->addMessage($this->getErrorStatusUserMessage($data->getStatusCode()));
+        } catch (Exception $ex) {
+            if (!is_null($transaction)) {
+                $transaction->setException($ex->getMessage());
+                $transactionManager->save($transaction);
+            }
+
+            return $this->redirectBackToCheckout()->addMessage(
+                'Error handling return. ' . ($this->shouldDisplayErrors() ? $ex->getMessage() : "Contact plugin author.")
+            );
+        }
+    }
+    
 }
 
