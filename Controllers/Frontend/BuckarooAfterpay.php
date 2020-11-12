@@ -442,6 +442,10 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
 
     public function payPushAction()
     {
+        $data = $this->container->get('buckaroo_payment.payment_result');
+        if ($data->getAmountCredit() != null) {
+            return $this->refundPushAction($data);
+        }
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Afterpay-payPush', $data);
     }
@@ -452,8 +456,14 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
         SimpleLog::log('Afterpay-capturePush', $data);
     }
 
-    public function refundPushAction()
+    public function refundPushAction($data)
     {
+        $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
+        if(count($order)){
+            $refundOrder = Shopware()->Modules()->Order();
+            $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
+        }
+
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Afterpay-refundPush', $data);
     }

@@ -199,6 +199,10 @@ class Shopware_Controllers_Frontend_BuckarooGiftcard extends SimplePaymentContro
                 return $this->sendResponse('The request is empty');
             }
 
+            if ($data->getAmountCredit() != null) {
+                return $this->refundPushAction($data);
+            }
+
             $transaction = $transactionManager->getByQuoteNumber( $data->getInvoice());
             // run validations
             if (!$data->isValid()) return $this->responseError('POST data invalid');

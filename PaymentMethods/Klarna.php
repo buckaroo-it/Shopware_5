@@ -21,7 +21,7 @@ class Klarna extends AbstractPaymentMethod
     /**
      * Buckaroo service name
      */
-    const BRQ_KEY = 'klarna';
+    const BRQ_KEY = 'klarnakp';
 
     /**
      * Buckaroo service version
