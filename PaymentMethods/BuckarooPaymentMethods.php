@@ -148,7 +148,7 @@ class BuckarooPaymentMethods
         {
             $payment = $paymentRepo->findOneBy([ 'name' => $paymentMean->getName() ]);
 
-            $img_url = $_SERVER['REQUEST_URI'] . '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
+            $img_url = '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
             $option = [
                 'name' => $paymentMean->getName(),
                 'class' => $paymentMean->getName(),

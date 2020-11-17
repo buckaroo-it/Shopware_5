@@ -90,6 +90,22 @@ class CheckoutSubscriber implements SubscriberInterface
 
         $paymentKey = str_replace("buckaroo_", "", $paymentData['name']);
 
+        if (!empty($this->session->sOrderVariables) && !empty($this->session->sOrderVariables['sUserData'])) {
+            $request = $args->getRequest();
+            $fields = $request->getPost('buckaroo-extra-fields');
+            if(isset($fields['afterpaynew'])){
+                if($phone = $fields['afterpaynew']['billing']['phone']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'] = $phone;
+                }
+                if($phone = $fields['afterpaynew']['billing']['phone']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'] = $phone;
+                }
+                if($birthday = $fields['afterpaynew']['user']['birthday']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['birthday'] = implode('-', [ $birthday['year'], $birthday['month'], $birthday['day'] ]);
+                }
+            }
+        }
+
         $view->assign([
             'billingCountryIso' => $countryIso,
             'paymentName' => $paymentData['name'],

@@ -36,7 +36,7 @@
 			name="buckaroo-extra-fields[{$name}][user][birthday][year]"
 			class="buckaroo_auto_submit"
 		>
-	        {for $year = date("Y") to date("Y")-120 step=-1}
+	        {for $year = date("Y")-18 to date("Y")-120 step=-1}
 	            <option value="{$year}" {if $year == $buckarooExtraFields.user.birthday.year}selected{/if}>{$year}</option>
 	        {/for}
 		</select>

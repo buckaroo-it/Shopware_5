@@ -128,6 +128,16 @@
 
         <li class="block-group row--tos">
 
+            {if ($billingCountryIso eq 'NL' || $billingCountryIso eq 'BE')}
+            
+                {assign var="name" value="afterpaynew"}
+
+                {include file='frontend/_includes/fields/user_birthday.tpl' name=$name}
+
+                {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
+
+            {/if}
+                            
             {* Afterpay terms of service checkbox *}
             {block name='frontend_checkout_confirm_afterpay_checkbox'}
                 <span class="block column--checkbox">
@@ -192,7 +202,7 @@
                             I have read and accepted the
                             <a target="_blank" href="{$url}" title="AfterPay conditions"><span style="text-decoration:underline;">AfterPay conditions.</span></a>
                         {/s}
-                        
+
                         {/if}
                         
 

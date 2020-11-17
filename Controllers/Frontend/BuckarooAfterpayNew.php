@@ -209,6 +209,10 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
 
         $birthDay = !empty($user['birthday']) ? DateTime::createFromFormat('Y-m-d', $user['birthday'])->format('d-m-Y') : '';
 
+        if($birthday = $this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['birthday']){
+            $birthDay =  DateTime::createFromFormat('Y-m-d', $birthday)->format('d-m-Y');
+        }
+
         $this->addArticleParameters($request);
         $this->addBillingCustomerParameters($request, $birthDay, $user, $paymentMethod);
 
@@ -260,6 +264,10 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
     protected function addBillingCustomerParameters($request, $birthDay, $user, $paymentMethod){
 
         $billing = $this->getBillingAddress();
+
+        if(!empty($this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'])){
+            $billing['phone'] = $this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'];
+        }
 
         $billingCountry = $this->container->get('models')->getRepository('Shopware\Models\Country\Country')->find($billing['countryId']);
         $billingCountryIso = empty($billingCountry) ? '' : $billingCountry->getIso();
