@@ -128,14 +128,17 @@
 
         <li class="block-group row--tos">
 
-            {if ($billingCountryIso eq 'NL' || $billingCountryIso eq 'BE')}
+            {if $paymentName|strstr:"buckaroo_afterpaynew" ne false && ($billingCountryIso eq 'NL' || $billingCountryIso eq 'BE')}
             
                 {assign var="name" value="afterpaynew"}
 
+                {include file='frontend/_includes/fields/user_id.tpl'       name=$name}
                 {include file='frontend/_includes/fields/user_birthday.tpl' name=$name}
 
+                {include file='frontend/_includes/fields/billing_id.tpl'    name=$name}
                 {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
 
+                <input type="hidden" name="payment" value="{$paymentId}">
             {/if}
                             
             {* Afterpay terms of service checkbox *}

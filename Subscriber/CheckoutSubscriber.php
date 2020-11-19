@@ -7,6 +7,9 @@ use Enlight_Event_EventArgs;
 use BuckarooPayment\Components\Flash;
 use Zend_Session_Abstract;
 use BuckarooPayment\Components\Helpers;
+use BuckarooPayment\PaymentMethods\BuckarooPaymentMethods;
+use BuckarooPayment\Components\ExtraFieldsLoader;
+use BuckarooPayment\Components\ExtraFieldsPersister;
 
 class CheckoutSubscriber implements SubscriberInterface
 {
@@ -15,6 +18,11 @@ class CheckoutSubscriber implements SubscriberInterface
      */
     protected $session;
 
+    /**
+     * @var BuckarooPayment\Components\ExtraFieldsPersister
+     */
+    protected $persister;
+
     public static function getSubscribedEvents()
     {
         return [
@@ -22,9 +30,12 @@ class CheckoutSubscriber implements SubscriberInterface
         ];
     }
 
-    public function __construct(Zend_Session_Abstract $session)
+    public function __construct(Zend_Session_Abstract $session, BuckarooPaymentMethods $paymentMethods, ExtraFieldsLoader $loader, ExtraFieldsPersister $persister)
     {
         $this->session = $session;
+        $this->paymentMethods = $paymentMethods;
+        $this->loader = $loader;
+        $this->persister = $persister;
     }
 
     /**
@@ -97,21 +108,58 @@ class CheckoutSubscriber implements SubscriberInterface
                 if($phone = $fields['afterpaynew']['billing']['phone']){
                     $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'] = $phone;
                 }
-                if($phone = $fields['afterpaynew']['billing']['phone']){
-                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['phone'] = $phone;
-                }
                 if($birthday = $fields['afterpaynew']['user']['birthday']){
-                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['birthday'] = implode('-', [ $birthday['year'], $birthday['month'], $birthday['day'] ]);
+                    $birthday = implode('-', [ $birthday['year'], $birthday['month'], $birthday['day'] ]);
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['afterpaynew']['birthday'] = $birthday;
                 }
+                $this->saveExtraFields($request);
             }
         }
-
         $view->assign([
             'billingCountryIso' => $countryIso,
+            'paymentId' => $paymentData['id'],
             'paymentName' => $paymentData['name'],
             'paymentKey' => $paymentKey,
             'paymentFee' => Helpers::floatToPrice($paymentFee),
             'isEncrypted' => $isEncrypted,
+            'buckarooExtraFields' => (!empty($userId)) ? $this->loadExtraFields() : null,
         ]);
+    }
+
+    /**
+     * @return array
+     */
+    protected function loadExtraFields()
+    {
+        $keys = $this->paymentMethods->getExtraFieldKeys();
+        $this->loader->addCollectKeys($keys);
+
+        $extraFields = $this->loader->load();
+        return $this->paymentMethods->getAdditionalExtraFields($extraFields);
+    }
+
+    /**
+     * Save extra fields of the payment methods
+     *
+     * @param  Enlight_Controller_Request_Request $request
+     */
+    protected function saveExtraFields($request)
+    {
+        $register = $request->getPost();
+
+        if (! empty($register['payment'])) {
+            $paymentId = $register['payment'];
+
+            $paymentClass = $this->paymentMethods->getByPaymentId($paymentId);
+
+            if (! empty($paymentClass)) {
+                $fields = $request->getPost('buckaroo-extra-fields');
+
+                $data = isset($fields[$paymentClass->getKey()]) ? $fields[$paymentClass->getKey()] : [];
+                $keys = $paymentClass->getExtraFieldKeys();
+
+                $this->persister->persist($keys, $data);
+            }
+        }
     }
 }

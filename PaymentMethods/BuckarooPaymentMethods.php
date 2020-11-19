@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\Container;
 use BuckarooPayment\Components\Helpers;
 use Shopware\Models\Payment\Payment as PaymentModel;
 use Shopware\Models\Country\Country as CountryModel;
+use Shopware\Models\Shop\Shop as Shop;
 use Doctrine\Common\Collections\ArrayCollection;
 use BuckarooPayment\Components\Validation\Validator;
 
@@ -148,7 +149,16 @@ class BuckarooPaymentMethods
         {
             $payment = $paymentRepo->findOneBy([ 'name' => $paymentMean->getName() ]);
 
-            $img_url = '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
+
+            $schema = 'http';
+            if (array_key_exists('HTTPS', $_SERVER) && strtolower($_SERVER['HTTPS']) === 'on') {
+                $schema = 'https';
+            }
+            if (array_key_exists('REQUEST_SCHEME', $_SERVER)) {
+                $schema = $_SERVER['REQUEST_SCHEME'];
+            }
+    
+            $img_url = $schema . '://' . $_SERVER['HTTP_HOST'] . '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
             $option = [
                 'name' => $paymentMean->getName(),
                 'class' => $paymentMean->getName(),
@@ -157,7 +167,6 @@ class BuckarooPaymentMethods
                 'description' => !empty($payment) ? $payment->getDescription() : $paymentMean->getDescription(),
                 'active' => !empty($payment) ? $this->getPaymentActiveByName($payment->getName()) : 0,
                 'additionalDescription' => 
-                    // '<img style="height: 40px" src="{link file=\'frontend/_resources/images/' . $paymentMean->getImageName() . '\' fullPath}" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
                     '<img style="height: 40px" src="'.$img_url.'" alt="Buckaroo ' . $paymentMean->getDescription() . ' logo">',
             ];
 

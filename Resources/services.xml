@@ -95,6 +95,9 @@
 
         <service id="buckaroo_payment.subscriber.checkout" class="BuckarooPayment\Subscriber\CheckoutSubscriber">
             <argument type="service" id="buckaroo_payment.adapter.session"/>
+            <argument type="service" id="buckaroo_payment.payment_methods.buckaroo"/>
+            <argument type="service" id="buckaroo_payment.extra_fields_loader"/>
+            <argument type="service" id="buckaroo_payment.extra_fields_persister"/>
             <tag name="shopware.event_subscriber"/>
         </service>
 
