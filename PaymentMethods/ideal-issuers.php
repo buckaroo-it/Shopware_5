@@ -15,4 +15,5 @@ return [
 	'FVLBNL22' => 'Van Lanschot',
 	'KNABNL2H' => 'Knab',
 	'BUNQNL2A' => 'Bunq',
+	'REVOLT21' => 'Revolut',
 ];
