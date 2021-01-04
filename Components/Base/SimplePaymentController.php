@@ -502,9 +502,8 @@ abstract class SimplePaymentController extends AbstractPaymentController
 
                 SimpleLog::log(__METHOD__ . "|7|");
 
-                $this->savePaymentStatus(
+                $this->saveBuckarooPaymentStatus(
                     $data->getInvoice(),
-                    $this->generateToken(),
                     $this->getPaymentStatus($data->getStatusCode()),
                     $sendEmail // sendStatusMail
                 );
@@ -720,6 +719,20 @@ abstract class SimplePaymentController extends AbstractPaymentController
         );
 
         return $id;
+    }
+
+    public function saveBuckarooPaymentStatus($transactionId, $paymentStatusId, $sendStatusMail = false)
+    {
+        $sql = '
+            SELECT id FROM s_order
+            WHERE transactionID=?
+            AND status!=-1
+        ';
+        $orderId = (int) Shopware()->Db()->fetchOne($sql, [
+                $transactionId
+            ]);
+        $order = Shopware()->Modules()->Order();
+        $order->setPaymentStatus($orderId, $paymentStatusId, $sendStatusMail);
     }
 
 }
