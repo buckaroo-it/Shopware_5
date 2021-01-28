@@ -82,7 +82,7 @@ class Request implements JsonSerializable, ArrayAccess, Arrayable
             return $this->offsetGet($param);
         }
 
-        throw new Exception("Call to undefined method " . __CLASS__ . '::' . $method);
+        throw new \Exception("Call to undefined method " . __CLASS__ . '::' . $method);
     }
 
     /** Implement Arrayable */

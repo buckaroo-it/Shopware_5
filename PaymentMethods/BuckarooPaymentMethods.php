@@ -281,7 +281,7 @@ class BuckarooPaymentMethods
      * Find a Paymentmethod class with a Payment id
      *
      * @param  int $id
-     * @return BuckarooPayment\Components\Base\AbstractPaymentMethod
+     * @return \BuckarooPayment\Components\Base\AbstractPaymentMethod
      */
     public function getByPaymentId($paymentId)
     {
@@ -298,7 +298,7 @@ class BuckarooPaymentMethods
      * Find a Paymentmethod class with a Payment
      *
      * @param  Shopware\Models\Payment\Payment $payment
-     * @return BuckarooPayment\Components\Base\AbstractPaymentMethod
+     * @return \BuckarooPayment\Components\Base\AbstractPaymentMethod
      */
     public function getByPayment(PaymentModel $payment)
     {
@@ -311,7 +311,7 @@ class BuckarooPaymentMethods
      * Find a Paymentmethod class with a Payment name
      *
      * @param  string $name
-     * @return BuckarooPayment\Components\Base\AbstractPaymentMethod
+     * @return \BuckarooPayment\Components\Base\AbstractPaymentMethod
      */
     public function getByPaymentName($name)
     {

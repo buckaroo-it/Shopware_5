@@ -21,7 +21,7 @@ class SoftwareHeader
     {
         return "Software: " . json_encode([
             "PlatformName" => "Shopware",
-            "PlatformVersion" => (defined("Shopware::VERSION") ? Shopware::VERSION : Shopware()->Config()->get('Version')),
+            "PlatformVersion" => Shopware()->Config()->get('Version'),
             "ModuleSupplier" => "{$this->pluginInfo->getAuthor()}",
             "ModuleName" => "{$this->pluginInfo->getName()}",
             "ModuleVersion" => "{$this->pluginInfo->getVersion()}"

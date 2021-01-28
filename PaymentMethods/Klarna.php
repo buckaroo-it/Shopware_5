@@ -58,8 +58,8 @@ class Klarna extends AbstractPaymentMethod
      * A discount should be specified as an article, with a negative ArticlePrice.
      * Lastly, Klarna does not support B2B orders.
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\DataRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\DataResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\DataRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\DataResponse
      */
     public function reserve(DataRequest $request)
     {
@@ -78,8 +78,8 @@ class Klarna extends AbstractPaymentMethod
      * When an order is shipped outside the reservation period and the consumer has not paid during the full collection period,
      * Klarna has the option to revoke the payout to the merchant.
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function pay(TransactionRequest $request)
     {
@@ -99,8 +99,8 @@ class Klarna extends AbstractPaymentMethod
      * When an accepted reservation will not be shipped this should be cancel to clear the reserved amount of the consumer.
      * This can also be used to cancel the remaining part in case of partial shipment that can’t be shipped.
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\DataRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\DataResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\DataRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\DataResponse
      */
     public function cancelReservation(DataRequest $request)
     {

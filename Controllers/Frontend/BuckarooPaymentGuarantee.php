@@ -150,7 +150,7 @@ class Shopware_Controllers_Frontend_BuckarooPaymentGuarantee extends AbstractPay
             }
 
             return $this->redirectBackToCheckout()->addMessage(
-                'Error creating payment. ' . ($this->shouldDisplayErrors() ? $ex->getMessage() : $ex->getMessage())
+                'Error creating payment. ' . ($this->shouldDisplayErrors() ? $ex->getMessage() : '')
             );
         }
     }
@@ -219,7 +219,6 @@ class Shopware_Controllers_Frontend_BuckarooPaymentGuarantee extends AbstractPay
     }
 
     /**
-     * @return Transaction
      */
     protected function createNewTransaction()
     {

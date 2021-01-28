@@ -39,7 +39,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
     /**
      * Get the paymentmethod-class with the payment name
      * 
-     * @return BuckarooPayment\Components\Base\AbstractPaymentMethod
+     * @return \BuckarooPayment\Components\Base\AbstractPaymentMethod
      */
     protected function getPaymentMethodClass()
     {
@@ -126,7 +126,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
     /**
      * Create a new base Transaction
      *
-     * @return Transaction
      */
     protected function createNewTransaction()
     {
@@ -244,7 +243,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
                     // So only do it when saving an order
                     if( !$this->checkSignature($response->getSignature()) )
                     {
-                        return $this->redirectBackToCheckout('Signature invalid');
+                        return $this->redirectBackToCheckout();
                     }
 
                     $orderNumber = $this->saveOrder(
@@ -363,7 +362,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
                     // So only do it when saving an order
                     if( !$this->checkSignature($response->getSignature()) )
                     {
-                        return $this->redirectBackToCheckout('Signature invalid');
+                        return $this->redirectBackToCheckout();
                     }
 
                     $orderNumber = $this->saveOrder(

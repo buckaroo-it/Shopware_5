@@ -100,7 +100,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
                 $result = ['result' => 'success', 'redirect' => ''];
 
                 echo json_encode($result);
-                exit;
+                return;
             }
 
             $transaction->setException($response->getSomeError());
@@ -124,7 +124,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             $result = ['result' => 'failure', 'redirect' => '', 'message' => $message];
 
             echo json_encode($result);
-            exit;
+            return;
         } catch (Exception $ex) {
             if ($transaction) {
                 $transaction->setException($ex->getMessage());
@@ -139,7 +139,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             $result = ['result' => 'failure', 'redirect' => '', 'message' => 'unknown exception occured ' . $ex->getMessage()];
 
             echo json_encode($result);
-            exit;
+            return;
 
         }
     }
@@ -262,7 +262,9 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
                 'amount' => $order->sAmount
             ];
         } catch (\Exception $e) {
-            die($e->getMessage());
+            echo $e->getMessage();
+            return;
+            // die($e->getMessage());
         }
     }
 
@@ -370,9 +372,9 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
 
     private function isUserLoggedIn()
     {
+        // $customerId = Shopware()->Session()->offsetGet('sUserId');
+        // return $customerId !== null && !empty($customerId);
         return false;
-        $customerId = Shopware()->Session()->offsetGet('sUserId');
-        return $customerId !== null && !empty($customerId);
     }
 
     private function flattenAddress($address)
@@ -474,9 +476,7 @@ class Shopware_Controllers_Frontend_BuckarooApplePay extends SimplePaymentContro
             WHERE name = "buckaroo_applepay"
         ';
 
-        $id = Shopware()->Db()->fetchOne($sql, [$code]);
-
-        return $id;
+        return Shopware()->Db()->fetchOne($sql, []);
     }
 
     private function getCountyIdByIso($iso)

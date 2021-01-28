@@ -42,8 +42,8 @@ class PaymentGuarantee extends AbstractPaymentMethod
     /**
      * Initiate Payment
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionRequest
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest
      */
     public function guaranteepay(TransactionRequest $request)
     {
@@ -57,9 +57,9 @@ class PaymentGuarantee extends AbstractPaymentMethod
     /**
      * Initiate capture transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
      * @param  array
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function capture(TransactionRequest $request, array $args = [])
     {

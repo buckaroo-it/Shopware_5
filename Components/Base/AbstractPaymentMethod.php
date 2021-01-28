@@ -323,7 +323,7 @@ abstract class AbstractPaymentMethod
     /**
      * Get the specifications of the payment method
      *
-     * @return BuckarooPayment\Components\JsonApi\Payload\Response
+     * @return \BuckarooPayment\Components\JsonApi\Payload\Response
      */
     protected function getSpecifications()
     {
@@ -342,8 +342,8 @@ abstract class AbstractPaymentMethod
     /**
      * Initiate pay transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function pay(TransactionRequest $request)
     {
@@ -355,9 +355,9 @@ abstract class AbstractPaymentMethod
     /**
      * Initiate refund transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
      * @param  array
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function refund(TransactionRequest $request, array $args = [])
     {
@@ -377,7 +377,7 @@ abstract class AbstractPaymentMethod
      */
     protected function setUserAttribute($name, $value)
     {
-        if( !Helpers::stringContains($name, 'buckaroo') ) throw new Exception("Name should contain 'buckaroo'");
+        if( !Helpers::stringContains($name, 'buckaroo') ) throw new \Exception("Name should contain 'buckaroo'");
         $dbName = Helpers::stringStartsWith($name, 'buckaroo_') ? $name : 'buckaroo_' . $name;
 
         $userId = $this->session->sUserId;
@@ -399,7 +399,7 @@ abstract class AbstractPaymentMethod
      */
     protected function getUserAttribute($name)
     {
-        if( !Helpers::stringContains($name, 'buckaroo') ) throw new Exception("Name should contain 'buckaroo'");
+        if( !Helpers::stringContains($name, 'buckaroo') ) throw new \Exception("Name should contain 'buckaroo'");
         $dbName = Helpers::stringStartsWith($name, 'buckaroo_') ? $name : 'buckaroo_' . $name;
 
         $userId = $this->session->sUserId;
@@ -510,7 +510,7 @@ abstract class AbstractPaymentMethod
      * Returns if it is a credit card or not
      * @return boolean
      */
-    public function isCreditcard()
+    public static function isCreditcard()
     {
         $creditCards = [
             "buckaroo_amex",

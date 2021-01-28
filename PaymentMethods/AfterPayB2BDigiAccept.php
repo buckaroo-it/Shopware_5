@@ -86,8 +86,8 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
     /**
      * Initiate pay transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function pay(TransactionRequest $request)
     {
@@ -105,8 +105,8 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
     /**
      * Authorize a Transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function authorize(TransactionRequest $request)
     {
@@ -124,9 +124,9 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
     /**
      * Initiate capture transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
      * @param  array
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function capture(TransactionRequest $request, array $args = [])
     {
@@ -138,9 +138,9 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
     /**
      * Initiate cancel authorization transaction
      *
-     * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
+     * @param  \BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
      * @param  array
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function cancelAuthorization(TransactionRequest $request, array $args = [])
     {

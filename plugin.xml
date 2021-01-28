@@ -6,42 +6,66 @@
 
     <version>1.12.3</version>
     <copyright>(c) Buckaroo B.V.</copyright>
+    <license>MIT</license>
     <author>Buckaroo</author>
     <link>https://www.buckaroo.nl</link>
 
-    <compatibility minVersion="5.2.13"/>
+    <description lang="en">
+        <![CDATA[
+        Buckaroo payment provider plugin for Shopware
+        ]]>
+    </description>
+    <description lang="de">
+        <![CDATA[
+        Buckaroo payment provider plugin for Shopware
+        ]]>
+    </description>
+    <compatibility minVersion="5.6.0"/>
 
     <changelog version="1.0.0">
-        <changes lang="de">Erste Version</changes>
-        <changes lang="en">First version</changes>
+        <changes lang="de">
+        <![CDATA[Erste Version]]>
+        </changes>
+        <changes lang="en">
+        <![CDATA[First version]]>
+        </changes>
     </changelog>
 
     <changelog version="1.1.0">
-        <changes lang="de">Erste Version</changes>
-        <changes lang="en">First version</changes>
+        <changes lang="de">
+        <![CDATA[Erste Version]]>
+        </changes>
+        <changes lang="en">
+        <![CDATA[First version]]>
+        </changes>
     </changelog>
 
     <changelog version="1.2.0">
         <changes lang="de">
+        <![CDATA[
             - Implemented new Payment methods 
                 - Carte Bleue
                 - Carte Bancaire 
             - Implemented partial refund functionality for all applicable payment methods.
             - Code optimizations, Refatoring, Renaming.
             - Implemented new configuration options        
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Implemented new Payment methods 
                 - Carte Bleue
                 - Carte Bancaire 
             - Implemented partial refund functionality for all applicable payment methods.
             - Code optimizations, Refatoring, Renaming.
             - Implemented new configuration options        
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.3.0">
         <changes lang="de">
+        <![CDATA[
             Implemented partial capture for
                 - Klarna
                 - Afterpay
@@ -49,8 +73,10 @@
             - Implemented new Payment methods 
                 - Payconiq
                 - Giftcard        
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             Implemented partial capture for
                 - Klarna
                 - Afterpay
@@ -58,52 +84,70 @@
             - Implemented new Payment methods 
                 - Payconiq
                 - Giftcard         
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.3.1">
-        <changes lang="de">Fixed issue with model name.</changes>
-        <changes lang="en">Fixed issue with model name.</changes>
+        <changes lang="de">
+        <![CDATA[Fixed issue with model name.]]>
+        </changes>
+        <changes lang="en">
+        <![CDATA[Fixed issue with model name.]]>
+        </changes>
     </changelog>
 
     <changelog version="1.4.0">
-        <changes lang="de">Improved Shopware compatibility with the Community-Store.</changes>
-        <changes lang="en">Improved Shopware compatibility with the Community-Store.</changes>
+        <changes lang="de">
+        <![CDATA[Improved Shopware compatibility with the Community-Store.]]>
+        </changes>
+        <changes lang="en">
+        <![CDATA[Improved Shopware compatibility with the Community-Store.]]>
+        </changes>
     </changelog>
 
     <changelog version="1.4.1">
         <changes lang="de">
+        <![CDATA[
             Bug fixes
                 - refund push messages.
                 - Order push messages.
                 - Confirmation email after the payment is completed.
                 - Several small fixes     
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             Bug fixes
                 - refund push messages.
                 - Order push messages.
                 - Confirmation email after the payment is completed.
                 - Several small fixes             
+        ]]>
         </changes>
     </changelog>
 
 
     <changelog version="1.4.2">
         <changes lang="de">
+        <![CDATA[
             Bug fixes
                 - Fix for failed push message in rare scenarios for Klarna reserve action.
                 - Fixed region error in multistore environments on push receive.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             Bug fixes
                 - Fix for failed push message in rare scenarios for Klarna reserve action.  
                 - Fixed region error in multistore environments on push receive.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.5.0">
         <changes lang="de">
+        <![CDATA[
             - Added 5 new payment methods:
                 - Nexi
                 - Maestro
@@ -111,8 +155,10 @@
                 - VPay
                 - Dankort
             - Fixed Paypay issue with Italian billing address.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Added 5 new payment methods:
                 - Nexi
                 - Maestro
@@ -120,110 +166,148 @@
                 - VPay
                 - Dankort
             - Fixed Paypay issue with Italian billing address.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.6.0">
         <changes lang="de">
+        <![CDATA[
             - Shopware 5.5.6 compatibility.
             - Removed BIC, IBAN and Chamber of commerce fields from register form.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Shopware 5.5.6 compatibility.
             - Removed BIC, IBAN and Chamber of commerce fields from register form.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.7.0">
         <changes lang="de">
+        <![CDATA[
             - Structural changes in the plugin due to Shopware 5.5.7 version update.
             - Billing and shipping extra fields validation is done while selecting payment method.
             - Stock gets reserved when customer initiates payment process.
             - Klarna auto capture is supported if enabled in Merchant Buckaroo account.
             - API messages made translatable via backend snippet manager.
             - All build in extra field validation messages made translatable via backend snippet manager.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Structural changes in the plugin due to Shopware 5.5.7 version update.
             - Billing and shipping extra fields validation is done while selecting payment method.
             - Stock gets reserved when customer initiates payment process.
             - Klarna auto capture is supported if enabled in Merchant Buckaroo account.
             - API messages made translatable via backend snippet manager.
             - All build in extra field validation messages made translatable via backend snippet manager.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.8.0">
         <changes lang="de">
+        <![CDATA[
             - New payment method Afterpay (new version) added.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - New payment method Afterpay (new version) added.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.8.1">
         <changes lang="de">
+        <![CDATA[
             - Improving Shopware 5.5.8 compatibility.
             - Solved issue with Payconiq push message.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Improving Shopware 5.5.8 compatibility.
             - Solved issue with Payconiq push message.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.8.2">
         <changes lang="de">
+        <![CDATA[
             - Implemented Klarna auto capture push url based on module settings in instead of the push url settings in the Buckaroo plaza. 
             - Implemented change so empty housenumber extension is not send to AfterPay for Belgium adresses.
             - Improved Belgium phonenumber formatting and validation
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Implemented Klarna auto capture push url based on module settings in instead of the push url in the Buckaroo plaza. 
             - Implemented change that housenumber extensions are not send to AfterPay for Belgium adresses.
             - Improved Belgium phonenumber formatting and validation
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.9.0">
         <changes lang="de">
+        <![CDATA[
             - Implementation of inline credit card payments
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Implementation of inline credit card payments
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.10.0">
         <changes lang="de">
+        <![CDATA[
             - Implementation of Apple Pay
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Implementation of Apple Pay
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.10.1">
         <changes lang="de">
+        <![CDATA[
             - Fixed issue on new installations with adding Ideal database columns. 
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Fixed issue on new installations with adding Ideal database columns. 
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.10.2">
         <changes lang="de">
+        <![CDATA[
             - Fixed issue where in some scenarios / specific installations the order is stored in the wrong store. 
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Fixed issue where in some scenarios / specific installations the order is stored in the wrong store. 
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.10.3">
         <changes lang="de">
+        <![CDATA[
             - Modify the error messages so that they are understood by the user.
             - Add a restriction on the payment method so that it is allowed depending on the minimum and maximum limit of the order amount.
             - Fix wrong error message when no bank is selected with iDeal.
@@ -231,8 +315,10 @@
             - ApplePay don't calculate shipping costs for downloadable products.
             - Klarna, add shipping phonenumber to validation.
             - Shopware 5.6 compatibility.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Modify the error messages so that they are understood by the user.
             - Add a restriction on the payment method so that it is allowed depending on the minimum and maximum limit of the order amount.
             - Fix wrong error message when no bank is selected with iDeal.
@@ -240,46 +326,76 @@
             - ApplePay don't calculate shipping costs for downloadable products.
             - Klarna, add shipping phonenumber to validation.
             - Shopware 5.6 compatibility.
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.10.4">
         <changes lang="de">
+        <![CDATA[
             - afterpay(new) Fix target checkout url based on environment(test/live).
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - afterpay(new) Fix target checkout url based on environment(test/live).
+        ]]>
         </changes>
     </changelog>    
 
     <changelog version="1.10.5">
         <changes lang="de">
+        <![CDATA[
             - Fixed issue with free shipping above a specified amount in combination with ApplePay.
             - Translated Ideal error message to Dutch.
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Fixed issue with free shipping above a specified amount in combination with ApplePay.
             - Translated Ideal error message to Dutch.
+        ]]>
         </changes>
     </changelog>    
 
     <changelog version="1.11.0">
         <changes lang="de">
+        <![CDATA[
             - compatibility with Shopware 5.6.6
             - Merged pull requests from GitHub
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - compatibility with Shopware 5.6.6
             - Merged pull requests from GitHub
+        ]]>
         </changes>
     </changelog>
 
     <changelog version="1.11.1">
         <changes lang="de">
+        <![CDATA[
             - Fügen Sie benutzerdefinierte Geschenkkarten hinzu
+        ]]>
         </changes>
         <changes lang="en">
+        <![CDATA[
             - Add custom giftcards available
+        ]]>
+        </changes>
+    </changelog>
+
+    <changelog version="1.12.3">
+        <changes lang="de">
+        <![CDATA[
+            BP-281 Sofort Bestellungen werden nicht geliefert
+        ]]>
+        </changes>
+        <changes lang="en">
+        <![CDATA[
+            BP-281 Sofort orders not being delivered
+        ]]>
         </changes>
     </changelog>
 </plugin>

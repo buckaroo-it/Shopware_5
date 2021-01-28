@@ -366,10 +366,10 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
             $typeDutchPhone = $this->getTypeDutchPhoneNumber($shipping['phone']);
             $typeBelgiumPhone = $this->getTypeBelgiumPhoneNumber($shipping['phone']);
 
-            if($billingCountryIso == "NL" && $type = $typeDutchPhone){
-                $request->setServiceParameter($type, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
-            } elseif ($billingCountryIso == "BE" && $type = $typeBelgiumPhone){
-                $request->setServiceParameter($type, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
+            if($shippingCountryIso == "NL" && $typeDutchPhone){
+                $request->setServiceParameter($typeDutchPhone, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
+            } elseif ($shippingCountryIso == "BE" && $typeBelgiumPhone){
+                $request->setServiceParameter($typeBelgiumPhone, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
             }
         
         } else if ($shippingCountryIso == "FI"){

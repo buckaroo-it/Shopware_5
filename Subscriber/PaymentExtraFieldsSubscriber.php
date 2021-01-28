@@ -138,7 +138,7 @@ class PaymentExtraFieldsSubscriber implements SubscriberInterface
     /**
      * Save extra fields of the payment methods
      *
-     * @param  Enlight_Controller_Request_Request $request
+     * @param  \Enlight_Controller_Request_Request $request
      */
     protected function saveExtraFields($request, $view = null)
     {

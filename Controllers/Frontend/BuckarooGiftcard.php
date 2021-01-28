@@ -162,7 +162,6 @@ class Shopware_Controllers_Frontend_BuckarooGiftcard extends SimplePaymentContro
     }
 
     /**
-     * @return Transaction
      */
     protected function createNewTransaction()
     {

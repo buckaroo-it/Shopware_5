@@ -22,6 +22,8 @@ class CheckoutSubscriber implements SubscriberInterface
      * @var BuckarooPayment\Components\ExtraFieldsPersister
      */
     protected $persister;
+    protected $paymentMethods;
+    protected $loader;
 
     public static function getSubscribedEvents()
     {
@@ -141,7 +143,7 @@ class CheckoutSubscriber implements SubscriberInterface
     /**
      * Save extra fields of the payment methods
      *
-     * @param  Enlight_Controller_Request_Request $request
+     * @param  \Enlight_Controller_Request_Request $request
      */
     protected function saveExtraFields($request)
     {

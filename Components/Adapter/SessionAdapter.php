@@ -42,7 +42,7 @@ class SessionAdapter extends Zend_Session_Abstract
     }
 
     /**
-     * @return Enlight_Components_Session_Namespace | null
+     * @return \Enlight_Components_Session_Namespace | null
      */
     protected function getInstance()
     {

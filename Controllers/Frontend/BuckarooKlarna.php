@@ -199,7 +199,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
     }
 
     /**
-     * @return Transaction
      */
     protected function createNewTransaction()
     {
@@ -340,7 +339,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
                 return $this->refundPushAction();     
             }
         } catch (Exception $e) {
-            $this->Response()->setException($ex);
+            $this->Response()->setException($e);
         }
 
         $this->restoreSession();

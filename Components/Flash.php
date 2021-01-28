@@ -31,7 +31,7 @@ class Flash
 	{
 		if( !in_array($type, static::$validTypes) )
 		{
-			throw new Exception('Flash addMessage - message-type should be in ' . implode(', ', static::$validTypes));
+			throw new \Exception('Flash addMessage - message-type should be in ' . implode(', ', static::$validTypes));
 		}
 
         $existingMessages = $this->session->BuckarooPaymentFlashMessages;

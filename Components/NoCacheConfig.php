@@ -13,6 +13,7 @@ class NoCacheConfig extends Shopware_Components_Config
 {
     public function __construct(Enlight_Components_Db_Adapter_Pdo_Mysql $db)
     {
+        parent::__construct($db);
         $this->_db = $db;
 
         // Don't inject shop via services.xml

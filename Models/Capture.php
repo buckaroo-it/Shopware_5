@@ -122,6 +122,8 @@ class Capture
      * @ORM\Column(name="items_id", type="text", nullable=true)
      */
     private $itemsId;
+    
+    private $refundedItems;
 
     /**
      * @return int

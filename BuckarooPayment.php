@@ -505,7 +505,7 @@ class BuckarooPayment extends Plugin
     public static function getBuckarooConfig()
     {
         if (!isset(self::$buckarooConfig)) {
-            self::$buckarooConfig = require __DIR__ . '/config.php';
+            self::$buckarooConfig = require_once __DIR__ . '/config.php';
         }
         return self::$buckarooConfig;
     }

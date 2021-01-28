@@ -13,6 +13,6 @@ if( !function_exists('dd') )
         echo '<pre>';
         print_r($object);
         echo '</pre>';
-        if( $exit ) exit;
+        // if( $exit ) exit;
     }
 }

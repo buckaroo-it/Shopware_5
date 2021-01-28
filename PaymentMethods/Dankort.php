@@ -40,7 +40,7 @@ class Dankort extends CreditCard
      *
      * @param  BuckarooPayment\Components\JsonApi\Payload\TransactionRequest $request
      * @param  array
-     * @return BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
+     * @return \BuckarooPayment\Components\JsonApi\Payload\TransactionResponse
      */
     public function refund(TransactionRequest $request, array $args = [])
     {

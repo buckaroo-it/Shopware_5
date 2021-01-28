@@ -47,7 +47,7 @@ class SessionLockingHelper
 	/**
 	 * Restart the session after session write is stopped
 	 *
-	 * @return Enlight_Components_Session_Namespace
+	 * @return \Enlight_Components_Session_Namespace
 	 */
 	public function restartSession()
 	{

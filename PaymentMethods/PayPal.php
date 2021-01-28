@@ -37,7 +37,7 @@ class PayPal extends AbstractPaymentMethod
     const POSITION = '15';
 
     /**
-     * @param  Shopware\Models\Country\Country $country
+     * @param  \Shopware\Models\Country\Country $country
      * @return bool
      */
     public function isStateMandatory($country)

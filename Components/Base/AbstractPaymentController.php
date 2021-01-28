@@ -200,7 +200,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
      * Get order from the database with the ordernumber
      *
      * @param  string $orderNumber
-     * @return Shopware\Models\Order\Order
+     * @return \Shopware\Models\Order\Order
      */
     protected function getOrder($orderNumber = null)
     {
@@ -220,7 +220,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
      * TransactionID is the invoice ID in the table Order
      * 
      * @param  string $orderNumber
-     * @return Shopware\Models\Order\Order
+     * @return \Shopware\Models\Order\Order
      */
     protected function getOrderByInvoiceId($invoiceNumber)
     {
@@ -467,7 +467,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
      * Return an normal response
      *
      * @param  string $message
-     * @return Enlight_Controller_Response_Response
+     * @return \Enlight_Controller_Response_Response
      */
     public function sendResponse($message)
     {
@@ -479,7 +479,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
      *
      * @param  string  $error
      * @param  integer $httpCode
-     * @return Enlight_Controller_Response_Response
+     * @return \Enlight_Controller_Response_Response
      */
     protected function responseError($error, $httpCode = 400)
     {
@@ -491,7 +491,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
      *
      * @param  Exception $ex
      * @param  integer   $httpCode
-     * @return Enlight_Controller_Response_Response
+     * @return \Enlight_Controller_Response_Response
      */
     protected function responseException(Exception $ex, $httpCode = 500)
     {
@@ -501,7 +501,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
     /**
      * Get the snippets namespace for the Buckaroo status messages
      *
-     * @return Enlight_Components_Snippet_Namespace
+     * @return \Enlight_Components_Snippet_Namespace
      */
     protected function getStatusMessageSnippets()
     {
@@ -511,7 +511,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
     /**
      * Get the snippets namespace for the Buckaroo validation messages
      *
-     * @return Enlight_Components_Snippet_Namespace
+     * @return \Enlight_Components_Snippet_Namespace
      */
     protected function getValidationSnippets()
     {
@@ -521,7 +521,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
     /**
      * Create a new Validator object
      *
-     * @return BuckarooPayment\Components\Validation\Validator
+     * @return \BuckarooPayment\Components\Validation\Validator
      */
     protected function makeValidator()
     {

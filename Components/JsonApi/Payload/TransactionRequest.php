@@ -353,7 +353,7 @@ class TransactionRequest extends Request
 
     	if( !in_array($channel, [ 'Web', 'Backoffice' ]) )
     	{
-    		throw new Exception('Channel should be set to "Web" or "Backoffice"');
+    		throw new \Exception('Channel should be set to "Web" or "Backoffice"');
     	}
 
     	return $this->setHeader('Channel', $channel);

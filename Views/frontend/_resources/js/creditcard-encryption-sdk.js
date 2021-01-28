@@ -128,7 +128,7 @@ var BuckarooClientSideEncryption;
             if (monthString.length !== 1 && monthString.length !== 2)
                 return false;
             // Check the value of month, it should be between 1 and 12.
-            var monthInt = parseInt(monthString);
+            var monthInt = Number.parseInt(monthString);
             if (monthInt < 1 || monthInt > 12)
                 return false;
             return true;

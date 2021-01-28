@@ -43,7 +43,7 @@ class PaymentResult implements ArrayAccess, Arrayable
 
 			if( Helpers::stringContains($contentType, 'json') )
 			{
-				$data = json_decode($this->getPost('json_data_key'), true);
+				$data = json_decode($this->request->getPost('json_data_key'), true);
 			}
 			else
 			{
@@ -72,7 +72,7 @@ class PaymentResult implements ArrayAccess, Arrayable
 	/** Implement ArrayAccess */
     public function offsetSet($offset, $value)
     {
-        throw new Exception("Can't set a value of a PaymentResult");
+        throw new \Exception("Can't set a value of a PaymentResult");
     }
 
     /** Implement ArrayAccess */

@@ -145,6 +145,8 @@ class Transaction
      * @ORM\Column(name="needs_restock", type="integer", nullable=true)
      */
     private $needsRestock;
+    
+    private $CustomerName;
 
     /**
      * @return int

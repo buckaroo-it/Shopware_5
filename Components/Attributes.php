@@ -120,7 +120,7 @@ class Attributes
      * @param  string  $column
      * @return boolean
      */
-    public function columnExists($table, $column)
+    public function columnExists($table, $column = '')
     {
         $column = $this->crudService->get($table, $column);
 

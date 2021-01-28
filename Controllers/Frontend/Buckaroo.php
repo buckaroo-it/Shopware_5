@@ -18,7 +18,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
             'culture_code'  => $shop->getLocale()->getLocale(),
             'merchant_id'   => $config->applepayMerchantGUID()
         ], JSON_PRETTY_PRINT);
-        exit;
+        return;
     }
 
     public function getItemsFromDetailPageAction() 
@@ -105,7 +105,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         );
         
         echo json_encode($items, JSON_PRETTY_PRINT);
-        exit;
+        return;
     }
 
     public function getCartItemsAction() 
@@ -117,7 +117,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 
         if ($basket_items === null) {
             echo json_encode([]);
-            exit;
+            return;
         }
 
         $products_discounts_surcharges = array_map(function($item) {
@@ -145,7 +145,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         );
 
         echo json_encode($items, JSON_PRETTY_PRINT);
-        exit;
+        return;
     }
 
     private function addSurcharge($paymentMethod, $country_code) {
@@ -176,7 +176,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
 
         if (array_search($selected_country_code, $available_country_codes) === false) {
             echo json_encode([]);
-            exit;
+            return;
         }
 
         SimpleLog::log(__METHOD__ . "|2|");
@@ -213,7 +213,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
                     ];
                     SimpleLog::log(__METHOD__ . "|3|", $shipping_methods);
                     echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
-                    exit;
+                    return;
                 }
             }
         }
@@ -275,7 +275,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
         SimpleLog::log(__METHOD__ . "|9|", $shipping_methods);
 
         echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
-        exit;
+        return;
     }
 
     private function getFreeShippingResponse($basket_items)
@@ -294,7 +294,7 @@ class Shopware_Controllers_Frontend_Buckaroo extends SimplePaymentController
                         ]
                     ];
                     echo json_encode($shipping_methods, JSON_PRETTY_PRINT);
-                    exit;
+                    return;
                 }
             }
         }
