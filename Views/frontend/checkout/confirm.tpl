@@ -119,6 +119,37 @@
 
     {/if}
 
+    {* Billink *}
+
+    {if $paymentName|strstr:"buckaroo_billink" ne false}
+
+        <h3>Billink</h3>
+
+        <li class="block-group row--tos">
+
+            {if $paymentName|strstr:"buckaroo_billink" ne false}
+            
+                {assign var="name" value="billink"}
+
+                {if $billinkBusiness eq 'B2C'}
+                    {include file='frontend/_includes/fields/user_id.tpl'       name=$name}
+                    {include file='frontend/_includes/fields/user_birthday.tpl' name=$name}
+                {/if}
+
+                {include file='frontend/_includes/fields/billing_id.tpl'    name=$name}
+                {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
+
+                {if $billinkBusiness eq 'B2B'}
+                    {include file='frontend/_includes/fields/user_buckaroo_payment_coc.tpl' name=$name}
+                    {include file='frontend/_includes/fields/user_buckaroo_payment_vat_num.tpl' name=$name}
+                {/if}
+
+                <input type="hidden" name="payment" value="{$paymentId}">
+            {/if}
+        </li>
+
+    {/if}
+    
     {* Afterpay *}
 
 

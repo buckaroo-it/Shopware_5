@@ -38,6 +38,9 @@ class Shopware_Controllers_Backend_BuckarooPartialRefundForm extends Enlight_Con
         $isGiftcard = $payment == 'buckaroo_giftcard' ? true : false;
 
         switch ($payment) {
+            case 'buckaroo_billink':
+                $refundController = 'BuckarooBillinkRefund';
+                break;
             case 'buckaroo_afterpaynew':
                 $refundController = 'BuckarooAfterPayNewRefund';
                 break;    

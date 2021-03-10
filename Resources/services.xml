@@ -288,6 +288,11 @@
                  parent="buckaroo_payment.payment_methods.base_payment_method"
         />
 
+        <service id="buckaroo_payment.payment_methods.billink"
+                 class="BuckarooPayment\PaymentMethods\Billink"
+                 parent="buckaroo_payment.payment_methods.base_payment_method"
+        />
+
         <service id="buckaroo_payment.payment_methods.applepay"
                  class="BuckarooPayment\PaymentMethods\ApplePay"
                  parent="buckaroo_payment.payment_methods.base_payment_method"

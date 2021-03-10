@@ -418,6 +418,9 @@ class BuckarooPayment extends Plugin
             (object)[ 'table' => 's_user_attributes', 'column' => 'buckaroo_payment_coc',          'type' => 'string',
                 'data' => [ 'displayInBackend' => true, 'label' => 'COC', 'supportText' => 'Chamber of Commerce number', 'helpText' => 'Needed to do Afterpay payments' ]
             ],
+            (object)[ 'table' => 's_user_attributes', 'column' => 'buckaroo_payment_vat_num',          'type' => 'string',
+                'data' => [ 'displayInBackend' => true, 'label' => 'VATNumber', 'supportText' => 'VATNumber', 'helpText' => 'Needed to do Billink payments' ]
+            ],
             (object)[ 'table' => 's_user_attributes', 'column' => 'buckaroo_user_identification',   'type' => 'string',
             'data' => [ 'displayInBackend' => true, 'label' => 'IDENT', 'supportText' => 'Customer Identification', 'helpText' => 'Needed to do Afterpay payments' ]
             ],

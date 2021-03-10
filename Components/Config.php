@@ -165,6 +165,18 @@ class Config
     }
 
     /**
+     * Whether to use pay or authorize/capture method for Afterpay
+     * true = pay
+     * false = authorize/capture
+     *
+     * @return boolean
+     */
+    public function billinkUsePay()
+    {
+        return $this->get('buckaroo_billink_handling', 'authorize_capture') == 'pay';
+    }
+
+    /**
      * Whether to send status mails to the customer when the Afterpay payment has been captured
      *
      * @return boolean
@@ -222,6 +234,11 @@ class Config
     public function guaranteePaymentInvite()
     {
         return $this->get('buckaroo_guarantee_payment_invite', 'no') == 'yes';
+    }
+
+    public function billinkBusiness()
+    {
+        return $this->get('buckaroo_billink_business');
     }
 
     /**

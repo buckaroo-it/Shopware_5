@@ -116,8 +116,28 @@ class CheckoutSubscriber implements SubscriberInterface
                 }
                 $this->saveExtraFields($request);
             }
+
+            if(isset($fields['billink'])){
+                if($phone = $fields['billink']['billing']['phone']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['billink']['phone'] = $phone;
+                }
+                if($birthday = $fields['billink']['user']['birthday']){
+                    $birthday = implode('-', [ $birthday['year'], $birthday['month'], $birthday['day'] ]);
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['billink']['birthday'] = $birthday;
+                }
+
+                if($buckaroo_payment_coc = $fields['billink']['user']['buckaroo_payment_coc']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_payment_coc'] = $buckaroo_payment_coc;
+                }
+
+                if($buckaroo_payment_vat_num = $fields['billink']['user']['buckaroo_payment_vat_num']){
+                    $this->session->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_payment_vat_num'] = $buckaroo_payment_vat_num;
+                }
+                $this->saveExtraFields($request);
+            }
         }
         $view->assign([
+            'billinkBusiness' => $config->billinkBusiness(),
             'billingCountryIso' => $countryIso,
             'paymentId' => $paymentData['id'],
             'paymentName' => $paymentData['name'],

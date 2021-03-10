@@ -35,6 +35,9 @@ class Shopware_Controllers_Backend_BuckarooPartialCaptureForm extends Enlight_Co
         $payment = $order->getPayment()->getName();
 
         switch ($payment) {
+            case 'buckaroo_billink':
+                $paymentMethodRequestPath = 'BuckarooBillinkPartialCapture';
+                break;
             case 'buckaroo_afterpaynew':
                 $paymentMethodRequestPath = 'BuckarooAfterPayNewPartialCapture';
                 break;            

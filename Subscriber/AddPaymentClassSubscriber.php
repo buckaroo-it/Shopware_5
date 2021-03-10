@@ -36,6 +36,7 @@ class AddPaymentClassSubscriber implements SubscriberInterface
         $dirs['buckaroo_afterpayb2bdigiaccept'] =   'BuckarooPayment\PaymentMethods\AfterPayB2BDigiAccept';
         $dirs['buckaroo_afterpayacceptgiro'] =      'BuckarooPayment\PaymentMethods\AfterPayAcceptgiro';
         $dirs['buckaroo_afterpaynew'] =             'BuckarooPayment\PaymentMethods\AfterPayNew';
+        $dirs['buckaroo_billink'] =                 'BuckarooPayment\PaymentMethods\Billink';
         $dirs['buckaroo_amex'] =                    'BuckarooPayment\PaymentMethods\Amex';
         $dirs['buckaroo_bancontact'] =              'BuckarooPayment\PaymentMethods\Bancontact';
         $dirs['buckaroo_cartebancaire'] =           'BuckarooPayment\PaymentMethods\CarteBancaire';

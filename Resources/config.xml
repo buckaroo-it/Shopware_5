@@ -660,6 +660,31 @@
         </element>
 
         <element type="select" scope="shop">
+            <name>buckaroo_billink_env</name>
+            <label lang="de">Billink</label>
+            <label lang="en">Billink</label>
+            <label lang="nl">Billink</label>
+            <value>test</value>
+            <description lang="de">Billink</description>
+            <description lang="en">Billink</description>
+            <description lang="nl">Billink</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
             <name>buckaroo_applepay_env</name>
             <label lang="de">Apple Pay</label>
             <label lang="en">Apple Pay</label>
@@ -1112,6 +1137,70 @@
             <label lang="de">Afterpay max order amount</label>
             <label lang="en">Afterpay max order amount</label>
             <label lang="nl">Afterpay max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_billink_min_order_amount</name>
+            <label lang="de">Billink min order amount</label>
+            <label lang="en">Billink min order amount</label>
+            <label lang="nl">Billink min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_billink_max_order_amount</name>
+            <label lang="de">Billink max order amount</label>
+            <label lang="en">Billink max order amount</label>
+            <label lang="nl">Billink max order amount</label>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_billink_handling</name>
+            <label lang="de">Billink methode</label>
+            <label lang="en">Billink method</label>
+            <label lang="nl">Billink methode</label>
+            <value>pay</value>
+            <description lang="de">Billink methode</description>
+            <description lang="en">Billink method</description>
+            <description lang="nl">Billink method</description>
+            <store>
+                <option>
+                    <value>pay</value>
+                    <label lang="de">Pay</label>
+                    <label lang="en">Pay</label>
+                    <label lang="nl">Pay</label>
+                </option>
+                <option>
+                    <value>authorize_capture</value>
+                    <label lang="de">Authorize/Capture</label>
+                    <label lang="en">Authorize/Capture</label>
+                    <label lang="nl">Authorize/Capture</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
+            <name>buckaroo_billink_business</name>
+            <label lang="de">Billink Zahlungsmethode</label>
+            <label lang="en">Billink payment method</label>
+            <label lang="nl">Billink betaalmethode</label>
+            <value>B2C</value>
+            <description lang="de">Wählen Sie aus, welche Zahlungsmethode bei Billink verwendet werden muss.</description>
+            <description lang="en">Select which paymethod must be used at Billink.</description>
+            <description lang="nl">Selecteer welke betaalmethode bij Billink gebruikt moet worden.</description>
+            <store>
+                <option>
+                    <value>B2C</value>
+                    <label lang="de">B2C</label>
+                    <label lang="en">B2C</label>
+                    <label lang="nl">B2C</label>
+                </option>
+                <option>
+                    <value>B2B</value>
+                    <label lang="de">B2B</label>
+                    <label lang="en">B2B</label>
+                    <label lang="nl">B2B</label>
+                </option>
+            </store>
         </element>
 
         <element required="false" type="number" scope="shop">
