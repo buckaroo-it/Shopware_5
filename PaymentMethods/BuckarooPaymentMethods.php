@@ -160,7 +160,7 @@ class BuckarooPaymentMethods
                 $schema = $_SERVER['REQUEST_SCHEME'];
             }
     
-            $img_url = $schema . '://' . $_SERVER['HTTP_HOST'] . '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
+            $img_url = (isset($_SERVER['HTTP_HOST']) ? $schema . '://' . $_SERVER['HTTP_HOST'] : '') . '/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/'. $paymentMean->getImageName();
             $option = [
                 'name' => $paymentMean->getName(),
                 'class' => $paymentMean->getName(),

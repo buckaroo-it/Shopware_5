@@ -240,8 +240,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
 
         $request->setServiceParameter('Salutation', $salutation, 'BillingCustomer');
 
-        $typeDutchPhone = $this->getTypeDutchPhoneNumber($billing['phone']);
-        $request->setServiceParameter($typeDutchPhone, Helpers::stringFormatPhone($billing['phone']), 'BillingCustomer');
+        $request->setServiceParameter('MobilePhone', Helpers::stringFormatPhone($billing['phone']), 'BillingCustomer');
 
         $config   = $this->container->get('buckaroo_payment.config');
         $category = $config->billinkBusiness() ? $config->billinkBusiness() : 'B2C';
@@ -281,10 +280,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
         $shippingCountryIso = empty($shippingCountry) ? '' : $shippingCountry->getIso();
         $shippingStreet     = $this::setAdditionalAddressFields($shipping);
 
-        $typeDutchPhone   = $this->getTypeDutchPhoneNumber($shipping['phone']);
-        $typeBelgiumPhone = $this->getTypeBelgiumPhoneNumber($shipping['phone']);
-
-        $request->setServiceParameter($typeDutchPhone, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
+        $request->setServiceParameter('MobilePhone', Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
 
         $request->setServiceParameter('FirstName', $shipping['firstname'], 'ShippingCustomer');
         $request->setServiceParameter('LastName', $shipping['lastname'], 'ShippingCustomer');
@@ -352,25 +348,6 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
             return true;
         }
         return $this->container->get('buckaroo_payment.config')->billinkUsePay();
-    }
-
-    public function getTypeDutchPhoneNumber($phone_number)
-    {
-        $type = 'Phone';
-        if (preg_match("/^(\+|00|0)(31\s?)?(6){1}[\s0-9]{8}/", $phone_number)) {
-            $type = 'MobilePhone';
-        }
-        return $type;
-    }
-
-    public function getTypeBelgiumPhoneNumber($phone_number)
-    {
-        $type = 'Phone';
-        if (preg_match("/^(\+|00|0)(32\s?)?(4){1}[\s0-9]{8}/", $phone_number)) {
-            $type = 'MobilePhone';
-        }
-
-        return $type;
     }
 
     /**
