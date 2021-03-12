@@ -29,7 +29,7 @@ class Billink extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'Billink';
+    const DESCRIPTION = 'Billink - achteraf betalen';
 
     /**
      * Position

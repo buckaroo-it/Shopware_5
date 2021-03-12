@@ -123,7 +123,7 @@
 
     {if $paymentName|strstr:"buckaroo_billink" ne false}
 
-        <h3>Billink</h3>
+        <h3>Billink - achteraf betalen</h3>
 
         <li class="block-group row--tos">
 

@@ -661,13 +661,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_billink_env</name>
-            <label lang="de">Billink</label>
-            <label lang="en">Billink</label>
-            <label lang="nl">Billink</label>
+            <label lang="de">Billink - achteraf betalen</label>
+            <label lang="en">Billink - achteraf betalen</label>
+            <label lang="nl">Billink - achteraf betalen</label>
             <value>test</value>
-            <description lang="de">Billink</description>
-            <description lang="en">Billink</description>
-            <description lang="nl">Billink</description>
+            <description lang="de">Billink - achteraf betalen</description>
+            <description lang="en">Billink - achteraf betalen</description>
+            <description lang="nl">Billink - achteraf betalen</description>
             <store>
                 <option>
                     <value>live</value>
