@@ -51,7 +51,7 @@ export default class ApplePay {
             type: 'final'
           };
 
-          if (shipping_methods.length > 0) {
+          if (shipping_methods && (shipping_methods.length > 0)) {
             this.selected_shipping_method = shipping_methods[0].identifier;
             this.selected_shipping_amount = shipping_methods[0].amount;
           }
@@ -184,7 +184,7 @@ export default class ApplePay {
               this.log('17');
               window.buckaroo.submit = true;
               document.querySelector('#confirm--form').submit();
-              return Promise.resolve(authorizationSuccessResult);
+              return Promise.resolve(authorization_result);
             }
           }
         }
@@ -215,7 +215,7 @@ export default class ApplePay {
   }
 
   getFirstShippingItem(shipping_methods) {
-    if(this.is_downloadable === '1'){
+    if ((this.is_downloadable === '1') || !shipping_methods || (shipping_methods.length == 0)) {
       return {
         type: 'final',
         label: 'No shipping fee',
@@ -223,15 +223,12 @@ export default class ApplePay {
         qty: 1
       };
     }
-    if (shipping_methods.length > 0) {
-      return {
-        type: 'final',
-        label: shipping_methods[0].label,
-        amount: shipping_methods[0].amount || 0,
-        qty: 1
-      };
-    }
-     return null;
+    return {
+      type: 'final',
+      label: shipping_methods[0].label,
+      amount: shipping_methods[0].amount || 0,
+      qty: 1
+    };
   }
 
   getItems() {
