@@ -1,6 +1,6 @@
 import ApplePay from './applepay.js';
 
-if ($('.applepay-button-container')[0]) {
+if (document.querySelector('.applepay-button-container')) {
   const load_buckaroo_sdk = new Promise((resolve) => {
     var buckaroo_sdk = document.createElement("script");
     buckaroo_sdk.src = "https://checkout.buckaroo.nl/api/buckaroosdk/script/en-US";
