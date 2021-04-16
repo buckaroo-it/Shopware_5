@@ -5,7 +5,7 @@ namespace BuckarooPayment\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs;
 use BuckarooPayment\Components\Flash;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 use BuckarooPayment\Components\Helpers;
 use BuckarooPayment\PaymentMethods\BuckarooPaymentMethods;
 use BuckarooPayment\Components\ExtraFieldsLoader;
@@ -32,7 +32,7 @@ class CheckoutSubscriber implements SubscriberInterface
         ];
     }
 
-    public function __construct(Zend_Session_Abstract $session, BuckarooPaymentMethods $paymentMethods, ExtraFieldsLoader $loader, ExtraFieldsPersister $persister)
+    public function __construct(Enlight_Components_Session_Namespace $session, BuckarooPaymentMethods $paymentMethods, ExtraFieldsLoader $loader, ExtraFieldsPersister $persister)
     {
         $this->session = $session;
         $this->paymentMethods = $paymentMethods;

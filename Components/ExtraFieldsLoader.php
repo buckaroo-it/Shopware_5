@@ -3,7 +3,7 @@
 namespace BuckarooPayment\Components;
 
 use Shopware\Components\Model\ModelManager;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 use Exception;
 use DateTime;
 use BuckarooPayment\Components\SessionCase;
@@ -18,7 +18,7 @@ class ExtraFieldsLoader
     protected $em;
 
     /**
-     * @var Zend_Session_Abstract
+     * @var Enlight_Components_Session_Namespace
      */
     protected $session;
 
@@ -34,7 +34,7 @@ class ExtraFieldsLoader
         'lists' => []
     ];
 
-    public function __construct(ModelManager $em, Zend_Session_Abstract $session)
+    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session)
     {
         $this->em = $em;
         $this->session = $session;

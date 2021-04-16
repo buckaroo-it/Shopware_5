@@ -551,9 +551,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         }
 
         // Session got lost sometimes since 5.6.6
-        \Enlight_Components_Session::writeClose();
-        \Enlight_Components_Session::setId($sessionId);
-        \Enlight_Components_Session::start();
+        $this->restoreSession($sessionId);
 
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
@@ -594,9 +592,9 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             } else if ($this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode()))) {
                 // Signature can only be checked once
                 // So only do it when saving an order
-                if (!$this->checkSignature($data->getSignature())) {
-                    return $this->redirectBackToCheckout()->addMessage('Signature not valid');
-                }
+                // if (!$this->checkSignature($data->getSignature())) {
+                    // return $this->redirectBackToCheckout()->addMessage('Signature not valid');
+                // }
                 $orderNumber = $this->saveOrder(
                     $data->getInvoice(),
                     $this->generateToken(),

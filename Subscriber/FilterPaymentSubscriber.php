@@ -5,7 +5,7 @@ namespace BuckarooPayment\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use Enlight_Event_EventArgs;
 use Enlight_Controller_Front;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 
 class FilterPaymentSubscriber implements SubscriberInterface
 {
@@ -22,7 +22,7 @@ class FilterPaymentSubscriber implements SubscriberInterface
     }
 
     public function __construct(
-        Zend_Session_Abstract $session
+        Enlight_Components_Session_Namespace $session
     )
     {
         $this->session = $session;

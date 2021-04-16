@@ -14,6 +14,9 @@ use Exception;
 use ArrayObject;
 use Shopware\Models\Customer\Customer;
 
+use Enlight_Components_Session_Namespace;
+use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
+
 /**
  * extends Shopware_Controllers_Frontend_Payment
  * https://github.com/shopware/shopware/blob/5.2/engine/Shopware/Controllers/Frontend/Payment.php
@@ -609,16 +612,18 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
 
     protected function restoreSession($sessionId = null)
     {
-
         if(is_null($sessionId)){
             if (!$sessionId = $this->Request()->getParam('session_id')) {
                 throw new Exception('session_id is missing');
             }
         }
 
-        \Enlight_Components_Session::writeClose();
-        \Enlight_Components_Session::setId($sessionId);
-        \Enlight_Components_Session::start();
+        $session = $this->get('session');
+        if(!$session->isStarted()){
+            session_write_close();
+            Shopware()->Session()->offsetSet('sessionId', $sessionId);
+            Shopware()->Container()->set('sessionid', $sessionId);
+        }
     } 
     
     protected function setActiveShop()

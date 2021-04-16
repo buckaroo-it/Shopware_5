@@ -5,7 +5,7 @@ namespace BuckarooPayment\Components;
 use Shopware\Components\Model\ModelManager;
 use BuckarooPayment\Models\PartialTransaction;
 use DateTime;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 
 class PartialTransactionManager
 {
@@ -19,7 +19,7 @@ class PartialTransactionManager
      */
     protected $session;
 
-    public function __construct(ModelManager $em, Zend_Session_Abstract $session)
+    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session)
     {
         $this->em = $em;
         $this->session = $session;

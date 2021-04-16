@@ -2,10 +2,10 @@
 
 namespace BuckarooPayment\Components;
 
-use Shopware\Components\Model\ModelManager;
 use BuckarooPayment\Models\Transaction;
 use DateTime;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
+use Shopware\Components\Model\ModelManager;
 
 class TransactionManager
 {
@@ -13,19 +13,19 @@ class TransactionManager
      * @var Shopware\Components\Model\ModelManager
      */
     protected $em;
-    
+
     private $payment_id;
-    
+
     private $user_id;
 
     /**
-     * @var Enlight_Components_Session_Namespace 
+     * @var Enlight_Components_Session_Namespace
      */
     protected $session;
 
-    public function __construct(ModelManager $em, Zend_Session_Abstract $session)
+    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session)
     {
-        $this->em = $em;
+        $this->em      = $em;
         $this->session = $session;
     }
 
@@ -68,7 +68,7 @@ class TransactionManager
         $transaction->setCreatedAt($now);
         $transaction->setUpdatedAt($now);
 
-        if($CustomerCardName !== null){
+        if ($CustomerCardName !== null) {
             $transaction->setCustomerCardName($CustomerCardName);
         }
         $this->save($transaction);
@@ -86,7 +86,7 @@ class TransactionManager
     {
         $transaction = $this->em
             ->getRepository('BuckarooPayment\Models\Transaction')
-            ->findOneBy([ 'transactionId' => $transactionKey, 'quoteNumber' => $quoteNumber ], [ 'createdAt' => 'DESC' ]);
+            ->findOneBy(['transactionId' => $transactionKey, 'quoteNumber' => $quoteNumber], ['createdAt' => 'DESC']);
 
         return $transaction;
     }
@@ -101,7 +101,7 @@ class TransactionManager
     {
         $transaction = $this->em
             ->getRepository('BuckarooPayment\Models\Transaction')
-            ->findOneBy([ 'orderNumber' => $orderNumber ], [ 'createdAt' => 'DESC' ]);
+            ->findOneBy(['orderNumber' => $orderNumber], ['createdAt' => 'DESC']);
 
         return $transaction;
     }
@@ -116,11 +116,11 @@ class TransactionManager
     {
         $transaction = $this->em
             ->getRepository('BuckarooPayment\Models\Transaction')
-            ->findOneBy([ 'transactionId' => $transactionKey ], [ 'createdAt' => 'DESC' ]);
+            ->findOneBy(['transactionId' => $transactionKey], ['createdAt' => 'DESC']);
 
         return $transaction;
     }
-    
+
     /**
      * Get a Transaction by quotenumber
      *
@@ -131,10 +131,10 @@ class TransactionManager
     {
         $transaction = $this->em
             ->getRepository('BuckarooPayment\Models\Transaction')
-            ->findOneBy([ 'quoteNumber' => $quoteNumber ], [ 'createdAt' => 'DESC' ]);
+            ->findOneBy(['quoteNumber' => $quoteNumber], ['createdAt' => 'DESC']);
 
         return $transaction;
-    }    
+    }
 
     /**
      * Save a Transaction
@@ -147,9 +147,14 @@ class TransactionManager
         $now = new DateTime;
 
         $transaction->setUpdatedAt($now);
-        
-        $this->em->persist($transaction);
-        $this->em->flush();
+        try {
+            $this->em->persist($transaction);
+            $this->em->flush();
+        } catch (\Exception $e) {
+            if (!$this->getManager()->isOpen()) {
+                $this->resetEntityManager();
+            }
+        }
 
         return $transaction;
     }
@@ -190,21 +195,25 @@ class TransactionManager
         }
     }
 
-    public function setUserId($user_id) {
+    public function setUserId($user_id)
+    {
         $this->user_id = $user_id;
     }
 
-    protected function getUserId() {
+    protected function getUserId()
+    {
         return $this->user_id;
-    }      
+    }
 
-    public function setPaymentId($payment_id) {
+    public function setPaymentId($payment_id)
+    {
         $this->payment_id = $payment_id;
     }
 
-    protected function getPaymentId() {
+    protected function getPaymentId()
+    {
         return $this->payment_id;
-    }    
+    }
 
     /**
      * @return int
