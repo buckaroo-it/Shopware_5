@@ -250,11 +250,11 @@ class Shopware_Controllers_Backend_BuckarooAfterPayPartialCapture extends Shopwa
                 $request->setServiceParameter('ArticleDescription', $detail->getArticleName(), $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleId', $order_detail_article_id, $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleQuantity', $counter, $groupType = 'Article', $groupId = $y);
-                $request->setServiceParameter('ArticleUnitprice', round($detail->getPrice(), 2), $groupType = 'Article', $groupId = $y);
+                $request->setServiceParameter('ArticleUnitprice', number_format($detail->getPrice(), 2), $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleVatcategory', VatCategory::getByPercentage($detail->getTaxRate()), $groupType = 'Article', $groupId = $y);
                 $y++;
 
-                $amountDebit += (round($detail->getPrice(), 2) * $counter);
+                $amountDebit += (number_format($detail->getPrice(), 2) * $counter);
             }
         }
 
@@ -264,10 +264,10 @@ class Shopware_Controllers_Backend_BuckarooAfterPayPartialCapture extends Shopwa
             $request->setServiceParameter('ArticleDescription', 'shipping', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleId', 'SW8888', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleQuantity', 1, $groupType = 'Article', $groupId = $y);
-            $request->setServiceParameter('ArticleUnitprice', round($order->getInvoiceShipping(), 2), $groupType = 'Article', $groupId = $y);
+            $request->setServiceParameter('ArticleUnitprice', number_format($order->getInvoiceShipping(), 2), $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleVatcategory', 1, $groupType = 'Article', $groupId = $y);
 
-            $amountDebit += (round($order->getInvoiceShipping(), 2));
+            $amountDebit += (number_format($order->getInvoiceShipping(), 2));
         }
 
         // Recalculate based on items to avoid rounding issues

@@ -96,7 +96,7 @@ class Shopware_Controllers_Backend_BuckarooPartialRefundForm extends Enlight_Con
             'details' => $order->getDetails(),
             'refunded' => $transaction->getRefundedItems(),
             'invoiceAmount' => $order->getInvoiceAmount(),
-            'refundAmount' => round($refundAmount, 2),
+            'refundAmount' => number_format($refundAmount, 2),
             'ShippingAmount' => $order->getInvoiceShipping(),
             'currency' => $transaction->getCurrency(),
             'isEPS' => $isPaymentMethodEPS,

@@ -278,7 +278,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             $request->setServiceParameter('ArticleTitle', $item['articlename'], 'Article', $i);
             $request->setServiceParameter('ArticleNumber', $item['ordernumber'], 'Article', $i);
             $request->setServiceParameter('ArticleQuantity', $item['quantity'], 'Article', $i);
-            $request->setServiceParameter('ArticlePrice', round($item['priceNumeric'], 2), 'Article', $i);
+            $request->setServiceParameter('ArticlePrice', number_format($item['priceNumeric'], 2), 'Article', $i);
             $request->setServiceParameter('ArticleVat', $item['tax_rate'], 'Article', $i);
         }
 
@@ -288,7 +288,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             $request->setServiceParameter('ArticleTitle', 'shipping', 'Article', $i);
             $request->setServiceParameter('ArticleNumber', 'SW8888', 'Article', $i);
             $request->setServiceParameter('ArticleQuantity', 1, 'Article', $i);
-            $request->setServiceParameter('ArticlePrice', round($basket['sShippingcosts'], 2), 'Article', $i);
+            $request->setServiceParameter('ArticlePrice', number_format($basket['sShippingcosts'], 2), 'Article', $i);
             $request->setServiceParameter('ArticleVat', $basket['sShippingcostsTax'], 'Article', $i);
         }
     }

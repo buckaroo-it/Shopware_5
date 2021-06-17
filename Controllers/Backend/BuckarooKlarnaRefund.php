@@ -225,7 +225,7 @@ class Shopware_Controllers_Backend_BuckarooKlarnaRefund extends Shopware_Control
                 $amountCredit += $order->getInvoiceShipping();
             }
             // Recalculate based on items to avoid rounding issues
-            $request->setAmountCredit(round($amountCredit, 2));
+            $request->setAmountCredit(number_format($amountCredit, 2));
             $em->flush();
         }
 

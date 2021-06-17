@@ -250,24 +250,24 @@ class Shopware_Controllers_Backend_BuckarooAfterPayNewPartialCapture extends Sho
                 }
 
                 $request->setServiceParameter('Description',        $detail->getArticleName(),                              $groupType = 'Article', $groupId = $y);
-                $request->setServiceParameter('GrossUnitPrice',     round($detail->getPrice(), 2),                          $groupType = 'Article', $groupId = $y);
+                $request->setServiceParameter('GrossUnitPrice',     number_format($detail->getPrice(), 2),                          $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('VatPercentage',      $detail->getTaxRate(),    $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('Quantity',           $counter,                                               $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('Identifier',         $order_detail_article_id,                               $groupType = 'Article', $groupId = $y);
                 $y++;
 
-                $amountDebit += (round($detail->getPrice(), 2) * $counter);
+                $amountDebit += (number_format($detail->getPrice(), 2) * $counter);
             }
         }
 
         if (in_array('SW8888', $captureArticleIds)) {
             $request->setServiceParameter('Description',            'ShippingCost',                                 $groupType = 'Article', $groupId = $y);
-            $request->setServiceParameter('GrossUnitPrice',         round($order->getInvoiceShipping(), 2),     $groupType = 'Article', $groupId = $y);
-            $request->setServiceParameter('VatPercentage',          round($order->getInvoiceShippingTaxRate(), 2),                                          $groupType = 'Article', $groupId = $y);
+            $request->setServiceParameter('GrossUnitPrice',         number_format($order->getInvoiceShipping(), 2),     $groupType = 'Article', $groupId = $y);
+            $request->setServiceParameter('VatPercentage',          number_format($order->getInvoiceShippingTaxRate(), 2),                                          $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('Quantity',               1,                                          $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('Identifier',             'SW8888',                                   $groupType = 'Article', $groupId = $y);
 
-            $amountDebit += (round($order->getInvoiceShipping(), 2));
+            $amountDebit += (number_format($order->getInvoiceShipping(), 2));
         }
 
         // Recalculate based on items to avoid rounding issues

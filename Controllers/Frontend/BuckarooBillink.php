@@ -175,7 +175,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
 
             $i += 1;
             $request->setServiceParameter('Description', $item['articlename'], 'Article', $i);
-            $request->setServiceParameter('GrossUnitPriceIncl', round($item['priceNumeric'], 2), 'Article', $i);
+            $request->setServiceParameter('GrossUnitPriceIncl', number_format($item['priceNumeric'], 2), 'Article', $i);
             $request->setServiceParameter('VatPercentage', $item['tax_rate'], 'Article', $i);
             $request->setServiceParameter('Quantity', $item['quantity'], 'Article', $i);
             $request->setServiceParameter('Identifier', $item['ordernumber'], 'Article', $i);
@@ -187,7 +187,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
             $request->setServiceParameter('Description', 'ShippingCost', 'Article', $i);
             $request->setServiceParameter('Identifier', 'SW8888', 'Article', $i);
             $request->setServiceParameter('Quantity', 1, 'Article', $i);
-            $request->setServiceParameter('GrossUnitPriceIncl', round($basket['sShippingcosts'], 2), 'Article', $i);
+            $request->setServiceParameter('GrossUnitPriceIncl', number_format($basket['sShippingcosts'], 2), 'Article', $i);
             $request->setServiceParameter('VatPercentage', $basket['sShippingcostsTax'], 'Article', $i);
         }
 

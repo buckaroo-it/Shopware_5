@@ -258,7 +258,7 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
                 $request->setServiceParameter('ArticleQuantity', $counter, $groupType = 'Article', $groupId = $y);
                 $y++;
 
-                $amountCredit += (round($detail->getPrice(), 2) * $counter);
+                $amountCredit += (number_format($detail->getPrice(), 2) * $counter);
             }
         }
 
@@ -268,7 +268,7 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
             $request->setServiceParameter('ArticleNumber', 'SW8888', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleQuantity', 1, $groupType = 'Article', $groupId = $y);
 
-            $amountCredit += (round($order->getInvoiceShipping(), 2));
+            $amountCredit += (number_format($order->getInvoiceShipping(), 2));
         }
 
         // Recalculate based on items to avoid rounding issues

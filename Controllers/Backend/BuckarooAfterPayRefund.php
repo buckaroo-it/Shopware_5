@@ -216,7 +216,7 @@ class Shopware_Controllers_Backend_BuckarooAfterPayRefund extends Shopware_Contr
                             $counter++;
                         }
                     }
-                    $amountCredit += (round($detail->getPrice(), 2) * $counter);
+                    $amountCredit += (number_format($detail->getPrice(), 2) * $counter);
                 }
             }
         } else {
@@ -234,7 +234,7 @@ class Shopware_Controllers_Backend_BuckarooAfterPayRefund extends Shopware_Contr
                             $counter++;
                         }
                     }
-                    $amountCredit += (round($detail->getPrice(), 2) * $counter);
+                    $amountCredit += (number_format($detail->getPrice(), 2) * $counter);
                 }
             }
         }
@@ -245,7 +245,7 @@ class Shopware_Controllers_Backend_BuckarooAfterPayRefund extends Shopware_Contr
         }
 
         // Recalculate based on items to avoid rounding issues
-        $request->setAmountCredit(round($amountCredit, 2));
+        $request->setAmountCredit(number_format($amountCredit, 2));
         $request->setOriginalTransactionKey($transactionKey);
 
         // pass extra data as service parameters (BuckarooRefundForm)
@@ -417,7 +417,7 @@ class Shopware_Controllers_Backend_BuckarooAfterPayRefund extends Shopware_Contr
                 $request->setServiceParameter('ArticleDescription', $detail->getArticleName(), $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleId', $order_detail_article_id, $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleQuantity', $counter, $groupType = 'Article', $groupId = $y);
-                $request->setServiceParameter('ArticleUnitprice', round($detail->getPrice(), 2), $groupType = 'Article', $groupId = $y);
+                $request->setServiceParameter('ArticleUnitprice', number_format($detail->getPrice(), 2), $groupType = 'Article', $groupId = $y);
                 $request->setServiceParameter('ArticleVatcategory', VatCategory::getByPercentage($detail->getTaxRate()), $groupType = 'Article', $groupId = $y);
                 //Increase GroupID
                 $y++;
@@ -429,7 +429,7 @@ class Shopware_Controllers_Backend_BuckarooAfterPayRefund extends Shopware_Contr
             $request->setServiceParameter('ArticleDescription', 'shipping', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleId', 'SW8888', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleQuantity', 1, $groupType = 'Article', $groupId = $y);
-            $request->setServiceParameter('ArticleUnitprice', round($order->getInvoiceShipping(), 2), $groupType = 'Article', $groupId = $y);
+            $request->setServiceParameter('ArticleUnitprice', number_format($order->getInvoiceShipping(), 2), $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleVatcategory', 1, $groupType = 'Article', $groupId = $y);
         }
 

@@ -231,7 +231,7 @@ class Shopware_Controllers_Backend_BuckarooGuaranteeRefund extends Shopware_Cont
                 $amountCredit += $order->getInvoiceShipping();
             }
             // Recalculate based on items to avoid rounding issues
-            $request->setAmountCredit(round($amountCredit, 2));
+            $request->setAmountCredit(number_format($amountCredit, 2));
         }
 
         // flush stock updates to database

@@ -90,7 +90,7 @@ class Shopware_Controllers_Backend_BuckarooPartialCaptureForm extends Enlight_Co
             'details' => $order->getDetails(),
             'captured' => $transaction->getCapturedItems(),
             'invoiceAmount' => $order->getInvoiceAmount(),
-            'captureAmount' => round($captureAmount, 2),
+            'captureAmount' => number_format($captureAmount, 2),
             'ShippingAmount' => $order->getInvoiceShipping(),
             'currency' => $transaction->getCurrency(),
             'paymentMethodRequestPath' => $paymentMethodRequestPath,

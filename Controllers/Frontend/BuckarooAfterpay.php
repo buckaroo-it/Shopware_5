@@ -220,7 +220,7 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
             $request->setServiceParameter('ArticleDescription', $item['articlename'],                            'Article', $i);
             $request->setServiceParameter('ArticleId',          $item['ordernumber'],                            'Article', $i);
             $request->setServiceParameter('ArticleQuantity',    $item['quantity'],                               'Article', $i);
-            $request->setServiceParameter('ArticleUnitprice',   round($item['priceNumeric'], 2),                 'Article', $i);
+            $request->setServiceParameter('ArticleUnitprice',   number_format($item['priceNumeric'], 2),                 'Article', $i);
             $request->setServiceParameter('ArticleVatcategory', VatCategory::getByPercentage($item['tax_rate']), 'Article', $i);
         }
 
@@ -231,7 +231,7 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
         //     $request->setServiceParameter('ArticleDescription', 'shipping',                                                 'Article', $i);
         //     $request->setServiceParameter('ArticleId',          '',                                                         'Article', $i);
         //     $request->setServiceParameter('ArticleQuantity',    1,                                                          'Article', $i);
-        //     $request->setServiceParameter('ArticleUnitprice',   round($basket['sShippingcosts'], 2),                        'Article', $i);
+        //     $request->setServiceParameter('ArticleUnitprice',   number_format($basket['sShippingcosts'], 2),                        'Article', $i);
         //     $request->setServiceParameter('ArticleVatcategory', VatCategory::getByPercentage($basket['sShippingcostsTax']), 'Article', $i);
         // }
 
@@ -286,7 +286,7 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
         $request->setServiceParameter('ShippingEmail',             $user['email']);
         $request->setServiceParameter('ShippingPhoneNumber',       Helpers::stringFormatPhone($shipping['phone']));
         $request->setServiceParameter('ShippingLanguage',          $shopLang);
-        $request->setServiceParameter('ShippingCosts',             (empty($basket['sShippingcosts']) ? 0 : round($basket['sShippingcosts'], 2)) );
+        $request->setServiceParameter('ShippingCosts',             (empty($basket['sShippingcosts']) ? 0 : number_format($basket['sShippingcosts'], 2)) );
 
         if ($shippingCountryIso == "BE") {
             if (!empty($shippingStreet['suffix'])) {
