@@ -72,7 +72,7 @@ class PaymentResult implements ArrayAccess, Arrayable
 	/** Implement ArrayAccess */
     public function offsetSet($offset, $value)
     {
-        throw new \Exception("Can't set a value of a PaymentResult");
+        $this->data[$offset] = $value;
     }
 
     /** Implement ArrayAccess */

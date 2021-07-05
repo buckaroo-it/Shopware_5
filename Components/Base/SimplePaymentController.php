@@ -7,6 +7,7 @@ use BuckarooPayment\Components\Base\AbstractPaymentController;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
 use BuckarooPayment\Components\JsonApi\Payload\Request;
 use BuckarooPayment\Components\Constants\PaymentStatus;
+use BuckarooPayment\Components\Constants\ResponseStatus;
 use BuckarooPayment\Components\Helpers;
 use BuckarooPayment\Components\SessionCase;
 use BuckarooPayment\Components\SimpleLog;
@@ -442,6 +443,13 @@ abstract class SimplePaymentController extends AbstractPaymentController
 
             SimpleLog::log(__METHOD__ . "|2|");
 
+            if (
+                ($data->getServiceName() == 'paypal')
+                && ($data->getStatusCode() == ResponseStatus::PENDING_PROCESSING)
+            ) {
+                $data->offsetSet('BRQ_STATUSCODE', ResponseStatus::CANCELLED_BY_USER);
+            }
+
             // Workaround for refunds bug with push url
             // Push is sent to the original push url instead of the refund url.
             if ($data->getAmountCredit() != null) {
@@ -578,6 +586,13 @@ abstract class SimplePaymentController extends AbstractPaymentController
             )
             {
                 return $this->redirectBackToCheckout()->addMessage('Error validating data');
+            }
+
+            if (
+                ($data->offsetGet('BRQ_PAYMENT_METHOD') == 'paypal')
+                && ($data->getStatusCode() == ResponseStatus::PENDING_PROCESSING)
+            ) {
+                $data->offsetSet('BRQ_STATUSCODE', ResponseStatus::CANCELLED_BY_USER);
             }
 
             // get transaction with the quoteNumber and the sessionId
