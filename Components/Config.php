@@ -236,11 +236,6 @@ class Config
         return $this->get('buckaroo_guarantee_payment_invite', 'no') == 'yes';
     }
 
-    public function billinkBusiness()
-    {
-        return $this->get('buckaroo_billink_business');
-    }
-
     /**
      * Get a list of female salutations (used to determine sex of customer)
      *

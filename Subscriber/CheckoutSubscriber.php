@@ -137,7 +137,7 @@ class CheckoutSubscriber implements SubscriberInterface
             }
         }
         $view->assign([
-            'billinkBusiness' => $config->billinkBusiness(),
+            'billinkBusiness' => empty($this->session->sOrderVariables['sUserData']['billingaddress']['company']) ? 'B2C' : 'B2B',
             'billingCountryIso' => $countryIso,
             'paymentId' => $paymentData['id'],
             'paymentName' => $paymentData['name'],
@@ -145,6 +145,7 @@ class CheckoutSubscriber implements SubscriberInterface
             'paymentFee' => Helpers::floatToPrice($paymentFee),
             'isEncrypted' => $isEncrypted,
             'buckarooExtraFields' => (!empty($userId)) ? $this->loadExtraFields() : null,
+            'vatId' => $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] ?? ''
         ]);
     }
 

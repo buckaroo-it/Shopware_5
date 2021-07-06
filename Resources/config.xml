@@ -1178,31 +1178,6 @@
             </store>
         </element>
 
-        <element type="select" scope="shop">
-            <name>buckaroo_billink_business</name>
-            <label lang="de">Billink Zahlungsmethode</label>
-            <label lang="en">Billink payment method</label>
-            <label lang="nl">Billink betaalmethode</label>
-            <value>B2C</value>
-            <description lang="de">Wählen Sie aus, welche Zahlungsmethode bei Billink verwendet werden muss.</description>
-            <description lang="en">Select which paymethod must be used at Billink.</description>
-            <description lang="nl">Selecteer welke betaalmethode bij Billink gebruikt moet worden.</description>
-            <store>
-                <option>
-                    <value>B2C</value>
-                    <label lang="de">B2C</label>
-                    <label lang="en">B2C</label>
-                    <label lang="nl">B2C</label>
-                </option>
-                <option>
-                    <value>B2B</value>
-                    <label lang="de">B2B</label>
-                    <label lang="en">B2B</label>
-                    <label lang="nl">B2B</label>
-                </option>
-            </store>
-        </element>
-
         <element required="false" type="number" scope="shop">
             <name>buckaroo_amex_min_order_amount</name>
             <label lang="de">Amex min order amount</label>

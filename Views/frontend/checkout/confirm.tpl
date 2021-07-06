@@ -141,7 +141,7 @@
 
                 {if $billinkBusiness eq 'B2B'}
                     {include file='frontend/_includes/fields/user_buckaroo_payment_coc.tpl' name=$name}
-                    {include file='frontend/_includes/fields/user_buckaroo_payment_vat_num.tpl' name=$name}
+                    {include file='frontend/_includes/fields/user_buckaroo_payment_vat_num.tpl' name=$name vatId=$vatId}
                 {/if}
 
                 <input type="hidden" name="payment" value="{$paymentId}">

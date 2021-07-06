@@ -242,8 +242,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
 
         $request->setServiceParameter('MobilePhone', Helpers::stringFormatPhone($billing['phone']), 'BillingCustomer');
 
-        $config   = $this->container->get('buckaroo_payment.config');
-        $category = $config->billinkBusiness() ? $config->billinkBusiness() : 'B2C';
+        $category = $this->getCategory();
 
         if ($category == 'B2C') {
             $request->setServiceParameter('BirthDate', $birthDay, 'BillingCustomer');
@@ -303,12 +302,10 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
     {
         if ($billing['buckaroo_payment_coc']) {
             $request->setServiceParameter('ChamberOfCommerce', $billing['buckaroo_payment_coc'], 'BillingCustomer');
-            $request->setServiceParameter('ChamberOfCommerce', $billing['buckaroo_payment_coc'], 'ShippingCustomer');
         }
 
         if ($billing['buckaroo_payment_vat_num']) {
             $request->setServiceParameter('VATNumber', $billing['buckaroo_payment_vat_num'], 'BillingCustomer');
-            $request->setServiceParameter('VATNumber', $billing['buckaroo_payment_vat_num'], 'ShippingCustomer');
         }
     }
 
@@ -344,7 +341,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
      */
     protected function usePay()
     {
-        if ($this->container->get('buckaroo_payment.config')->billinkBusiness() == 'B2B') {
+        if ($this->getCategory() == 'B2B') {
             return true;
         }
         return $this->container->get('buckaroo_payment.config')->billinkUsePay();
@@ -447,5 +444,12 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
     {
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Billink-cancelAuthorizePush', $data);
+    }
+
+    private function getCategory()
+    {
+        $billing = $this->getBillingAddress();
+        $category = empty($billing['company']) ? 'B2C' : 'B2B';
+        return $category;
     }
 }
