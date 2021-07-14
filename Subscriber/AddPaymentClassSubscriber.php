@@ -57,6 +57,7 @@ class AddPaymentClassSubscriber implements SubscriberInterface
         $dirs['buckaroo_dankort'] =                 'BuckarooPayment\PaymentMethods\Dankort';
         $dirs['buckaroo_maestro'] =                 'BuckarooPayment\PaymentMethods\Maestro';
         $dirs['buckaroo_nexi'] =                    'BuckarooPayment\PaymentMethods\Nexi';
+        $dirs['buckaroo_postepay'] =                'BuckarooPayment\PaymentMethods\PostePay';
         $dirs['buckaroo_visaelectron'] =            'BuckarooPayment\PaymentMethods\VisaElectron';
         $dirs['buckaroo_vpay'] =                    'BuckarooPayment\PaymentMethods\Vpay';
 

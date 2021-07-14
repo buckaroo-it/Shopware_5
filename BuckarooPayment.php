@@ -50,6 +50,7 @@ class BuckarooPayment extends Plugin
         'buckaroo_dankort',
         'buckaroo_maestro',
         'buckaroo_nexi',
+        'buckaroo_postepay',
         'buckaroo_vpay',
         'buckaroo_visaelectron',
         'buckaroo_applepay'

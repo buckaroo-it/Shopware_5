@@ -335,6 +335,31 @@
         </element>
 
         <element type="select" scope="shop">
+            <name>buckaroo_postepay_env</name>
+            <label lang="de">PostePay</label>
+            <label lang="en">PostePay</label>
+            <label lang="nl">PostePay</label>
+            <value>test</value>
+            <description lang="de">PostePay</description>
+            <description lang="en">PostePay</description>
+            <description lang="nl">PostePay</description>
+            <store>
+                <option>
+                    <value>live</value>
+                    <label lang="de">Live</label>
+                    <label lang="en">Live</label>
+                    <label lang="nl">Live</label>
+                </option>
+                <option>
+                    <value>test</value>
+                    <label lang="de">Test</label>
+                    <label lang="en">Test</label>
+                    <label lang="nl">Test</label>
+                </option>
+            </store>
+        </element>
+
+        <element type="select" scope="shop">
             <name>buckaroo_vpay_env</name>
             <label lang="de">Vpay</label>
             <label lang="en">Vpay</label>
@@ -1444,6 +1469,20 @@
             <label lang="de">Nexi max order amount</label>
             <label lang="en">Nexi max order amount</label>
             <label lang="nl">Nexi max order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_postepay_min_order_amount</name>
+            <label lang="de">PostePay min order amount</label>
+            <label lang="en">PostePay min order amount</label>
+            <label lang="nl">PostePay min order amount</label>
+        </element>
+
+        <element required="false" type="number" scope="shop">
+            <name>buckaroo_postepay_max_order_amount</name>
+            <label lang="de">PostePay max order amount</label>
+            <label lang="en">PostePay max order amount</label>
+            <label lang="nl">PostePay max order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
