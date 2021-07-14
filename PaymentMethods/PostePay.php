@@ -25,7 +25,7 @@ class PostePay extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'postepay';
+    const DESCRIPTION = 'PostePay';
 
     /**
      * Position
