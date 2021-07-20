@@ -324,6 +324,12 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
 
             if ($additionalAddressLine1IsSet) {
                 $streetData['number'] = $addressValues['additionalAddressLine1'];
+
+                $spacePosition = strpos($addressValues['additionalAddressLine1'],' ');
+                if (!$additionalAddressLine2IsSet && $spacePosition) {
+                    $streetData['number'] = substr($addressValues['additionalAddressLine1'], 0, $spacePosition);
+                    $streetData['suffix'] = substr($addressValues['additionalAddressLine1'], $spacePosition + 1);
+                }
             }
             if ($additionalAddressLine2IsSet) {
                 $streetData['suffix'] = $addressValues['additionalAddressLine2'];
