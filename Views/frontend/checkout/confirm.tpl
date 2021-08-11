@@ -145,6 +145,11 @@
                 {/if}
 
                 <input type="hidden" name="payment" value="{$paymentId}">
+
+                {s name="ConfirmTermsBillink" namespace="frontend/buckaroo/confirm"}
+                    <a target="_blank" href="https://www.billink.nl/app/uploads/2021/05/Gebruikersvoorwaarden-Billink_V11052021.pdf" title="Accept terms of use"><span style="text-decoration:underline;">Accept terms of use</span></a>
+                {/s}
+
             {/if}
         </li>
 
