@@ -146,9 +146,15 @@
 
                 <input type="hidden" name="payment" value="{$paymentId}">
 
-                {s name="ConfirmTermsBillink" namespace="frontend/buckaroo/confirm"}
-                    <a target="_blank" href="https://www.billink.nl/app/uploads/2021/05/Gebruikersvoorwaarden-Billink_V11052021.pdf" title="Accept terms of use"><span style="text-decoration:underline;">Accept terms of use</span></a>
-                {/s}
+
+                {* Billink terms of service checkbox *}
+                {block name='ConfirmTermsBillink'}
+                    <span class="block column--checkbox">
+                        <input type="checkbox" required="required" aria-required="true" id="buckaroo_billink_conditions" name="buckaroo_billink_conditions"{if $buckarooBillinkConditionsChecked} checked="checked"{/if} />
+                        <a target="_blank" href="https://www.billink.nl/app/uploads/2021/05/Gebruikersvoorwaarden-Billink_V11052021.pdf" title="Accept terms of use"><span style="text-decoration:underline;">Accept terms of use</span></a>
+                    </span>
+                {/block}
+
 
             {/if}
         </li>
