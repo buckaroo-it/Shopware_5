@@ -12,7 +12,7 @@ use BuckarooPayment\Components\Validation\Validator;
 use BuckarooPayment\Components\Helpers;
 use BuckarooPayment\Components\SessionLockingHelper;
 use BuckarooPayment\Components\Config;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 use Shopware\Bundle\AttributeBundle\Service\DataPersister;
 use Shopware\Bundle\AttributeBundle\Service\DataLoader;
 
@@ -87,7 +87,7 @@ abstract class AbstractPaymentMethod
 
     public function __construct(
         Config $config = null,
-        Zend_Session_Abstract $session = null,
+        Enlight_Components_Session_Namespace $session = null,
         DataPersister $dataPersister = null,
         DataLoader $dataLoader = null,
         Api $api = null,

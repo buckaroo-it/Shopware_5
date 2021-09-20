@@ -2,7 +2,7 @@
 
 namespace BuckarooPayment\Components\Adapter;
 
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Container;
  * This is because there is not a Shop selected when in the backend
  */
 
-class SessionAdapter extends Zend_Session_Abstract
+class SessionAdapter extends Enlight_Components_Session_Namespace
 {
     /**
      * @var  Symfony\Component\DependencyInjection\Container

@@ -5,7 +5,7 @@ namespace BuckarooPayment\Components;
 use Shopware\Components\Model\ModelManager;
 use BuckarooPayment\Models\Cache;
 use DateTime;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 
 class CacheManager
 {

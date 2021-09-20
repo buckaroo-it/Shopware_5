@@ -35,12 +35,6 @@ class SessionLockingHelper
 	 */
 	public function stopSessionWrite()
 	{
-        // if( Enlight_Components_Session::isStarted() )
-        // {
-        // 	$readOnly = false;
-        //     Enlight_Components_Session::writeClose($readOnly);
-        // }
-
 		session_write_close();
 	}
 
@@ -51,12 +45,6 @@ class SessionLockingHelper
 	 */
 	public function restartSession()
 	{
-		// remove current session instance
-        // $this->container->set('session', null);
-
-        // get new session instance
-        // return $this->container->get('session');
-
 		session_start();
 	}
 

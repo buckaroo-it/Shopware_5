@@ -17,8 +17,8 @@ class Shopware_Controllers_Backend_BuckarooPartialRefundForm extends Enlight_Con
 
     public function postDispatch()
     {
-        $csrfToken = $this->container->get('BackendSession')->offsetGet('X-CSRF-Token');
-        $this->View()->assign(['csrfToken' => $csrfToken]);
+        // $csrfToken = $this->container->get('BackendSession')->offsetGet('X-CSRF-Token');
+        // $this->View()->assign(['csrfToken' => $csrfToken]);
     }
 
     public function indexAction()

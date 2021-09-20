@@ -2,7 +2,7 @@
 
 namespace BuckarooPayment\Components;
 
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 
 class Flash
 {
@@ -17,7 +17,7 @@ class Flash
 	 */
 	protected $session;
 
-	public function __construct(Zend_Session_Abstract $session)
+	public function __construct(Enlight_Components_Session_Namespace $session)
 	{
 		$this->session = $session;
 	}

@@ -11,89 +11,89 @@
             <argument type="service" id="snippets" on-invalid="null"/>
         </service>
 
-        <service id="buckaroo_payment.plugin_info" class="BuckarooPayment\Components\PluginInfo">
+        <service id="buckaroo_payment.plugin_info" class="BuckarooPayment\Components\PluginInfo" public="true">
         </service>
 
-        <service id="buckaroo_payment.schema" class="BuckarooPayment\Components\Schema">
+        <service id="buckaroo_payment.schema" class="BuckarooPayment\Components\Schema" public="true">
             <argument type="service" id="models"/>
         </service>
 
-        <service id="buckaroo_payment.adapter.session" class="BuckarooPayment\Components\Adapter\SessionAdapter">
+        <service id="buckaroo_payment.adapter.session" class="BuckarooPayment\Components\Adapter\SessionAdapter" public="true">
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="buckaroo_payment.session_locking_helper" class="BuckarooPayment\Components\SessionLockingHelper">
+        <service id="buckaroo_payment.session_locking_helper" class="BuckarooPayment\Components\SessionLockingHelper" public="true">
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="buckaroo_payment.flash" class="BuckarooPayment\Components\Flash">
+        <service id="buckaroo_payment.flash" class="BuckarooPayment\Components\Flash" public="true">
             <argument type="service" id="buckaroo_payment.adapter.session"/>
         </service>
 
-        <service id="buckaroo_payment.no_cache_config" class="BuckarooPayment\Components\NoCacheConfig">
+        <service id="buckaroo_payment.no_cache_config" class="BuckarooPayment\Components\NoCacheConfig" public="true">
             <argument type="service" id="db"/>
         </service>
 
-        <service id="buckaroo_payment.config" class="BuckarooPayment\Components\Config">
+        <service id="buckaroo_payment.config" class="BuckarooPayment\Components\Config" public="true">
             <argument type="service" id="shopware.plugin.cached_config_reader"/>
         </service>
 
-        <service id="buckaroo_payment.payment_result" class="BuckarooPayment\Components\JsonApi\Payload\PaymentResult">
+        <service id="buckaroo_payment.payment_result" class="BuckarooPayment\Components\JsonApi\Payload\PaymentResult" public="true">
             <argument type="service" id="front"/>
             <argument type="service" id="buckaroo_payment.config"/>
         </service>
 
-        <service id="buckaroo_payment.attributes" class="BuckarooPayment\Components\Attributes">
+        <service id="buckaroo_payment.attributes" class="BuckarooPayment\Components\Attributes" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="shopware_attribute.crud_service"/>
             <argument type="service" id="shopware_attribute.data_persister"/>
             <argument type="service" id="shopware_attribute.data_loader"/>
         </service>
 
-        <service id="buckaroo_payment.transaction_manager" class="BuckarooPayment\Components\TransactionManager">
+        <service id="buckaroo_payment.transaction_manager" class="BuckarooPayment\Components\TransactionManager" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
         </service>
 
-        <service id="buckaroo_payment.capture_manager" class="BuckarooPayment\Components\CaptureManager">
+        <service id="buckaroo_payment.capture_manager" class="BuckarooPayment\Components\CaptureManager" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
         </service>
 
-        <service id="buckaroo_payment.partial_transaction_manager" class="BuckarooPayment\Components\PartialTransactionManager">
+        <service id="buckaroo_payment.partial_transaction_manager" class="BuckarooPayment\Components\PartialTransactionManager" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
         </service>
 
-        <service id="buckaroo_payment.subscriber.apple_pay_button_subscriber" class="BuckarooPayment\Subscriber\ApplePayButtonSubscriber">
+        <service id="buckaroo_payment.subscriber.apple_pay_button_subscriber" class="BuckarooPayment\Subscriber\ApplePayButtonSubscriber" public="true">
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="buckaroo_payment.subscriber.apple_pay_finish_order_subscribter" class="BuckarooPayment\Subscriber\ApplePayFinishOrderSubscriber">
+        <service id="buckaroo_payment.subscriber.apple_pay_finish_order_subscribter" class="BuckarooPayment\Subscriber\ApplePayFinishOrderSubscriber" public="true">
             <tag name="shopware.event_subscriber"/>
         </service>
 
         <!-- JM NEW !!! -->
-        <service id="buckaroo_payment.subscriber.filter_payment" class="BuckarooPayment\Subscriber\FilterPaymentSubscriber">
+        <service id="buckaroo_payment.subscriber.filter_payment" class="BuckarooPayment\Subscriber\FilterPaymentSubscriber" public="true">
             <argument type="service" id="buckaroo_payment.adapter.session"/>
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="buckaroo_payment.subscriber.add_payment_class" class="BuckarooPayment\Subscriber\AddPaymentClassSubscriber">
+        <service id="buckaroo_payment.subscriber.add_payment_class" class="BuckarooPayment\Subscriber\AddPaymentClassSubscriber" public="true">
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="buckaroo_payment.subscriber.frontend_view" class="BuckarooPayment\Subscriber\FrontendViewSubscriber">
+        <service id="buckaroo_payment.subscriber.frontend_view" class="BuckarooPayment\Subscriber\FrontendViewSubscriber" public="true">
             <tag name="shopware.event_subscriber"/>
         </service>
 
         <service id="buckaroo_payment.subscriber.checkout_flash"
-                 class="BuckarooPayment\Subscriber\CheckoutFlashSubscriber">
+                 class="BuckarooPayment\Subscriber\CheckoutFlashSubscriber" public="true">
             <argument type="service" id="buckaroo_payment.flash"/>
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="buckaroo_payment.subscriber.checkout" class="BuckarooPayment\Subscriber\CheckoutSubscriber">
+        <service id="buckaroo_payment.subscriber.checkout" class="BuckarooPayment\Subscriber\CheckoutSubscriber" public="true">
             <argument type="service" id="buckaroo_payment.adapter.session"/>
             <argument type="service" id="buckaroo_payment.payment_methods.buckaroo"/>
             <argument type="service" id="buckaroo_payment.extra_fields_loader"/>
@@ -102,7 +102,7 @@
         </service>
 
         <service id="buckaroo_payment.subscriber.payment_extrafields_subscriber"
-                 class="BuckarooPayment\Subscriber\PaymentExtraFieldsSubscriber">
+                 class="BuckarooPayment\Subscriber\PaymentExtraFieldsSubscriber" public="true">
             <argument type="service" id="front"/>
             <argument type="service" id="buckaroo_payment.payment_methods.buckaroo"/>
             <argument type="service" id="buckaroo_payment.extra_fields_loader"/>
@@ -110,39 +110,39 @@
             <tag name="shopware.event_subscriber"/>
         </service>
 
-        <service id="buckaroo_payment.jsonapi.hmac_header" class="BuckarooPayment\Components\JsonApi\HmacHeader">
+        <service id="buckaroo_payment.jsonapi.hmac_header" class="BuckarooPayment\Components\JsonApi\HmacHeader" public="true">
             <argument type="service" id="buckaroo_payment.config"/>
         </service>
 
-        <service id="buckaroo_payment.jsonapi.software_header" class="BuckarooPayment\Components\JsonApi\SoftwareHeader">
+        <service id="buckaroo_payment.jsonapi.software_header" class="BuckarooPayment\Components\JsonApi\SoftwareHeader" public="true">
             <argument type="service" id="buckaroo_payment.plugin_info"/>
         </service>
 
-        <service id="buckaroo_payment.jsonapi.culture_header" class="BuckarooPayment\Components\JsonApi\CultureHeader"/>
+        <service id="buckaroo_payment.jsonapi.culture_header" class="BuckarooPayment\Components\JsonApi\CultureHeader" public="true"/>
 
-        <service id="buckaroo_payment.api" class="BuckarooPayment\Components\JsonApi\Api">
+        <service id="buckaroo_payment.api" class="BuckarooPayment\Components\JsonApi\Api" public="true">
             <argument type="service" id="buckaroo_payment.jsonapi.hmac_header"/>
             <argument type="service" id="buckaroo_payment.jsonapi.software_header"/>
             <argument type="service" id="buckaroo_payment.jsonapi.culture_header"/>
         </service>
 
-        <service id="buckaroo_payment.extra_fields_loader" class="BuckarooPayment\Components\ExtraFieldsLoader">
+        <service id="buckaroo_payment.extra_fields_loader" class="BuckarooPayment\Components\ExtraFieldsLoader" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
         </service>
 
-        <service id="buckaroo_payment.extra_fields_persister" class="BuckarooPayment\Components\ExtraFieldsPersister">
+        <service id="buckaroo_payment.extra_fields_persister" class="BuckarooPayment\Components\ExtraFieldsPersister" public="true">
             <argument type="service" id="models"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
             <argument type="service" id="shopware_attribute.data_persister"/>
         </service>
 
         <service id="buckaroo_payment.payment_methods.buckaroo"
-                 class="BuckarooPayment\PaymentMethods\BuckarooPaymentMethods">
+                 class="BuckarooPayment\PaymentMethods\BuckarooPaymentMethods" public="true">
             <argument type="service" id="service_container"/>
         </service>
 
-        <service id="buckaroo_payment.payment_methods.base_payment_method" abstract="true">
+        <service id="buckaroo_payment.payment_methods.base_payment_method" abstract="true" public="true">
             <argument type="service" id="buckaroo_payment.config"/>
             <argument type="service" id="buckaroo_payment.adapter.session"/>
             <argument type="service" id="shopware_attribute.data_persister"/>

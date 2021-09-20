@@ -4,7 +4,7 @@ namespace BuckarooPayment\Components;
 
 use Shopware\Bundle\AttributeBundle\Service\DataPersister;
 use Shopware\Components\Model\ModelManager;
-use Zend_Session_Abstract;
+use Enlight_Components_Session_Namespace;
 use Exception;
 use BuckarooPayment\Components\SessionCase;
 
@@ -16,7 +16,7 @@ class ExtraFieldsPersister
     protected $em;
 
     /**
-     * @var Zend_Session_Abstract
+     * @var Enlight_Components_Session_Namespace
      */
     protected $session;
 
@@ -32,7 +32,7 @@ class ExtraFieldsPersister
     /** @var DataPersister */
     private $_dataPersister;
 
-    public function __construct(ModelManager $em, Zend_Session_Abstract $session, DataPersister $_dataPersister)
+    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session, DataPersister $_dataPersister)
     {
         $this->em = $em;
         $this->session = $session;

@@ -520,6 +520,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
             else if( $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode())) )
             {
                 SimpleLog::log(__METHOD__ . "|9|");
+                SimpleLog::log(__METHOD__ . "|9.1|" . var_export([ $data->getInvoice(), $this->generateToken(), $this->getPaymentStatus($data->getStatusCode())]));
 
                 $orderNumber = $this->saveOrder(
                     $data->getInvoice(),
@@ -567,9 +568,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
         }
 
         // Session got lost sometimes since 5.6.6
-        \Enlight_Components_Session::writeClose();
-        \Enlight_Components_Session::setId($sessionId);
-        \Enlight_Components_Session::start();
+        $this->restoreSession($sessionId);
 
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;
