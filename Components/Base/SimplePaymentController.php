@@ -517,19 +517,10 @@ abstract class SimplePaymentController extends AbstractPaymentController
 
                 SimpleLog::log(__METHOD__ . "|8|");
             }
-            else if( $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode())) )
+            elseif( $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode())) )
             {
                 SimpleLog::log(__METHOD__ . "|9|");
                 SimpleLog::log(__METHOD__ . "|9.1|" . var_export([ $data->getInvoice(), $this->generateToken(), $this->getPaymentStatus($data->getStatusCode())]));
-
-                $orderNumber = $this->saveOrder(
-                    $data->getInvoice(),
-                    $this->generateToken(),
-                    $this->getPaymentStatus($data->getStatusCode()),
-                    false // sendStatusMail
-                );
-                $transaction->setOrderNumber($orderNumber);
-
                 SimpleLog::log(__METHOD__ . "|10|", $orderNumber);
             }
 
