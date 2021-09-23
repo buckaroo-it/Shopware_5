@@ -151,12 +151,7 @@ class TransactionManager
             $this->em->persist($transaction);
             $this->em->flush();
         } catch (\Exception $e) {
-            if($transaction)
-            {
-                $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
-                $transaction->setException($e->getMessage());
-                $transactionManager->save($transaction);
-            }
+            //Exception
         }
 
         return $transaction;
