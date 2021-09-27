@@ -19,10 +19,10 @@ class PartialTransactionManager
      */
     protected $session;
 
-    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session)
+    public function __construct(ModelManager $em, Enlight_Components_Session_Namespace $session = null)
     {
         $this->em = $em;
-        $this->session = $session;
+        $this->session = $session ?: Shopware()->Session();
     }
 
     /**
@@ -161,6 +161,10 @@ class PartialTransactionManager
             return $user['additional']['payment']['id'];
         }
 
+        if (!empty($this->session->get('sPaymentID'))) {
+            return $this->session->get('sPaymentID');
+        }
+        
         return $user['additional']['user']['paymentID'];
     }
 }

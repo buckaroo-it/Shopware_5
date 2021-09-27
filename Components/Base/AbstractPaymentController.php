@@ -422,6 +422,8 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
         return http_build_query(array(
             'session_id' => session_id(),
             'shop_id' => Shopware()->Container()->get('shop')->getId(),
+            // 'uid' => Shopware()->Session()->sUserId,
+            // 'pid' => Shopware()->Session()->sPaymentID,
         ));   
     }    
 
@@ -618,12 +620,9 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
             }
         }
 
-        $session = $this->get('session');
-        if(!$session->isStarted()){
-            session_write_close();
-            Shopware()->Session()->offsetSet('sessionId', $sessionId);
-            Shopware()->Container()->set('sessionid', $sessionId);
-        }
+        Shopware()->Session()->save();
+        Shopware()->Session()->setId($sessionId);
+        Shopware()->Session()->start();
     } 
     
     protected function setActiveShop()
