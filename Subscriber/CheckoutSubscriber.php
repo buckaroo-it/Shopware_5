@@ -145,7 +145,7 @@ class CheckoutSubscriber implements SubscriberInterface
             'paymentFee' => Helpers::floatToPrice($paymentFee),
             'isEncrypted' => $isEncrypted,
             'buckarooExtraFields' => (!empty($userId)) ? $this->loadExtraFields() : null,
-            'vatId' => $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] ?? ''
+            'vatId' => $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] ? $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] : ''
         ]);
     }
 
