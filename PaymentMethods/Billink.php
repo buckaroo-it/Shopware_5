@@ -55,7 +55,7 @@ class Billink extends AbstractPaymentMethod
      */
     public function getImageName()
     {
-        return 'buckaroo_billink.jpg';
+        return 'buckaroo_billink.png';
     }
 
     /**
