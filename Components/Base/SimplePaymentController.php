@@ -672,7 +672,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
     public function refundPushAction($data)
     {
         $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-        if(count($order)){
+        if(!empty($order)){
             $refundOrder = Shopware()->Modules()->Order();
             $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
         }

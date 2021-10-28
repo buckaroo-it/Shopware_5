@@ -217,7 +217,7 @@ class Shopware_Controllers_Frontend_BuckarooGiftcard extends SimplePaymentContro
             }
 
             $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-            $hasOrder = count($order);
+            $hasOrder = !empty($order);
 
             // check if payment is valid to be updated
             $isValidToUpdate = $this->isPaymentStatusValidForSave($this->getPaymentStatus($data->getStatusCode()));

@@ -368,7 +368,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             $dataTransaction->addExtraInfo($data->getServiceParameters());
 
             $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-            $hasOrder = count($order);
+            $hasOrder = !empty($order);
 
             if (!$hasOrder) {
                 // Signature can only be checked once
@@ -436,7 +436,7 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
 
             $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-            $hasOrder = count($order);
+            $hasOrder = !empty($order);
 
             if ($hasOrder)
             {
