@@ -533,10 +533,17 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
                     PaymentStatus::RESERVED,
                     false // sendStatusMail
                 );
-                $transaction->setOrderNumber($orderNumber);
+                header('HTTP/1.1 500 Internal Server Error');
+                echo "need to wait until next push for correct processing";
+                die();
             }
 
             $transaction->setStatus($this->getPaymentStatus($data->getStatusCode()));
+            if ($this->getOrderNumber()) {
+                $transaction->setOrderNumber($this->getOrderNumber());
+                $em = $this->container->get('models');
+                $transaction->save($em);
+            }
             $transactionManager->save($transaction);
         }
         catch(Exception $ex)

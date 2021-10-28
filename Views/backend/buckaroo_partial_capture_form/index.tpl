@@ -134,7 +134,7 @@
             {/if}
 
             <button type="submit"
-                    class="btn btn-default">{s name="backend/buckaroo/klarna_pay/KlarnaPayCapture"}Capture{/s}</button>
+                    class="btn btn-default buckaroo-capture-submit">{s name="backend/buckaroo/klarna_pay/KlarnaPayCapture"}Capture{/s}</button>
         </form>
     </div>
 {/block}
@@ -205,8 +205,7 @@
             }
 
             $(document).ready(function () {
-
-                $('#capture-form').on('submit', function (event) {
+                $('.buckaroo-capture-submit').on('click', function (event) {
                     event.preventDefault();
 
                     var captureArticles = [];

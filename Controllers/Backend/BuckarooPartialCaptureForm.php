@@ -17,8 +17,8 @@ class Shopware_Controllers_Backend_BuckarooPartialCaptureForm extends Enlight_Co
 
     public function postDispatch()
     {
-        $csrfToken = $this->container->get('BackendSession')->offsetGet('X-CSRF-Token');
-        $this->View()->assign(['csrfToken' => $csrfToken]);
+        //$csrfToken = $this->container->get('BackendSession')->offsetGet('X-CSRF-Token');
+        //$this->View()->assign(['csrfToken' => $csrfToken]);
     }
 
     public function indexAction()
@@ -69,7 +69,7 @@ class Shopware_Controllers_Backend_BuckarooPartialCaptureForm extends Enlight_Co
         foreach ($order->getDetails() as $detail) {
             for ($amount = 1; $amount <= $detail->getQuantity(); $amount++) {
                 $article_capture = $detail->getArticleNumber() . '-' . $amount;
-                if (!in_array($article_capture, $transaction->getCapturedItems())) {
+                if ($transaction && !in_array($article_capture, $transaction->getCapturedItems())) {
                     $captureAmount += $detail->getPrice();
                 }
             }
@@ -78,21 +78,21 @@ class Shopware_Controllers_Backend_BuckarooPartialCaptureForm extends Enlight_Co
             }
         }
 
-        if (!in_array('SW8888', $transaction->getCapturedItems())) {
+        if ($transaction && !in_array('SW8888', $transaction->getCapturedItems())) {
             $captureAmount += $order->getInvoiceShipping();
         }
 
         $data = [
             'orderNumber' => $orderNumber,
             'orderId' => $order->getId(),
-            'orderValueCurrency' => $transaction->getCurrency() . ' ' . $order->getInvoiceAmount(),
+            'orderValueCurrency' => ($transaction ? $transaction->getCurrency() : '') . ' ' . $order->getInvoiceAmount(),
             'accountname' => $customer->getFirstname() . ' ' . $customer->getLastname(),
             'details' => $order->getDetails(),
-            'captured' => $transaction->getCapturedItems(),
+            'captured' => $transaction ? $transaction->getCapturedItems() : [],
             'invoiceAmount' => $order->getInvoiceAmount(),
             'captureAmount' => number_format($captureAmount, 2),
             'ShippingAmount' => $order->getInvoiceShipping(),
-            'currency' => $transaction->getCurrency(),
+            'currency' => $transaction ? $transaction->getCurrency() : '',
             'paymentMethodRequestPath' => $paymentMethodRequestPath,
             'hasDiscount' => $hasDiscount,
         ];
