@@ -486,7 +486,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
             }
 
             $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-            $hasOrder = count($order);
+            $hasOrder = !empty($order);
 
             SimpleLog::log(__METHOD__ . "|5|");
 
