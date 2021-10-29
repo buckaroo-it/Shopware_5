@@ -1194,12 +1194,6 @@
                     <label lang="en">Pay</label>
                     <label lang="nl">Pay</label>
                 </option>
-                <option>
-                    <value>authorize_capture</value>
-                    <label lang="de">Authorize/Capture</label>
-                    <label lang="en">Authorize/Capture</label>
-                    <label lang="nl">Authorize/Capture</label>
-                </option>
             </store>
         </element>
 
