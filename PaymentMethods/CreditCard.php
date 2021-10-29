@@ -22,6 +22,12 @@ class CreditCard extends AbstractPaymentMethod
         {
             $checkData['sErrorMessages'][] = implode('<br />', $validator->getMessages());
             $checkData['sErrorFlag'] = true;
+        } else
+        {
+            if (!empty($extraFields['user']['buckaroo_encrypted_data'])) {
+                $this->session = $this->session ?: Shopware()->Session();
+                $this->setEncryptedData($extraFields['user']['buckaroo_encrypted_data']);
+            }
         }
 
         return $checkData;

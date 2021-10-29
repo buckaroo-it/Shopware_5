@@ -86,6 +86,10 @@ class PaymentExtraFieldsSubscriber implements SubscriberInterface
         $view->assign('buckarooPaymentMethods', $this->paymentMethods);
         //$view->assign('buckarooValidationMessages', $messages);
 
+        if ($config = Shopware()->Container()->get('buckaroo_payment.config')) {
+            $view->assign('isEncrypted', $config->creditcardUseEncrypt());
+        }
+
         $view->addTemplateDir(__DIR__ . '/../Views');
     }
 

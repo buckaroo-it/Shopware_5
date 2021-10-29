@@ -1,13 +1,17 @@
-$(function() {
-    $('#shippingPaymentForm').submit(submit);   
-});
+var waitForJQuery = setInterval(function () {
+    if (typeof window.jQuery != 'undefined') {
+        window.jQuery('form.payment input[type="submit"]').click(submit);
+        clearInterval(waitForJQuery);
+    }
+}, 1000);
+
 var submit = function(e) {
     e.preventDefault();
-    var cardNumber = $(".cardNumber").val();
-    var cvc = $(".cvc").val();
-    var cardHolderName = $(".cardHolderName").val();
-    var expirationYear = $(".expirationYear").val();
-    var expirationMonth = $(".expirationMonth").val();
+    var cardNumber = window.jQuery(".cardNumber").val();
+    var cvc = window.jQuery(".cvc").val();
+    var cardHolderName = window.jQuery(".cardHolderName").val();
+    var expirationYear = window.jQuery(".expirationYear").val();
+    var expirationMonth = window.jQuery(".expirationMonth").val();
     var cardNumberValid = BuckarooClientSideEncryption.V001.validateCardNumber(cardNumber);
     var cvcValid = BuckarooClientSideEncryption.V001.validateCvc(cvc);
     var cardHolderNameValid = BuckarooClientSideEncryption.V001.validateCardholderName(cardHolderName);
@@ -16,10 +20,9 @@ var submit = function(e) {
     if (cardNumberValid && cvcValid && cardHolderNameValid && expirationYearValid && expirationMonthValid) {
         getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName);
     } else {
-        $('#shippingPaymentForm').off("submit");
-        jQuery("#shippingPaymentForm").trigger('submit');        
+        window.jQuery('form.payment input[type="submit"]').off("click");
+        window.jQuery('form.payment input[type="submit"]').trigger('click');
     }
-    
 }
 var getEncryptedData = function(cardNumber, year, month, cvc, cardholder) {
     BuckarooClientSideEncryption.V001.encryptCardData(cardNumber,
@@ -28,8 +31,8 @@ var getEncryptedData = function(cardNumber, year, month, cvc, cardholder) {
         cvc,
         cardholder,
         function(encryptedCardData) {
-            $(".encryptedCardData").val(encryptedCardData);
-            $('#shippingPaymentForm').off("submit");
-            jQuery("#shippingPaymentForm").trigger('submit');
+            window.jQuery(".encryptedCardData").val(encryptedCardData);
+            window.jQuery('form.payment input[type="submit"]').off("click");
+            window.jQuery('form.payment input[type="submit"]').trigger('click');
         });
 }

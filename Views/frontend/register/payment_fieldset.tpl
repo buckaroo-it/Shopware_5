@@ -1,4 +1,9 @@
 {block name="frontend_register_payment"}
+    {if $isEncrypted}
+        <script type="text/javascript" src="{link file="frontend/_resources/js/creditcard-encryption-sdk.js"}"></script>
+        <script type="text/javascript" src="{link file="frontend/_resources/js/creditcard-call-encryption.js"}"></script>
+    {/if}
+
     <div class="panel register--payment">
 
         {block name="frontend_register_payment_headline"}
