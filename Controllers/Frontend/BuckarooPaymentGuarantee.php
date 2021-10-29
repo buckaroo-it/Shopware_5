@@ -369,8 +369,12 @@ class Shopware_Controllers_Frontend_BuckarooPaymentGuarantee extends AbstractPay
         return $this->sendResponse('OK');
     }
 
-    public function refundPushAction()
+    public function refundPushAction($data = false)
     {
+        if(!$data){
+            return $this->sendResponse('Refund Push - no data');
+        }
+        
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('Guarantee-refundPush', $data);
         return $this->sendResponse('OK');
