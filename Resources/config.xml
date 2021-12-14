@@ -766,8 +766,8 @@
             <label lang="nl">Creditcard methode</label>
             <value>redirect</value>
             <description lang="de">Creditcard methode</description>
-            <description lang="en">Creditcard method</description>
-            <description lang="nl">Creditcard method</description>
+            <description lang="en">Check with Buckaroo whether Client Side Encryption is enabled, otherwise transactions will fail. If in doubt, please contact us.</description>
+            <description lang="nl">Controleer bij Buckaroo of Client Side Encryption is ingeschakeld, anders mislukken transacties. Bij twijfel, neem contact met ons op.</description>
             <store>
                 <option>
                     <value>redirect</value>
