@@ -7,11 +7,12 @@ var waitForJQuery = setInterval(function () {
 
 var submit = function(e) {
     e.preventDefault();
-    var cardNumber = window.jQuery(".cardNumber").val();
-    var cvc = window.jQuery(".cvc").val();
-    var cardHolderName = window.jQuery(".cardHolderName").val();
-    var expirationYear = window.jQuery(".expirationYear").val();
-    var expirationMonth = window.jQuery(".expirationMonth").val();
+    var rootBlock = window.jQuery('.payment--selection-input input[type="radio"]:checked').parent().parent();
+    var cardNumber = rootBlock.find('.cardNumber').val();
+    var cvc = rootBlock.find('.cvc').val();
+    var cardHolderName = rootBlock.find('.cardHolderName').val();
+    var expirationYear = rootBlock.find('.expirationYear').val();
+    var expirationMonth = rootBlock.find('.expirationMonth').val();
     var cardNumberValid = BuckarooClientSideEncryption.V001.validateCardNumber(cardNumber);
     var cvcValid = BuckarooClientSideEncryption.V001.validateCvc(cvc);
     var cardHolderNameValid = BuckarooClientSideEncryption.V001.validateCardholderName(cardHolderName);
