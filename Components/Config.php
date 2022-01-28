@@ -173,7 +173,7 @@ class Config
      */
     public function billinkUsePay()
     {
-        return $this->get('buckaroo_billink_handling', 'authorize_capture') == 'pay';
+        return true;
     }
 
     /**

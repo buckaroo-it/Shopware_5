@@ -1178,25 +1178,6 @@
             <label lang="nl">Billink max order amount</label>
         </element>
 
-        <element type="select" scope="shop">
-            <name>buckaroo_billink_handling</name>
-            <label lang="de">Billink methode</label>
-            <label lang="en">Billink method</label>
-            <label lang="nl">Billink methode</label>
-            <value>pay</value>
-            <description lang="de">Billink methode</description>
-            <description lang="en">Billink method</description>
-            <description lang="nl">Billink method</description>
-            <store>
-                <option>
-                    <value>pay</value>
-                    <label lang="de">Pay</label>
-                    <label lang="en">Pay</label>
-                    <label lang="nl">Pay</label>
-                </option>
-            </store>
-        </element>
-
         <element required="false" type="number" scope="shop">
             <name>buckaroo_amex_min_order_amount</name>
             <label lang="de">Amex min order amount</label>
