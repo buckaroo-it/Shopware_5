@@ -103,6 +103,13 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
                 if($response->isSuccess()){
                     $paymentStatus = PaymentStatus::THE_CREDIT_HAS_BEEN_ACCEPTED;
                 } elseif ($response->isPendingProcessing()){
+
+                    // redirect to Buckaroo
+                    if( $response->hasRedirect() )
+                    {
+                        return $this->redirect($response->getRedirectUrl());
+                    }
+
                     $paymentStatus = PaymentStatus::OPEN;
                 }
 
@@ -584,6 +591,12 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
                 $transactionStatus = PaymentStatus::COMPLETELY_INVOICED;
             } else {
                 $transactionStatus = $this->getPaymentStatus($data->getStatusCode());
+            }
+
+            if ($data->offsetGet(strtoupper('brq_SERVICE_klarnakp_ReservationNumber'))
+                    && ($data->getStatusCode() == 190)
+            ) {
+                $transactionStatus = PaymentStatus::RESERVED;
             }
 
             if ($this->hasOrder()) {
