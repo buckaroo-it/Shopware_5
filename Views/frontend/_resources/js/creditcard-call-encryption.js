@@ -1,18 +1,13 @@
-var waitForJQuery = setInterval(function () {
-    if (typeof window.jQuery != 'undefined') {
-        window.jQuery('form.payment input[type="submit"]').click(submit);
-        clearInterval(waitForJQuery);
-    }
-}, 1000);
-
+$(function() {
+    $('#shippingPaymentForm').submit(submit);   
+});
 var submit = function(e) {
     e.preventDefault();
-    var rootBlock = window.jQuery('.payment--selection-input input[type="radio"]:checked').parent().parent();
-    var cardNumber = rootBlock.find('.cardNumber').val();
-    var cvc = rootBlock.find('.cvc').val();
-    var cardHolderName = rootBlock.find('.cardHolderName').val();
-    var expirationYear = rootBlock.find('.expirationYear').val();
-    var expirationMonth = rootBlock.find('.expirationMonth').val();
+    var cardNumber = $(".cardNumber").val();
+    var cvc = $(".cvc").val();
+    var cardHolderName = $(".cardHolderName").val();
+    var expirationYear = $(".expirationYear").val();
+    var expirationMonth = $(".expirationMonth").val();
     var cardNumberValid = BuckarooClientSideEncryption.V001.validateCardNumber(cardNumber);
     var cvcValid = BuckarooClientSideEncryption.V001.validateCvc(cvc);
     var cardHolderNameValid = BuckarooClientSideEncryption.V001.validateCardholderName(cardHolderName);
@@ -21,9 +16,10 @@ var submit = function(e) {
     if (cardNumberValid && cvcValid && cardHolderNameValid && expirationYearValid && expirationMonthValid) {
         getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName);
     } else {
-        window.jQuery('form.payment input[type="submit"]').off("click");
-        window.jQuery('form.payment input[type="submit"]').trigger('click');
+        $('#shippingPaymentForm').off("submit");
+        $("#shippingPaymentForm").trigger('submit');        
     }
+    
 }
 var getEncryptedData = function(cardNumber, year, month, cvc, cardholder) {
     BuckarooClientSideEncryption.V001.encryptCardData(cardNumber,
@@ -32,8 +28,8 @@ var getEncryptedData = function(cardNumber, year, month, cvc, cardholder) {
         cvc,
         cardholder,
         function(encryptedCardData) {
-            window.jQuery(".encryptedCardData").val(encryptedCardData);
-            window.jQuery('form.payment input[type="submit"]').off("click");
-            window.jQuery('form.payment input[type="submit"]').trigger('click');
+            $(".encryptedCardData").val(encryptedCardData);
+            $('#shippingPaymentForm').off("submit");
+            $("#shippingPaymentForm").trigger('submit');
         });
 }
