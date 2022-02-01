@@ -19,20 +19,20 @@ var submit = function(e) {
     var expirationYearValid = BuckarooClientSideEncryption.V001.validateYear(expirationYear);
     var expirationMonthValid = BuckarooClientSideEncryption.V001.validateMonth(expirationMonth);
     if (cardNumberValid && cvcValid && cardHolderNameValid && expirationYearValid && expirationMonthValid) {
-        getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName);
+        getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName, rootBlock);
     } else {
         window.jQuery('form.payment input[type="submit"]').off("click");
         window.jQuery('form.payment input[type="submit"]').trigger('click');
     }
 }
-var getEncryptedData = function(cardNumber, year, month, cvc, cardholder) {
+var getEncryptedData = function(cardNumber, year, month, cvc, cardholder, rootBlock) {
     BuckarooClientSideEncryption.V001.encryptCardData(cardNumber,
         year,
         month,
         cvc,
         cardholder,
         function(encryptedCardData) {
-            window.jQuery(".encryptedCardData").val(encryptedCardData);
+            rootBlock.find('.encryptedCardData').val(encryptedCardData);
             window.jQuery('form.payment input[type="submit"]').off("click");
             window.jQuery('form.payment input[type="submit"]').trigger('click');
         });
