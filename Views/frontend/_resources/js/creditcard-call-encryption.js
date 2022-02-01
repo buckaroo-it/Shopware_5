@@ -1,13 +1,13 @@
 var waitForJQuery = setInterval(function () {
     if (typeof window.jQuery != 'undefined') {
-        window.jQuery('form.payment input[type="submit"]').click(submit);
+        window.jQuery('form.payment input[type="submit"], [data-ajax-shipping-payment="true"] button[type="submit"]').click(submit);
         clearInterval(waitForJQuery);
     }
 }, 1000);
 
 var submit = function(e) {
     e.preventDefault();
-    var rootBlock = window.jQuery('.payment--selection-input input[type="radio"]:checked').parent().parent();
+    var rootBlock = window.jQuery('.payment--method input[type="radio"]:checked').parent().parent();
     var cardNumber = rootBlock.find('.cardNumber').val();
     var cvc = rootBlock.find('.cvc').val();
     var cardHolderName = rootBlock.find('.cardHolderName').val();
@@ -19,13 +19,13 @@ var submit = function(e) {
     var expirationYearValid = BuckarooClientSideEncryption.V001.validateYear(expirationYear);
     var expirationMonthValid = BuckarooClientSideEncryption.V001.validateMonth(expirationMonth);
     if (cardNumberValid && cvcValid && cardHolderNameValid && expirationYearValid && expirationMonthValid) {
-        getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName, rootBlock);
+        getEncryptedData(cardNumber, expirationYear, expirationMonth, cvc, cardHolderName, rootBlock, e.target);
     } else {
-        window.jQuery('form.payment input[type="submit"]').off("click");
-        window.jQuery('form.payment input[type="submit"]').trigger('click');
+        window.jQuery(e.target).off("click");
+        window.jQuery(e.target).trigger('click');
     }
 }
-var getEncryptedData = function(cardNumber, year, month, cvc, cardholder, rootBlock) {
+var getEncryptedData = function(cardNumber, year, month, cvc, cardholder, rootBlock, target) {
     BuckarooClientSideEncryption.V001.encryptCardData(cardNumber,
         year,
         month,
@@ -33,7 +33,7 @@ var getEncryptedData = function(cardNumber, year, month, cvc, cardholder, rootBl
         cardholder,
         function(encryptedCardData) {
             rootBlock.find('.encryptedCardData').val(encryptedCardData);
-            window.jQuery('form.payment input[type="submit"]').off("click");
-            window.jQuery('form.payment input[type="submit"]').trigger('click');
+            window.jQuery(target).off("click");
+            window.jQuery(target).trigger('click');
         });
 }
