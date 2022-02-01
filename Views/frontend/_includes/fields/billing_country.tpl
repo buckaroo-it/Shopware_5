@@ -10,7 +10,6 @@
         <select name="buckaroo-extra-fields[{$name}][billing][country_id]"
                 data-address-type="address"
                 id="buckaroo-extra-fields-{$name}-billing-country_id"
-                required="required"
                 aria-required="true"
                 class="buckaroo_auto_submit select--country is--required{if $error_flags.country} has--error{/if}">
             <option disabled="disabled" value="" selected="selected">{s name='RegisterBillingPlaceholderCountry' namespace="frontend/register/billing_fieldset"}{/s}{s name="RequiredField" namespace="frontend/register/index"}{/s}</option>
