@@ -84,6 +84,7 @@
         </service>
 
         <service id="buckaroo_payment.subscriber.frontend_view" class="BuckarooPayment\Subscriber\FrontendViewSubscriber" public="true">
+            <argument>%buckaroo_payment.plugin_dir%</argument>
             <tag name="shopware.event_subscriber"/>
         </service>
 

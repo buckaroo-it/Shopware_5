@@ -28,6 +28,15 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class BuckarooPayment extends Plugin
 {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $container->setParameter('buckaroo_payment.plugin_dir', $this->getPath());
+        parent::build($container);
+    }
+
     private static $paymentMethods = array(
         'buckaroo_bancontact',
         'buckaroo_amex',

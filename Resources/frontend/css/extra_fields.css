@@ -32,3 +32,6 @@
 .buckaroo-has-error {
 	border: 1px solid #e74c3c !important;
 }
+.payment--method .error {
+	border-color: #f08080;
+}
