@@ -23,6 +23,7 @@ class Shopware_Controllers_Frontend_BuckarooPayconiqQrcode extends Enlight_Contr
             'amount' => $_GET['amount'],
             'description' => $_GET['description'],
             'imagePath' => 'custom/plugins/BuckarooPayment/Views/frontend/_resources/images/logo-payconiq.png',
+            'returnUrl' => urldecode($_GET['returnUrl'])
         ]);
     }
 

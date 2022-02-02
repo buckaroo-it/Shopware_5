@@ -357,7 +357,7 @@
                 {*<button id="helpBtn" class="payconiq-btn payconiq-qr__link">Need help ?*}
                 {*<span class="payconiq-qr__link__arrow">›</span>*}
                 {*</button>*}
-                <div class="payconiq-cancel"><a href="javascript:document.location=document.referrer;">{s name="CancelPayment" namespace="frontend/buckaroo/plugins"}Cancel payment{/s}</a></div>
+                <div class="payconiq-cancel"><a href="{$returnUrl}">{s name="CancelPayment" namespace="frontend/buckaroo/plugins"}Cancel payment{/s}</a></div>
             </div>
         </form>
 

@@ -246,6 +246,11 @@ class TransactionRequest extends Request
 		$this->data['ReturnURL'] = $url;
 	}
 
+    public function getReturnURL()
+    {
+        return $this->data['ReturnURL'];
+    }
+
 	/**
 	 * @param string $url
 	 */
