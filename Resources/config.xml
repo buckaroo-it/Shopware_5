@@ -622,13 +622,13 @@
                 <option>
                     <value>mail</value>
                     <label lang="de">Per Post senden</label>
-                    <label lang="en">Send by mail</label>
+                    <label lang="en">Send by postal mail(envelope)</label>
                     <label lang="nl">Stuur via de post</label>
                 </option>
                 <option>
                     <value>email</value>
                     <label lang="de">E-Mail senden</label>
-                    <label lang="en">Send e-mail</label>
+                    <label lang="en">Send by electronic mail(e-mail)</label>
                     <label lang="nl">Stuur e-mail</label>
                 </option>
             </store>
