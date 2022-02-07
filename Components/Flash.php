@@ -174,7 +174,8 @@ class Flash
     {
         SimpleLog::log(__METHOD__ . "|1|");
         $existingMessages = $this->session->BuckarooPaymentFlashMessages;
-        if ($existingMessages && ($msgs = json_decode($existingMessages)) && empty($msgs->$type)) {
+        if (!$existingMessages
+            || ($existingMessages && ($msgs = json_decode($existingMessages)) && empty($msgs->$type))) {
             if (!empty($_COOKIE['buckaroo_messages'])) {
                 SimpleLog::log(__METHOD__ . "|5|");
                 $existingMessages = $_COOKIE['buckaroo_messages'];
