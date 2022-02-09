@@ -4,7 +4,7 @@
     <label lang="en">Buckaroo</label>
     <label lang="de">Buckaroo</label>
 
-    <version>1.13.0</version>
+    <version>1.14.0</version>
     <copyright>(c) Buckaroo B.V.</copyright>
     <license>MIT</license>
     <author>Buckaroo</author>
@@ -454,6 +454,49 @@
             BP-950 Make it possible for Billink to enable 
             BP-970 Add CreditCard brand PostePay
             BP-959 Billink House Number with suffix is showing
+        ]]>
+        </changes>
+    </changelog>
+
+    <changelog version="1.14.0">
+        <changes lang="de">
+            <![CDATA[
+            Fix Code review failed
+            BP-1088 Billink logo update
+            BP-1128 Shopware 5 - afterpay's capture popup is empty in admin area
+            BP-1129 Shopware 5 - support and test PHP 8 | PHP Fatal error:  Uncaught TypeError: count()
+            BP-1132 refund pushes cause http 500 error
+            BP-1130 Shopware 5 - Billink - there is no way to capture aurhorized orders
+            BP-1131 Shopware 5 - CreditCards - encypt mode doesn't work
+            BP-1189 New Sofort logo added
+            BP-1192 Shopware 5 CSE tooltip (#8)
+            BP-1130 Shopware 5 - remove mode selector for Billink
+            BP-1313 Cannot save creditcard info
+            BP-1316 Klarna empy cart if cancel order
+            BP-1312 Cannot save selected payment method, when other methods have invalid fields
+            BP-1315 Payconiq empty checkout after cancel modal
+            BP-1343 No validation message on payment faild
+            BP-1344 Klarna invoice select has duplicate option (#11)
+        ]]>
+        </changes>
+        <changes lang="en">
+            <![CDATA[
+            Fix Code review failed
+            BP-1088 Billink logo update
+            BP-1128 Shopware 5 - afterpay's capture popup is empty in admin area
+            BP-1129 Shopware 5 - support and test PHP 8 | PHP Fatal error:  Uncaught TypeError: count()
+            BP-1132 refund pushes cause http 500 error
+            BP-1130 Shopware 5 - Billink - there is no way to capture aurhorized orders
+            BP-1131 Shopware 5 - CreditCards - encypt mode doesn't work
+            BP-1189 New Sofort logo added
+            BP-1192 Shopware 5 CSE tooltip (#8)
+            BP-1130 Shopware 5 - remove mode selector for Billink
+            BP-1313 Cannot save creditcard info
+            BP-1316 Klarna empy cart if cancel order
+            BP-1312 Cannot save selected payment method, when other methods have invalid fields
+            BP-1315 Payconiq empty checkout after cancel modal
+            BP-1343 No validation message on payment faild
+            BP-1344 Klarna invoice select has duplicate option (#11)
         ]]>
         </changes>
     </changelog>
