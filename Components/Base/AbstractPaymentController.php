@@ -619,7 +619,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
                 throw new Exception('session_id is missing');
             }
         }
-        if(version_compare($this->container->getParameter('shopware.release.version'), '5.7',  '=>')) {
+        if(version_compare($this->container->getParameter('shopware.release.version'), '5.7',  '>=')) {
             Shopware()->Session()->save();
             Shopware()->Session()->setId($sessionId);
             Shopware()->Session()->start();
