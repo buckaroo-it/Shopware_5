@@ -619,10 +619,15 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
                 throw new Exception('session_id is missing');
             }
         }
-
-        Shopware()->Session()->save();
-        Shopware()->Session()->setId($sessionId);
-        Shopware()->Session()->start();
+        if(version_compare($this->container->getParameter('shopware.release.version'), '5.7',  '>=')) {
+            Shopware()->Session()->save();
+            Shopware()->Session()->setId($sessionId);
+            Shopware()->Session()->start();
+        } else {
+            \Enlight_Components_Session::writeClose();
+            \Enlight_Components_Session::setId($sessionId);
+            \Enlight_Components_Session::start();
+        }
     } 
     
     protected function setActiveShop()
