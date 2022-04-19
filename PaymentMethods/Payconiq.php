@@ -35,7 +35,7 @@ class Payconiq extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validate($checkPayment, $validatorClass = null) {
+    public function validateData($checkPayment, $validatorClass = null) {
         $checkData = [];
         return $checkData;
     }

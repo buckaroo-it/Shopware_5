@@ -35,7 +35,7 @@ class P24 extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validate($checkPayment, $validatorClass = null) {
+    public function validateData($checkPayment, $validatorClass = null) {
         
         $checkData = [];
         $extraFields = $checkPayment['buckaroo-extra-fields'][$this::KEY];
@@ -46,7 +46,7 @@ class P24 extends AbstractPaymentMethod
         }
 
         $validatorClass = new Validator();
-        $validator = parent::validate($extraFields, $validatorClass);
+        $validator = parent::validateData($extraFields, $validatorClass);
 
         if( $validator->fails() )
         {
