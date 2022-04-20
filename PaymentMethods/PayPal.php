@@ -255,7 +255,7 @@ class PayPal extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validateData($checkPayment, $validatorClass = null) {
+    public function validate($checkPayment) {
         $checkData = [];
         return $checkData;
     }
