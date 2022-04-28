@@ -492,6 +492,10 @@ abstract class AbstractPaymentMethod extends GenericPaymentMethod
      */
     public function validateData($data, $validatorClass = null)
     {
+        if (empty($data))
+        {
+            return null;
+        }
         $validations = $this->getValidations();
 
         foreach($data as $entity => $fields)
