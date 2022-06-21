@@ -88,8 +88,6 @@ class Shopware_Controllers_Backend_BuckarooKlarna extends Shopware_Controllers_A
 
             $klarna = $this->container->get('buckaroo_payment.payment_methods.klarna');
 
-            $sendByMail = $config->klarnaPayInvoiceSendByMail();
-
             // create new Request
             $request = new TransactionRequest;
             $request->setCurrency($transaction->getCurrency());

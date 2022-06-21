@@ -84,8 +84,6 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
 
             $klarna = $this->container->get('buckaroo_payment.payment_methods.klarna');
 
-            $sendByMail = $config->klarnaPayInvoiceSendByMail();
-
             $capture_count = $transaction->getCountCapture();
             $amount_capture = empty($capture_count) ? '1' : (string)($capture_count + 1);
 
