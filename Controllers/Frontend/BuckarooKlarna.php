@@ -255,7 +255,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
         $billingStreet = $this::setAdditionalAddressFields($billing);
 
-        $request->setServiceParameter('BillingCareOf', $billing['firstname'] . ' ' . $billing['lastname']);
         $request->setServiceParameter('BillingCompanyName', $billing['company']);
         $request->setServiceParameter('BillingFirstName', $billing['firstname']);
         $request->setServiceParameter('BillingLastName', $billing['lastname']);
@@ -266,7 +265,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         $request->setServiceParameter('BillingCity', $billing['city']); // Required
         $request->setServiceParameter('BillingCountry', $billingCountryIso); // NL, DE, AT // Required
         $request->setServiceParameter('BillingPhoneNumber', Helpers::stringFormatPhone($billing['phone'])); // Required
-        // $request->setServiceParameter('BillingCellPhoneNumber',   $billing['phone']);
         $request->setServiceParameter('BillingEmail', $user['email']); // Required
     }
 
@@ -313,7 +311,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
 
             $shippingStreet = $this::setAdditionalAddressFields($shipping);
 
-            $request->setServiceParameter('ShippingCareOf', $shipping['firstname'] . ' ' . $shipping['lastname']);
             $request->setServiceParameter('ShippingCompany', $shipping['company']);
             $request->setServiceParameter('ShippingFirstName', $shipping['firstname']);
             $request->setServiceParameter('ShippingLastName', $shipping['lastname']);
@@ -324,7 +321,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
             $request->setServiceParameter('ShippingCity', $shipping['city']); // Required
             $request->setServiceParameter('ShippingCountry', $shippingCountry); // NL, DE, AT // Required
             $request->setServiceParameter('ShippingPhoneNumber', Helpers::stringFormatPhone($shipping['phone'])); // Required
-            // $request->setServiceParameter('ShippingCellPhoneNumber',   $shipping['phone']);
             $request->setServiceParameter('ShippingEmail', $user['email']); // Required
         }
 
@@ -340,9 +336,9 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         // check type of push action can be reserve, collecting or refunding.
         try {
             $data = $this->container->get('buckaroo_payment.payment_result');
-            if ($data->getTransactionType() == 'C700') {
+            if ($data->getTransactionType() == 'V610') {
                 return $this->autoCapturePushAction();
-            } else if ($data->getTransactionType() == 'C701') {
+            } else if ($data->getTransactionType() == 'V611') {
                 return $this->refundPushAction();     
             }
         } catch (Exception $e) {
