@@ -10,7 +10,6 @@
         <select name="buckaroo-extra-fields[{$name}][shipping][country_id]"
                 data-address-type="address"
                 id="buckaroo-extra-fields-{$name}-shipping-country_id"
-                required="required"
                 aria-required="true"
                 class="select--country is--required{if $error_flags.country} has--error{/if}">
             <option disabled="disabled" value="" selected="selected">{s name='RegisterShippingPlaceholderCountry' namespace="frontend/register/shipping_fieldset"}{/s}{s name="RequiredField" namespace="frontend/register/index"}{/s}</option>

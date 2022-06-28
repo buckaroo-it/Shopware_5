@@ -610,31 +610,6 @@
         </element>
 
         <element type="select" scope="shop">
-            <name>buckaroo_klarna_pay_invoice_send</name>
-            <label lang="de">Klarna invoice</label>
-            <label lang="en">Klarna invoice</label>
-            <label lang="nl">Klarna invoice</label>
-            <value>email</value>
-            <description lang="de">Klarna invoice</description>
-            <description lang="en">Klarna invoice</description>
-            <description lang="nl">Klarna invoice</description>
-            <store>
-                <option>
-                    <value>mail</value>
-                    <label lang="de">Per Post senden</label>
-                    <label lang="en">Send by mail</label>
-                    <label lang="nl">Stuur via de post</label>
-                </option>
-                <option>
-                    <value>email</value>
-                    <label lang="de">E-Mail senden</label>
-                    <label lang="en">Send e-mail</label>
-                    <label lang="nl">Stuur e-mail</label>
-                </option>
-            </store>
-        </element>
-
-        <element type="select" scope="shop">
             <name>buckaroo_afterpay_env</name>
             <label lang="de">Afterpay (old)</label>
             <label lang="en">Afterpay (old)</label>
@@ -1176,25 +1151,6 @@
             <label lang="de">Billink max order amount</label>
             <label lang="en">Billink max order amount</label>
             <label lang="nl">Billink max order amount</label>
-        </element>
-
-        <element type="select" scope="shop">
-            <name>buckaroo_billink_handling</name>
-            <label lang="de">Billink methode</label>
-            <label lang="en">Billink method</label>
-            <label lang="nl">Billink methode</label>
-            <value>pay</value>
-            <description lang="de">Billink methode</description>
-            <description lang="en">Billink method</description>
-            <description lang="nl">Billink method</description>
-            <store>
-                <option>
-                    <value>pay</value>
-                    <label lang="de">Pay</label>
-                    <label lang="en">Pay</label>
-                    <label lang="nl">Pay</label>
-                </option>
-            </store>
         </element>
 
         <element required="false" type="number" scope="shop">

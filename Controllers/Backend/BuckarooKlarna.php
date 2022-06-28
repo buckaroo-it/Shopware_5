@@ -88,8 +88,6 @@ class Shopware_Controllers_Backend_BuckarooKlarna extends Shopware_Controllers_A
 
             $klarna = $this->container->get('buckaroo_payment.payment_methods.klarna');
 
-            $sendByMail = $config->klarnaPayInvoiceSendByMail();
-
             // create new Request
             $request = new TransactionRequest;
             $request->setCurrency($transaction->getCurrency());
@@ -107,8 +105,6 @@ class Shopware_Controllers_Backend_BuckarooKlarna extends Shopware_Controllers_A
                 'module' => 'frontend',
             ]));
 
-            // $request->setServiceParameter('SendByMail', ($sendByMail ==  true ? 'true' : 'false'));
-            // $request->setServiceParameter('SendByEmail', ($sendByMail == false ? 'true' : 'false'));
             $request->setServiceParameter('ReservationNumber', $extraInfo['reservationnumber']);
 
             $response = $klarna->pay($request, compact( 'transaction', 'order', 'payment' ));

@@ -17,8 +17,10 @@ use Shopware\Bundle\AttributeBundle\Service\DataPersister;
 use Shopware\Bundle\AttributeBundle\Service\DataLoader;
 
 use Shopware\Components\Model\ModelManager;
+use ShopwarePlugin\PaymentMethods\Components\GenericPaymentMethod;
 
-abstract class AbstractPaymentMethod
+
+abstract class AbstractPaymentMethod extends GenericPaymentMethod
 {
     /**
      * Payment method key in plugin
@@ -488,8 +490,12 @@ abstract class AbstractPaymentMethod
      * @param  array $validatorClass
      * @return Validator
      */
-    public function validate($data, $validatorClass = null)
+    public function validateData($data, $validatorClass = null)
     {
+        if (empty($data))
+        {
+            return null;
+        }
         $validations = $this->getValidations();
 
         foreach($data as $entity => $fields)

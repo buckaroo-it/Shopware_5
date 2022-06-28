@@ -7,9 +7,6 @@
 	</label>
 
 	<input
-	{if $paymentName|strstr:$name ne false}
-		required
-	{/if}
 		type="text"
 		name="buckaroo-extra-fields[{$name}][billing][phone]"
 		id="buckaroo-extra-fields-{$name}-billing-phone"

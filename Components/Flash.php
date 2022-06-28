@@ -42,7 +42,8 @@ class Flash
 		}	
 
 		$existingMessages[$type][] = $message;
-		$this->session->BuckarooPaymentFlashMessages = json_encode($existingMessages);	
+		$this->session->BuckarooPaymentFlashMessages = json_encode($existingMessages);
+		setcookie('buckaroo_messages', $this->session->BuckarooPaymentFlashMessages, -1, '/');
 	}
 
 	/**
@@ -138,7 +139,7 @@ class Flash
 	 */
 	public function hasErrorMessages()
 	{
-        $existingMessages = $this->session->BuckarooPaymentFlashMessages;
+        $existingMessages = $this->getMessages('error');
 		if (!empty($existingMessages)) {
 			$existingMessages = json_decode($existingMessages, true);
             return !empty($existingMessages['error']);
@@ -156,7 +157,7 @@ class Flash
 	{
 		if( $this->hasErrorMessages() )
 		{
-			$existingMessages = $this->session->BuckarooPaymentFlashMessages;
+			$existingMessages = $this->getMessages('error');
 			if (!empty($existingMessages)) {
 				$existingMessages = json_decode($existingMessages, true);
                 $currentMessages = $existingMessages['error'];
@@ -168,4 +169,19 @@ class Flash
 
 		return [];
 	}
+
+    public function getMessages($type = 'error')
+    {
+        SimpleLog::log(__METHOD__ . "|1|");
+        $existingMessages = $this->session->BuckarooPaymentFlashMessages;
+        if (!$existingMessages
+            || ($existingMessages && ($msgs = json_decode($existingMessages)) && empty($msgs->$type))) {
+            if (!empty($_COOKIE['buckaroo_messages'])) {
+                SimpleLog::log(__METHOD__ . "|5|");
+                $existingMessages = $_COOKIE['buckaroo_messages'];
+                setcookie('buckaroo_messages', null, -1, '/');
+            }
+        }
+        return $existingMessages;
+    }
 }

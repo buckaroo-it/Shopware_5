@@ -10,13 +10,13 @@ class CreditCard extends AbstractPaymentMethod
     /**
      * Validates the extra fields
      */
-    public function validate($checkPayment, $validatorClass = null) {
+    public function validate($checkPayment) {
         
         $checkData = [];
         $extraFields = $checkPayment['buckaroo-extra-fields'][$this::KEY];
 
         $validatorClass = new Validator();
-        $validator = parent::validate($extraFields, $validatorClass);
+        $validator = parent::validateData($extraFields, $validatorClass);
 
         if( !is_null($validator) && $validator->fails() )
         {

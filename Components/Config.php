@@ -97,18 +97,6 @@ class Config
     }
 
     /**
-     * Whether to send the Klarna invoice via mail or email
-     * true = mail
-     * false = email
-     *
-     * @return boolean
-     */
-    public function klarnaPayInvoiceSendByMail()
-    {
-        return $this->get('buckaroo_klarna_pay_invoice_send', 'email') == 'mail';
-    }
-
-    /**
      * Whether to send status mails to the customer when the klarna payment has been paid
      *
      * @return boolean
@@ -173,7 +161,7 @@ class Config
      */
     public function billinkUsePay()
     {
-        return $this->get('buckaroo_billink_handling', 'authorize_capture') == 'pay';
+        return true;
     }
 
     /**

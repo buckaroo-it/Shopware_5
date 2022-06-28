@@ -217,6 +217,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
                     'amount' => $response->getAmount(),
                     'description' => 'buckaroo payconiq',
                     'currency' => $transaction->getCurrency(),
+                    'returnUrl' => urlencode($request->getReturnURL() . '&force_cancellation=1')
                 ]);
             }
 
@@ -429,7 +430,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payPushAction()
     {
-        SimpleLog::log(__METHOD__ . "|1|", $this->Request());
+        SimpleLog::log(__METHOD__ . "|1|", $_REQUEST);
 
         $this->restoreSession();
         $this->setActiveShop();
@@ -448,6 +449,14 @@ abstract class SimplePaymentController extends AbstractPaymentController
                 && ($data->getStatusCode() == ResponseStatus::PENDING_PROCESSING)
             ) {
                 $data->offsetSet('BRQ_STATUSCODE', ResponseStatus::CANCELLED_BY_USER);
+            }
+
+            if (
+                ($data->getServiceName() == 'Payconiq')
+                && ($data->getStatusCode() == ResponseStatus::PENDING_INPUT)
+            ) {
+                SimpleLog::log(__METHOD__ . "|22|");
+                return $this->sendResponse('OK');
             }
 
             // Workaround for refunds bug with push url
@@ -561,7 +570,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
      */
     public function payReturnAction()
     {
-        SimpleLog::log(__METHOD__ . "|1|", $this->Request());
+        SimpleLog::log(__METHOD__ . "|1|", $_REQUEST);
 
         if (!$sessionId = $this->Request()->getParam('session_id')) {
             throw new Exception('session_id is missing');
@@ -569,6 +578,13 @@ abstract class SimplePaymentController extends AbstractPaymentController
 
         // Session got lost sometimes since 5.6.6
         $this->restoreSession($sessionId);
+
+        if ($this->Request()->getParam('force_cancellation')) {
+            SimpleLog::log(__METHOD__ . "|11|");
+            return $this->redirectBackToCheckout()->addMessage(
+                $this->getErrorStatusUserMessage(ResponseStatus::CANCELLED_BY_USER)
+            );
+        }
 
         $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
         $transaction = null;

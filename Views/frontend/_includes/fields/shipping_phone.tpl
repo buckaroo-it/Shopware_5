@@ -7,7 +7,6 @@
 	</label>
 
 	<input
-		required
 		type="text"
 		name="buckaroo-extra-fields[{$name}][shipping][phone]"
 		id="buckaroo-extra-fields-{$name}-shipping-phone"

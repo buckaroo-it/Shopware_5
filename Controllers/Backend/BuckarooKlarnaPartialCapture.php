@@ -84,8 +84,6 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
 
             $klarna = $this->container->get('buckaroo_payment.payment_methods.klarna');
 
-            $sendByMail = $config->klarnaPayInvoiceSendByMail();
-
             $capture_count = $transaction->getCountCapture();
             $amount_capture = empty($capture_count) ? '1' : (string)($capture_count + 1);
 
@@ -108,8 +106,6 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
                 'module' => 'frontend',
             ]));
 
-            $request->setServiceParameter('SendByMail', ($sendByMail == true ? 'true' : 'false'));
-            $request->setServiceParameter('SendByEmail', ($sendByMail == false ? 'true' : 'false'));
             $request->setServiceParameter('ReservationNumber', $extraInfo['reservationnumber']);
 
             $response = $klarna->pay($request, compact('transaction', 'order', 'payment'));
@@ -264,7 +260,7 @@ class Shopware_Controllers_Backend_BuckarooKlarnaPartialCapture extends Shopware
 
         $y += 1;
 
-        if (in_array('SW8888', $captureArticleIds)) {
+        if (in_array('SW8888', $captureArticleIds) && $order->getInvoiceShipping() > 0) {
             $request->setServiceParameter('ArticleNumber', 'SW8888', $groupType = 'Article', $groupId = $y);
             $request->setServiceParameter('ArticleQuantity', 1, $groupType = 'Article', $groupId = $y);
 
