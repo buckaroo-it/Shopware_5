@@ -4,6 +4,16 @@
 
 # Buckaroo Shopware 5 Payments Plugin
 
+### Index
+- [About](#about)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Contribute](#contribute)
+- [Versioning](#versioning)
+- [Additional information](#additional-information)
+---
+
 ### About
 
 Shopware is a modular online shop system developed in Germany since 2004. It is available both as open source software and in commercial editions.
