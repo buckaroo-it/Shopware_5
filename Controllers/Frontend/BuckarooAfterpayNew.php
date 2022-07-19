@@ -291,11 +291,9 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
         }
 
         $billingStreet = $this::setAdditionalAddressFields($billing);
-        $salutation = ($this->getAdditionalUserGender() == '1') ? 'Mr' : 'Mrs';
         
         if(in_array($billingCountryIso, ["NL", "BE"])){
             // Netherlands and Belgium required fields:
-            $request->setServiceParameter('Salutation',         $salutation,                        'BillingCustomer');
             $request->setServiceParameter('BirthDate',          $birthDay,                          'BillingCustomer');
 
             if($billingCountryIso == "NL"){
@@ -356,11 +354,8 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
         $shippingCountryIso = empty($shippingCountry) ? '' : $shippingCountry->getIso();
         $shippingStreet = $this::setAdditionalAddressFields($shipping);
 
-        $salutation = ($this->getAdditionalUserGender() == '1') ? 'Mr' : 'Mrs';
-
         if(in_array($shippingCountryIso, ["NL", "BE"])){
             // Netherlands and Belgium required fields:
-            $request->setServiceParameter('Salutation',         $salutation,                        'ShippingCustomer');
             $request->setServiceParameter('BirthDate',          $birthDay,                          'ShippingCustomer');
 
             $typeDutchPhone = $this->getTypeDutchPhoneNumber($shipping['phone']);

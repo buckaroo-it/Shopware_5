@@ -213,6 +213,10 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
         if (!empty($this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_payment_vat_num'])) {
             $billing['buckaroo_payment_vat_num'] = $this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_payment_vat_num'];
         }
+
+        if (!empty($this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_user_gender'])) {
+            $user['buckaroo_user_gender'] = $this->container->get('session')->sOrderVariables['sUserData']['additional']['extra']['billink']['buckaroo_user_gender'];
+        }
         
         $billingCountry     = $this->container->get('models')->getRepository('Shopware\Models\Country\Country')->find($billing['countryId']);
         $billingCountryIso  = empty($billingCountry) ? '' : $billingCountry->getIso();
@@ -236,7 +240,20 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
         }
 
         $billingStreet = $this::setAdditionalAddressFields($billing);
-        $salutation    = ($this->getAdditionalUserGender() == '1') ? 'Male' : 'Female';
+        switch ($user['buckaroo_user_gender']) {
+            case 0:
+                $salutation = 'Unknown';
+                break;
+            case 1:
+                $salutation = 'Male';
+                break;
+            case 2:
+                $salutation = 'Female';
+                break;
+            case 9:
+                $salutation = 'Unknown';
+                break;
+        }
 
         $request->setServiceParameter('Salutation', $salutation, 'BillingCustomer');
 
