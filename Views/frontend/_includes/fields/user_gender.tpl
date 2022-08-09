@@ -10,10 +10,10 @@
                 id="buckaroo-extra-fields-{$name}-user-gender"
                 aria-required="true"
                 class="buckaroo_auto_submit select--gender is--required{if $error_flags.buckaroo_user_gender} has--error{/if}">
-            <option value="1" {if $buckarooExtraFields.user.salutation eq 'mr'} selected {/if}>{s name="PluginsUserGenderMale"}He/Him{/s}</option>
-            <option value="2" {if $buckarooExtraFields.user.salutation eq 'ms'} selected {/if}>{s name="PluginsUserGenderFemale"}She/Her{/s}</option>
-            <option value="0">{s name="PluginsUserGenderThey"}They/Them{/s}</option>
-            <option value="9">{s name="PluginsUserGenderUnknown"}I prefer not to say{/s}</option>
+            <option value="male" {if $buckarooExtraFields.user.salutation eq 'mr'} selected {/if}>{s name="PluginsUserGenderMale"}He/Him{/s}</option>
+            <option value="female" {if $buckarooExtraFields.user.salutation eq 'ms'} selected {/if}>{s name="PluginsUserGenderFemale"}She/Her{/s}</option>
+            <option value="unknown">{s name="PluginsUserGenderThey"}They/Them{/s}</option>
+            <option value="unknown">{s name="PluginsUserGenderUnknown"}I prefer not to say{/s}</option>
         </select>
     </div>
 </div>
