@@ -121,6 +121,7 @@ class ExtraFieldsLoader
     protected function loadUser($keys = [], &$lists)
     {
         $keys['id'] = 'id';
+        $keys['salutation'] = 'salutation';
         $data = [];
 
 

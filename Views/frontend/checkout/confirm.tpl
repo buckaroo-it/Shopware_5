@@ -135,6 +135,7 @@
                     {include file='frontend/_includes/fields/user_id.tpl'       name=$name}
                     {include file='frontend/_includes/fields/user_birthday.tpl' name=$name}
                 {/if}
+                {include file='frontend/_includes/fields/user_gender.tpl'   name=$name}
 
                 {include file='frontend/_includes/fields/billing_id.tpl'    name=$name}
                 {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
