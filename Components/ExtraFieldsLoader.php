@@ -85,7 +85,7 @@ class ExtraFieldsLoader
                 throw new Exception(__CLASS__ . " has no method '" . $method . "'");
             }
 
-            $this->collectData[$entity] = $this->{$method}($keys, $this->collectData['lists']);
+            $this->collectData[$entity] = $this->{$method}($this->collectData['lists'], $keys);
         }
 
         return $this->collectData;
@@ -118,7 +118,7 @@ class ExtraFieldsLoader
      * @param  array  $keys
      * @return array
      */
-    protected function loadUser($keys = [], &$lists)
+    protected function loadUser(&$lists, $keys = [])
     {
         $keys['id'] = 'id';
         $data = [];
@@ -203,7 +203,7 @@ class ExtraFieldsLoader
      * @param  array  $keys
      * @return array
      */
-    protected function loadBilling($keys = [], &$lists)
+    protected function loadBilling(&$lists, $keys = [])
     {
         $keys['id'] = 'id';
         $data = [];
@@ -253,7 +253,7 @@ class ExtraFieldsLoader
      * @param  array  $keys
      * @return array
      */
-    protected function loadShipping($keys = [], &$lists)
+    protected function loadShipping(&$lists, $keys = [])
     {
         $keys['id'] = 'id';
         $data = [];
