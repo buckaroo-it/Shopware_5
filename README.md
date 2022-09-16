@@ -31,10 +31,10 @@ To use the Buckaroo plugin, please be aware of the following minimum requirement
 ### Installation
 
 1.  Navigate to our  [Shopware 5 GitHub repository](https://github.com/buckaroo-it/Shopware_5).
-2.  Under  **Releases**, download the latest release.
+2.  Under → [Releases](https://github.com/buckaroo-it/Shopware_5/releases), download the latest release.
 3.  Sign in to your Shopware 5 backend.
-4.  Go to  **Configuration**  →  **Plugin Manager**  in the top main menu.
-5.  Then go to  **installed**  in the left menu.
+4.  Go to → **Configuration**  →  **Plugin Manager**  in the top main menu.
+5.  Then go to → **installed**  in the left menu.
 6.  Click on →  **Upload plugin**  at the top of the screen, and then select the file you downloaded in step 2.
 7.  The Buckaroo plugin is also now installed and active.
 
@@ -63,3 +63,6 @@ If you want to contribute as well, then please follow our [Contribution Guidelin
 - **Knowledge base & FAQ:** Available in [Dutch](https://support.buckaroo.nl/categorieen/plugins/shopware-5) or [English](https://support.buckaroo.eu/categories/plugins/shopware-5).
 - **Support:** https://support.buckaroo.eu/contact
 - **Contact:** [support@buckaroo.nl](mailto:support@buckaroo.nl) or [+31 (0)30 711 50 50](tel:+310307115050)
+
+<b>Please note:</b><br>
+This file has been prepared with the greatest possible care and is subject to language and/or spelling errors.
