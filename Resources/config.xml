@@ -611,13 +611,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpay_env</name>
-            <label lang="de">Afterpay (old)</label>
-            <label lang="en">Afterpay (old)</label>
-            <label lang="nl">Afterpay (old)</label>
+            <label lang="de">Riverty | AfterPay (old)</label>
+            <label lang="en">Riverty | AfterPay (old)</label>
+            <label lang="nl">Riverty | AfterPay (old)</label>
             <value>test</value>
-            <description lang="de">Afterpay (old)</description>
-            <description lang="en">Afterpay (old)</description>
-            <description lang="nl">Afterpay (old)</description>
+            <description lang="de">Riverty | AfterPay (old)</description>
+            <description lang="en">Riverty | AfterPay (old)</description>
+            <description lang="nl">Riverty | AfterPay (old)</description>
             <store>
                 <option>
                     <value>live</value>
@@ -636,13 +636,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpaynew_env</name>
-            <label lang="de">Afterpay (new)</label>
-            <label lang="en">Afterpay (new)</label>
-            <label lang="nl">Afterpay (new)</label>
+            <label lang="de">Riverty | AfterPay (new)</label>
+            <label lang="en">Riverty | AfterPay (new)</label>
+            <label lang="nl">Riverty | AfterPay (new)</label>
             <value>test</value>
-            <description lang="de">Afterpay (new)</description>
-            <description lang="en">Afterpay (new)</description>
-            <description lang="nl">Afterpay (new)</description>
+            <description lang="de">Riverty | AfterPay (new)</description>
+            <description lang="en">Riverty | AfterPay (new)</description>
+            <description lang="nl">Riverty | AfterPay (new)</description>
             <store>
                 <option>
                     <value>live</value>
@@ -711,13 +711,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpay_handling</name>
-            <label lang="de">Afterpay methode (old)</label>
-            <label lang="en">Afterpay method (old)</label>
-            <label lang="nl">Afterpay methode (old)</label>
+            <label lang="de">Riverty | AfterPay methode (old)</label>
+            <label lang="en">Riverty | AfterPay method (old)</label>
+            <label lang="nl">Riverty | AfterPay methode (old)</label>
             <value>pay</value>
-            <description lang="de">Afterpay methode (old)</description>
-            <description lang="en">Afterpay method (old)</description>
-            <description lang="nl">Afterpay method (old)</description>
+            <description lang="de">Riverty | AfterPay methode (old)</description>
+            <description lang="en">Riverty | AfterPay method (old)</description>
+            <description lang="nl">Riverty | AfterPay method (old)</description>
             <store>
                 <option>
                     <value>pay</value>
@@ -761,13 +761,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpay_new_handling</name>
-            <label lang="de">Afterpay methode (new)</label>
-            <label lang="en">Afterpay method (new)</label>
-            <label lang="nl">Afterpay methode (new)</label>
+            <label lang="de">Riverty | AfterPay methode (new)</label>
+            <label lang="en">Riverty | AfterPay method (new)</label>
+            <label lang="nl">Riverty | AfterPay methode (new)</label>
             <value>pay</value>
-            <description lang="de">Afterpay methode (new)</description>
-            <description lang="en">Afterpay method (new)</description>
-            <description lang="nl">Afterpay method (new)</description>
+            <description lang="de">Riverty | AfterPay methode (new)</description>
+            <description lang="en">Riverty | AfterPay method (new)</description>
+            <description lang="nl">Riverty | AfterPay method (new)</description>
             <store>
                 <option>
                     <value>pay</value>
@@ -886,13 +886,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpay_send_capture_status_mail</name>
-            <label lang="de">Senden Afterpay capture Status Mail</label>
-            <label lang="en">Send Afterpay capture status mail</label>
-            <label lang="nl">Verstuur Afterpay capture mail</label>
+            <label lang="de">Senden Riverty | AfterPay capture Status Mail</label>
+            <label lang="en">Send Riverty | AfterPay capture status mail</label>
+            <label lang="nl">Verstuur Riverty | AfterPay capture mail</label>
             <value>yes</value>
-            <description lang="de">Senden Afterpay capture Status Mail</description>
-            <description lang="en">Send Afterpay capture status mail</description>
-            <description lang="nl">Verstuur Afterpay capture mail</description>
+            <description lang="de">Senden Riverty | AfterPay capture Status Mail</description>
+            <description lang="en">Send Riverty | AfterPay capture status mail</description>
+            <description lang="nl">Verstuur Riverty | AfterPay capture mail</description>
             <store>
                 <option>
                     <value>yes</value>
@@ -911,13 +911,13 @@
 
         <element type="select" scope="shop">
             <name>buckaroo_afterpay_send_cancel_status_mail</name>
-            <label lang="de">Senden Sie die Afterpay Autorisierungsstatus E-Mail</label>
-            <label lang="en">Send Afterpay cancel authorization status mail</label>
-            <label lang="nl">Verstuur Afterpay annuleer authorisatie status mail</label>
+            <label lang="de">Senden Sie die Riverty | AfterPay Autorisierungsstatus E-Mail</label>
+            <label lang="en">Send Riverty | AfterPay cancel authorization status mail</label>
+            <label lang="nl">Verstuur Riverty | AfterPay annuleer authorisatie status mail</label>
             <value>yes</value>
-            <description lang="de">Senden Sie die Afterpay Autorisierungsstatus E-Mail</description>
-            <description lang="en">Send Afterpay cancel authorization status mail</description>
-            <description lang="nl">Verstuur Afterpay annuleer authorisatie status mail</description>
+            <description lang="de">Senden Sie die Riverty | AfterPay Autorisierungsstatus E-Mail</description>
+            <description lang="en">Send Riverty | AfterPay cancel authorization status mail</description>
+            <description lang="nl">Verstuur Riverty | AfterPay annuleer authorisatie status mail</description>
             <store>
                 <option>
                     <value>yes</value>
@@ -1086,57 +1086,57 @@
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpaydigiaccept_min_order_amount</name>
-            <label lang="de">AfterPayDigiAccept min order amount</label>
-            <label lang="en">AfterPayDigiAccept min order amount</label>
-            <label lang="nl">AfterPayDigiAccept min order amount</label>
+            <label lang="de">Riverty | AfterPay DigiAccept min order amount</label>
+            <label lang="en">Riverty | AfterPay DigiAccept min order amount</label>
+            <label lang="nl">Riverty | AfterPay DigiAccept min order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpaydigiaccept_max_order_amount</name>
-            <label lang="de">AfterPayDigiAccept max order amount</label>
-            <label lang="en">AfterPayDigiAccept max order amount</label>
-            <label lang="nl">AfterPayDigiAccept max order amount</label>
+            <label lang="de">Riverty | AfterPay DigiAccept max order amount</label>
+            <label lang="en">Riverty | AfterPay DigiAccept max order amount</label>
+            <label lang="nl">Riverty | AfterPay DigiAccept max order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpayb2bdigiaccept_min_order_amount</name>
-            <label lang="de">Afterpayb2bdigiaccept min order amount</label>
-            <label lang="en">Afterpayb2bdigiaccept min order amount</label>
-            <label lang="nl">Afterpayb2bdigiaccept min order amount</label>
+            <label lang="de">Riverty | AfterPay b2bdigiaccept min order amount</label>
+            <label lang="en">Riverty | AfterPay b2bdigiaccept min order amount</label>
+            <label lang="nl">Riverty | AfterPay b2bdigiaccept min order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpayb2bdigiaccept_max_order_amount</name>
-            <label lang="de">Afterpayb2bdigiaccept max order amount</label>
-            <label lang="en">Afterpayb2bdigiaccept max order amount</label>
-            <label lang="nl">Afterpayb2bdigiaccept max order amount</label>
+            <label lang="de">Riverty | AfterPay b2bdigiaccept max order amount</label>
+            <label lang="en">Riverty | AfterPay b2bdigiaccept max order amount</label>
+            <label lang="nl">Riverty | AfterPay b2bdigiaccept max order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpayacceptgiro_min_order_amount</name>
-            <label lang="de">afterpayacceptgiro min order amount</label>
-            <label lang="en">afterpayacceptgiro min order amount</label>
-            <label lang="nl">afterpayacceptgiro min order amount</label>
+            <label lang="de">Riverty | AfterPay acceptgiro min order amount</label>
+            <label lang="en">Riverty | AfterPay acceptgiro min order amount</label>
+            <label lang="nl">Riverty | AfterPay acceptgiro min order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpayacceptgiro_max_order_amount</name>
-            <label lang="de">afterpayacceptgiro max order amount</label>
-            <label lang="en">afterpayacceptgiro max order amount</label>
-            <label lang="nl">afterpayacceptgiro max order amount</label>
+            <label lang="de">Riverty | AfterPay acceptgiro max order amount</label>
+            <label lang="en">Riverty | AfterPay acceptgiro max order amount</label>
+            <label lang="nl">Riverty | AfterPay acceptgiro max order amount</label>
         </element>
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpaynew_min_order_amount</name>
-            <label lang="de">Afterpay min order amount</label>
-            <label lang="en">Afterpay min order amount</label>
-            <label lang="nl">Afterpay min order amount</label>
+            <label lang="de">Riverty | AfterPay min order amount</label>
+            <label lang="en">Riverty | AfterPay min order amount</label>
+            <label lang="nl">Riverty | AfterPay min order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">
             <name>buckaroo_afterpaynew_max_order_amount</name>
-            <label lang="de">Afterpay max order amount</label>
-            <label lang="en">Afterpay max order amount</label>
-            <label lang="nl">Afterpay max order amount</label>
+            <label lang="de">Riverty | AfterPay max order amount</label>
+            <label lang="en">Riverty | AfterPay max order amount</label>
+            <label lang="nl">Riverty | AfterPay max order amount</label>
         </element>
 
         <element required="false" type="number" scope="shop">

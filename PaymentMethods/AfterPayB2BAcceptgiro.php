@@ -29,7 +29,7 @@ class AfterPayB2BAcceptgiro extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'AfterPay Eenmalige Machtiging B2B';
+    const DESCRIPTION = 'Riverty | AfterPay Eenmalige Machtiging B2B';
 
     /**
      * Position

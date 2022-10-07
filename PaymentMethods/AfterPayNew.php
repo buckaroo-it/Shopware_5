@@ -29,7 +29,7 @@ class AfterPayNew extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'AfterPay';
+    const DESCRIPTION = 'Riverty | AfterPay';
 
     /**
      * Position

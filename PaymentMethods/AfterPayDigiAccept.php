@@ -29,7 +29,7 @@ class AfterPayDigiAccept extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'AfterPay Digitale Factuur';
+    const DESCRIPTION = 'Riverty | AfterPay Digitale Factuur';
 
     /**
      * Position
