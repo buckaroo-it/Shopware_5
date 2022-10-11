@@ -29,7 +29,7 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'AfterPay Digitale Factuur B2B';
+    const DESCRIPTION = 'Riverty | AfterPay Digitale Factuur B2B';
 
     /**
      * Position

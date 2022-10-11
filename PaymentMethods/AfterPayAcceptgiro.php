@@ -29,7 +29,7 @@ class AfterPayAcceptgiro extends AbstractPaymentMethod
     /**
      * User friendly payment name
      */
-    const DESCRIPTION = 'AfterPay Eenmalige Machtiging';
+    const DESCRIPTION = 'Riverty | AfterPay Eenmalige Machtiging';
 
     /**
      * Position
