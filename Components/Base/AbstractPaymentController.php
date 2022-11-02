@@ -386,7 +386,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
             }
 
             if (empty($salutation)) {
-                return Gender::Unknown;
+                return Gender::UNKNOWN;
             }
 
         return Gender::MALE;
