@@ -227,10 +227,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
             {
                 SimpleLog::log(__METHOD__ . "|4|");
 
-                $this->removeArticlesStock();
-                $transaction->setNeedsRestock(1);
-    
-                $transactionManager->save($transaction);
                 return $this->redirect($response->getRedirectUrl());
             }
 
@@ -348,10 +344,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // redirect to Buckaroo
             if( $response->hasRedirect() )
             {
-                $this->removeArticlesStock();
-                $transaction->setNeedsRestock(1);
-    
-                $transactionManager->save($transaction);
                 return $this->redirect($response->getRedirectUrl());
             }
 
