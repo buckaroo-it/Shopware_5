@@ -694,17 +694,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
         return $this->sendResponse('Refund Push - OK');
     }
 
-    public function removeArticlesStock()
-    {
-        $articalIds = $this->getBasketArticleIds();
- 
-        foreach ($articalIds as $article) { 
-            $query = sprintf("UPDATE s_articles_details set instock = instock - %d WHERE id = %d", (int)$article['quantity'], (int)$article['article_details_id'] );
-            Shopware()->Db()->executeQuery($query);
-        }
-
-    }
- 
     public function addArticlesStock()
     {
         $articalIds = $this->getBasketArticleIds();
