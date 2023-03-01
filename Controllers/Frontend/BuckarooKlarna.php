@@ -234,15 +234,12 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         $billingCountry = $this->container->get('models')->getRepository('Shopware\Models\Country\Country')->find($billing['countryId']);
         $billingCountryIso = empty($billingCountry) ? '' : $billingCountry->getIso();
         $billingCountryName = empty($billingCountry) ? '' : ucfirst(strtolower($billingCountry->getIsoName()));
-        $billingGender = $this->convertSalutationToGender($billing['salutation']);
         $birthDay = !empty($user['birthday']) ? DateTime::createFromFormat('Y-m-d', $user['birthday'])->format('dmY') : '';
 
         $request->setServiceParameter('OperatingCountry', $billingCountryIso); // Required
         $request->setServiceParameter('Pno', $birthDay); // birthdate DDMMYYYY // Required
         $request->setServiceParameter('ShippingSameAsBilling', $this->isShippingSameAsBilling() ? 'true' : 'false');
         // $request->setServiceParameter('Encoding', $billingCountryName);
-        $request->setServiceParameter('Gender', $billingGender);
-
     }
 
     /*

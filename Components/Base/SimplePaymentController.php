@@ -227,10 +227,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
             {
                 SimpleLog::log(__METHOD__ . "|4|");
 
-                $this->removeArticlesStock();
-                $transaction->setNeedsRestock(1);
-    
-                $transactionManager->save($transaction);
                 return $this->redirect($response->getRedirectUrl());
             }
 
@@ -348,10 +344,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
             // redirect to Buckaroo
             if( $response->hasRedirect() )
             {
-                $this->removeArticlesStock();
-                $transaction->setNeedsRestock(1);
-    
-                $transactionManager->save($transaction);
                 return $this->redirect($response->getRedirectUrl());
             }
 
@@ -702,17 +694,6 @@ abstract class SimplePaymentController extends AbstractPaymentController
         return $this->sendResponse('Refund Push - OK');
     }
 
-    public function removeArticlesStock()
-    {
-        $articalIds = $this->getBasketArticleIds();
- 
-        foreach ($articalIds as $article) { 
-            $query = sprintf("UPDATE s_articles_details set instock = instock - %d WHERE id = %d", (int)$article['quantity'], (int)$article['article_details_id'] );
-            Shopware()->Db()->executeQuery($query);
-        }
-
-    }
- 
     public function addArticlesStock()
     {
         $articalIds = $this->getBasketArticleIds();

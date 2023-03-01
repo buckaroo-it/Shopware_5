@@ -85,7 +85,6 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
          * Title                       Type        Required    Description
          * =====================================================================================================================================
          * BillingTitle                string                  Title of the billing customer.
-         * BillingGender               decimal                 Gender of the billing customer. Male (1) Female (2) Not required in case of B2B.
          * BillingInitials             string      Required    Initials of the billing customer.
          * BillingLastNamePrefix       string                  Last name prefix of the billing customer.
          * BillingLastName             string      Required    Last name of the billing customer.
@@ -242,7 +241,6 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
         $billingStreet = $this::setAdditionalAddressFields($billing);
 
         $request->setServiceParameter('BillingTitle',             '');
-        $request->setServiceParameter('BillingGender',            $this->getAdditionalUserGender());
         $request->setServiceParameter('BillingInitials',          $billing['firstname']);
         $request->setServiceParameter('BillingLastNamePrefix',    '');
         $request->setServiceParameter('BillingLastName',          $billing['lastname']);
@@ -273,7 +271,6 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
         $shippingStreet = $this::setAdditionalAddressFields($shipping);
 
         $request->setServiceParameter('ShippingTitle',             '');
-        $request->setServiceParameter('ShippingGender',            $this->getAdditionalUserGender());
         $request->setServiceParameter('ShippingInitials',          $shipping['firstname']);
         $request->setServiceParameter('ShippingLastNamePrefix',    '');
         $request->setServiceParameter('ShippingLastName',          $shipping['lastname']);

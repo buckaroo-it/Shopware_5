@@ -9,4 +9,6 @@ class Gender
 
 	const MALE = 1;
 	const FEMALE = 2;
+	const THEY = 0;
+	const UNKNOWN = 9;
 }

@@ -425,6 +425,9 @@ class BuckarooPayment extends Plugin
             (object)[ 'table' => 's_user_attributes', 'column' => 'buckaroo_user_identification',   'type' => 'string',
             'data' => [ 'displayInBackend' => true, 'label' => 'IDENT', 'supportText' => 'Customer Identification', 'helpText' => 'Needed to do Afterpay payments' ]
             ],
+            (object)[ 'table' => 's_user_attributes', 'column' => 'buckaroo_user_gender',   'type' => 'string',
+            'data' => [ 'displayInBackend' => true, 'label' => 'Gender', 'supportText' => 'Customer Gender', 'helpText' => 'Needed for some payment methods' ]
+            ],
             (object)[ 'table' => 's_core_countries_states_attributes', 'column' => 'buckaroo_payment_paypal_code', 'type' => 'string',
                 'data' => [ 'displayInBackend' => true, 'label' => 'PayPal Code', 'supportText' => 'State Code for PayPal', 'helpText' => 'Needed when ordering with PayPal' ]
             ]

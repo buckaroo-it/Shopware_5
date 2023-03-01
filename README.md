@@ -1,48 +1,69 @@
-# Shopware-plugin
-Repository containing the Shopware plugin by Buckaroo
+<p align="center">
+  <img src="https://www.buckaroo.nl/media/3475/shopware5_icon.png" width="200px" position="center">
+</p>
 
-iDEAL, Bancontact, PayPal, credit cards and other payment methods in your Shopware webshop? Download our free plug-in. Select various payment methods and create a seamless check-out.
-Our Shopware plug-in includes a wide variety of payment methods:
+# Buckaroo Shopware 5 Payments Plugin
+[![Latest release](https://badgen.net/github/release/buckaroo-it/Shopware_5)](https://github.com/buckaroo-it/Shopware_5/releases)
 
+### Index
+- [About](#about)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Contribute](#contribute)
+- [Versioning](#versioning)
+- [Additional information](#additional-information)
+---
 
-Credit cards - Mastercard, Visa, American Express 
-Gift cards -Various
-Mobile payment (QR) - Payconiq
-Post pay - Klarna, AfterPay, AchterafBetalen
-Global online payment - PayPal 
+### About
 
+Shopware is a modular online shop system developed in Germany since 2004. It is available both as open source software and in commercial editions.
 
-NL - iDEAL
-BE - Bancontact, KBC/CBC
-DE - Sofort, Giropay
-FR - Carte Bancaire, Carte Bleue
-AT - EPS
-PL - Przelewy24 (P24)
+The Buckaroo Payments Plugin ([Dutch](https://support.buckaroo.nl/categorieen/plugins/shopware-5) or [English](https://support.buckaroo.eu/categories/plugins/shopware-5)) for Shopware 5 enables a ready-to-sell payment gateway. You can choose from popular online payment methods in The Netherlands, Belgium, France, Germany and globally.
+Start accepting payments within a few minutes.
 
+### Requirements
 
-Why download our payment plug-in?
-It's free. It's easy to implement. And we always got your back with unlimited free technical support. 
+To use the Buckaroo plugin, please be aware of the following minimum requirements:
+- A Buckaroo account ([Dutch](https://www.buckaroo.nl/start) or [English](https://www.buckaroo.eu/solutions/request-form))
+- Shopware 5.2.0 – 5.2.27, 5.3.0 – 5.3.7, 5.4.0 – 5.4.6, 5.5.0 – 5.5.10, 5.6.0 - 5.6.10, 5.7.0 – 5.7.7
+- PHP 7.4 or higher
 
+### Installation
 
-Our Shopware plug-in enables a ready-to-sell payment gateway. You can choose from popular online payment methods in The Netherlands, Belgium, France, Germany and globally. Including mobile payment methods, such as Payconiq and Bancontact. Including post pay payment solutions, such as Klarna and Afterpay. And including giftcards. Plus, an easy way to refund (if necessary). 
+1.  Navigate to our  [Shopware 5 GitHub repository](https://github.com/buckaroo-it/Shopware_5).
+2.  Under → [Releases](https://github.com/buckaroo-it/Shopware_5/releases), download the latest release.
+3.  Sign in to your Shopware 5 backend.
+4.  Go to → **Configuration**  →  **Plugin Manager**  in the top main menu.
+5.  Then go to → **installed**  in the left menu.
+6.  Click on →  **Upload plugin**  at the top of the screen, and then select the file you downloaded in step 2.
+7.  The Buckaroo plugin is also now installed and active.
 
+**PLEASE NOTE:** [The Buckaroo plugin is available directly from the Shopware store.](https://store.shopware.com/en/bucka93323165700f/buckaroo-payments-shopware-6.html)
 
-How to get started?
-1. Give us a call! +31 (0)30 7115010 (or send an email)
-2. Ask for a Buckaroo (test)account
-2. Download the Buckaroo Shopware plug-in
-3. Install and configure the plugin by following the step-by-step instructions. 
-     -> See the tab 'installation manual'
+### Configuration
 
- 
+For the configuration of the plugin, please refer to our [Dutch](https://support.buckaroo.nl/categorieen/plugins/shopware-5) or [English](https://support.buckaroo.eu/categories/plugins/shopware-5) support website. You'll find all the needed information there.
+You can also contact our [technical support department](mailto:support@buckaroo.nl) if you still have some unanswered questions.
 
-The Buckaroo Technical Support team is available for all your questions regarding installation, configuration and use of the plugin. Or Buckaroo payments in general. Don't hesitate to contact us! 
+### Contribute
 
- 
+We really appreciate it when developers contribute to improve the Buckaroo plugins.
+If you want to contribute as well, then please follow our [Contribution Guidelines](CONTRIBUTING.md).
 
-support@buckaroo.nl
-+31  030 7115050
-(We are best available during work days from 08.30 till 17.00)
+### Versioning 
+<p align="left">
+  <img src="https://www.buckaroo.nl/media/3484/shopware5_versioning.png" width="500px" position="center">
+</p>
 
+- **MAJOR:** Breaking changes that require additional testing/caution.
+- **MINOR:** Changes that should not have a big impact.
+- **PATCHES:** Bug and hotfixes only.
 
-https://www.buckaroo-payments.com/integration/plugins/shopware/  
+### Additional information
+- **Knowledge base & FAQ:** Available in [Dutch](https://support.buckaroo.nl/categorieen/plugins/shopware-5) or [English](https://support.buckaroo.eu/categories/plugins/shopware-5).
+- **Support:** https://support.buckaroo.eu/contact
+- **Contact:** [support@buckaroo.nl](mailto:support@buckaroo.nl) or [+31 (0)30 711 50 50](tel:+310307115050)
+
+<b>Please note:</b><br>
+This file has been prepared with the greatest possible care and is subject to language and/or spelling errors.

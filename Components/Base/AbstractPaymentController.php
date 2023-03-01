@@ -357,7 +357,7 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
     protected function getAdditionalUserGender()
     {
         $user = $this->getAdditionalUser();
-        $gender = Gender::MAN;
+        $gender = Gender::UNKNOWN;
 
         if( $user && !empty($user['salutation']) ) {
             $salutation = $user['salutation'];
@@ -385,7 +385,11 @@ abstract class AbstractPaymentController extends Shopware_Controllers_Frontend_P
                 return Gender::WOMAN;
             }
 
-        return Gender::MAN;
+            if (empty($salutation)) {
+                return Gender::UNKNOWN;
+            }
+
+        return Gender::MALE;
     }
 
     /**

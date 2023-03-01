@@ -24,7 +24,8 @@ class SessionCase
             'buckaroo_payment_iban',
             'buckaroo_payment_coc',
             'buckaroo_payment_vat_num',
-            'buckaroo_user_identification'
+            'buckaroo_user_identification',
+            'buckaroo_user_gender'
         ];
 
         foreach( $toCamelCase as $key )
