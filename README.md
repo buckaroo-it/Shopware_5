@@ -3,6 +3,7 @@
 </p>
 
 # Buckaroo Shopware 5 Payments Plugin
+[![Latest release](https://badgen.net/github/release/buckaroo-it/Shopware_5)](https://github.com/buckaroo-it/Shopware_5/releases)
 
 ### Index
 - [About](#about)
