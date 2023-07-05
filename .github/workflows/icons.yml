@@ -22,14 +22,14 @@ jobs:
       - name: Copy payment method icons
         run: |
             cd Media
-            cp -R "Payment methods/SVG/." ${{ github.workspace }}/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/payments/
-            cd ${{ github.workspace }}/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/payments/
+            cp -R "Payment methods/SVG/." ${{ github.workspace }}/Views/frontend/_resources/images/payments/
+            cd ${{ github.workspace }}/Views/frontend/_resources/images/payments/
             rm alipay.svg buckaroovoucher.svg creditclick.svg tinka.svg vouchers.svg wechatpay.svg payperemail.svg belfius.svg in3.svg trustly.svg
       - name: Copy creditcards icons
         run: |
             cd Media
             mv "Creditcard issuers/SVG/cartebleue.svg" "Creditcard issuers/SVG/cartebleuevisa.svg"
-            cp -R "Creditcard issuers/SVG/." ${{ github.workspace }}/custom/plugins/BuckarooPayment/Views/frontend/_resources/images/creditcards/
+            cp -R "Creditcard issuers/SVG/." ${{ github.workspace }}/Views/frontend/_resources/images/creditcards/
       - name: Cleanup
         run: |
             rm -rd Media
