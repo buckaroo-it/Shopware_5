@@ -55,7 +55,7 @@ class AfterPayNew extends AbstractPaymentMethod
      */
     public function getImageName()
     {
-        return 'buckaroo_afterpay_new.jpg';
+        return 'payments/afterpay.svg';
     }
 
     /**

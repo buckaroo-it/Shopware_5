@@ -55,7 +55,7 @@ class AfterPayAcceptgiro extends AbstractPaymentMethod
      */
     public function getImageName()
     {
-        return 'buckaroo_afterpay.jpg';
+        return 'payments/afterpay.svg';
     }
 
     /**

@@ -55,7 +55,7 @@ class AfterPayB2BDigiAccept extends AbstractPaymentMethod
      */
     public function getImageName()
     {
-        return 'buckaroo_afterpay.jpg';
+        return 'payments/afterpay.svg';
     }
 
     /**

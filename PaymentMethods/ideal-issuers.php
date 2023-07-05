@@ -16,4 +16,5 @@ return [
 	'KNABNL2H' => 'Knab',
 	'BUNQNL2A' => 'Bunq',
 	'REVOLT21' => 'Revolut',
+	'BITSNL2A' => 'YourSafe',
 ];

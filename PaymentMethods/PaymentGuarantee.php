@@ -125,4 +125,14 @@ class PaymentGuarantee extends AbstractPaymentMethod
             ]
         ];
     }
+
+    /**
+     * Get the name of the image in the Views/frontend/_resources/images folder
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return 'buckaroo_paymentguarantee.jpg';
+    }
 }

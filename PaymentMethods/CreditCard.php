@@ -206,5 +206,15 @@ class CreditCard extends AbstractPaymentMethod
         return $this->session->buckaroo_card_expiration_year;
     }
 
+    /**
+     * Get the name of the image in the Views/frontend/_resources/images folder
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return 'creditcards/'.$this->getKey() . '.svg';
+    }
+
 
 }
