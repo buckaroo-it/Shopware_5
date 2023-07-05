@@ -28,7 +28,6 @@ jobs:
       - name: Copy creditcards icons
         run: |
             cd Media
-            mv "Creditcard issuers/SVG/cartebleue.svg" "Creditcard issuers/SVG/cartebleuevisa.svg"
             cp -R "Creditcard issuers/SVG/." ${{ github.workspace }}/Views/frontend/_resources/images/creditcards/
       - name: Cleanup
         run: |
