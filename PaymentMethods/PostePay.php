@@ -39,4 +39,14 @@ class PostePay extends AbstractPaymentMethod
         $checkData = [];
         return $checkData;
     }
+
+    /**
+     * Get the name of the image in the Views/frontend/_resources/images folder
+     *
+     * @return string
+     */
+    public function getImageName()
+    {
+        return 'creditcards/postepay.svg';
+    }
 }

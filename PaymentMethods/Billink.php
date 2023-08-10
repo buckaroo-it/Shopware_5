@@ -48,15 +48,6 @@ class Billink extends AbstractPaymentMethod
         return $parts;
     }
 
-    /**
-     * Get the name of the image in the Views/frontend/_resources/images folder
-     *
-     * @return string
-     */
-    public function getImageName()
-    {
-        return 'buckaroo_billink.png';
-    }
 
     /**
      * Get the countries the paymentmethod is valid for

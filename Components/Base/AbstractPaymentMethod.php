@@ -159,7 +159,7 @@ abstract class AbstractPaymentMethod extends GenericPaymentMethod
      */
     public function getImageName()
     {
-        return $this->getName() . '.jpg';
+        return 'payments/'.$this->getKey() . '.svg';
     }
 
     /**
