@@ -498,15 +498,6 @@ class Shopware_Controllers_Frontend_BuckarooKlarna extends AbstractPaymentContro
         SimpleLog::log('Klarna-payPush', $data);
     }
 
-    public function refundPushAction($data = false)
-    {
-        if(!$data){
-            return $this->sendResponse('Refund Push - no data');
-        }
-        
-        $data = "POST:\n" . print_r($_POST, true) . "\n";
-        SimpleLog::log('Klarna-refundPush', $data);
-    }
 
     public function cancelReservationPushAction()
     {

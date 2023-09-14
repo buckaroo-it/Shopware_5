@@ -133,7 +133,7 @@ class Shopware_Controllers_Backend_BuckarooBillinkRefund extends Shopware_Contro
                     $this->setRefundedItems($transaction, $items);
                 }
 
-                $isFullyRefunded = $this->isFullyRefunded($order, $transaction);
+                $isFullyRefunded = $transaction->isFullyRefunded($order);
 
                 $orderStatus = $isFullyRefunded ? PaymentStatus::REFUNDED : PaymentStatus::PARTIALLY_PAID;
 
@@ -239,6 +239,11 @@ class Shopware_Controllers_Backend_BuckarooBillinkRefund extends Shopware_Contro
             $amountCredit += $order->getInvoiceShipping();
         }
 
+        $remaining = $transaction->getRemainingAmount($order);
+        if ($amountCredit > $remaining) {
+            $amountCredit = $remaining;
+        }
+
         // Recalculate based on items to avoid rounding issues
         $request->setAmountCredit(number_format($amountCredit, 2));
         $request->setOriginalTransactionKey($transactionKey);
@@ -282,21 +287,6 @@ class Shopware_Controllers_Backend_BuckarooBillinkRefund extends Shopware_Contro
         $em->flush();
     }
 
-    private function isFullyRefunded($order, $transaction)
-    {
-        $details = $order->getDetails();
-
-        $orderedItems = array();
-        foreach ($details as $detail) {
-            for ($quantitytId = 1; $quantitytId <= $detail->getQuantity(); $quantitytId++) {
-                $orderedItems[] = $detail->getArticleNumber() . '-' . $quantitytId;
-            }
-        }
-
-        $refundedItems = $transaction->getRefundedItems();
-
-        return (count((array_diff($orderedItems, $refundedItems))) == 0);
-    }
 
     public function setTransactionStatus($transaction, $orderStatus)
     {

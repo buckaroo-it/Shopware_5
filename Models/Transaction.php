@@ -543,6 +543,141 @@ class Transaction
         return $this->CustomerName;
     }
 
+    public function isFullyRefunded($order): bool {
+        return $order->getInvoiceAmount() - $this->getRefundAmount($order) < 0.05;
+    }
+
+    public function getRefundAmount($order) {
+        return $this->getItemRefundAmount($order) + $this->getPushRefundAmount();
+    }
+
+    public function getRemainingAmount($order) {
+        $amount =  $order->getInvoiceAmount() - $this->getRefundAmount($order);
+        if ($amount < 0 ) {
+            return 0;
+        }
+        return $amount;
+    }
+
+    /**
+     * Add or update push refund data
+     *
+     * @param string $pushKey
+     * @param array $data
+     *
+     * @return void
+     */
+    public function addPushRefund($pushKey, $data) {
+        $pushRefund = $this->getPushRefunds();
+        if (
+            !is_array($data) ||
+            !isset($data['amount']) ||
+            !isset($data['status']) ||
+            !is_string($pushKey)
+        ) {
+            return;
+        }
+
+        $pushRefund[$pushKey] = $data;
+        
+        $this->addExtraInfo(['bk_sw5_push_refunds' => $pushRefund]);
+    }
+
+    /**
+     * Get push refunds from extra info
+     *
+     * @return array
+     */
+    private function getPushRefunds() {
+        $extraInfo = $this->getExtraInfo();
+        if (
+            !isset($extraInfo['bk_sw5_push_refunds']) ||
+            !is_array($extraInfo['bk_sw5_push_refunds'])
+        ) {
+            return [];
+        }
+        return $extraInfo['bk_sw5_push_refunds'];
+    }
+
+    /**
+     * Get refund amount from push
+     *
+     * @return float
+     */
+    private function getPushRefundAmount() {
+        $pushRefunds = $this->getPushRefunds();
+        $amount = 0;
+
+        foreach ($pushRefunds as $pushRefund) {
+            if (
+                !is_array($pushRefund) ||
+                !isset($pushRefund['amount']) ||
+                !is_scalar($pushRefund['amount']) ||
+                !isset($pushRefund['status']) ||
+                $pushRefund['status'] !== 'success'
+            ) {
+                continue;
+            }
+            $amount += (float)$pushRefund['amount'];
+        }
+        return $amount;
+    }
 
 
+    /**
+     * Get refund amount from items
+     *
+     * @param $order
+     *
+     * @return float
+     */
+    private function getItemRefundAmount($order) {
+
+        $orderDetails = $order->getDetails();
+        
+        $amount = 0;
+        $refundedItems = $this->getRefundedItems();
+        $refundedItemsQty = [];
+
+        foreach ($refundedItems as $refundedItem)
+        {
+            $parts = explode("-", $refundedItem);
+            if (!isset($parts[0])) {
+                continue;
+            }
+            $articleNumber = $parts[0];
+            if(!isset($refundedItemsQty[$articleNumber])) {
+                $refundedItemsQty[$articleNumber] = 0;
+            }
+            $refundedItemsQty[$articleNumber]+= 1;
+        }
+
+        if (in_array('SW8888', $refundedItems)) {
+            $amount += $order->getInvoiceShipping();
+        }
+
+        foreach ($refundedItemsQty as $articleNumber => $qty) {
+            $amount+= (number_format($this->getOrderDetailPrice($orderDetails, $articleNumber), 2) * $qty);
+        }
+
+        return $amount;
+    }
+
+    /**
+     * Find article by article number and get the price
+     *
+     * @param array $orderDetails
+     * @param string $articleNumber
+     *
+     * @return float
+     */
+    private function getOrderDetailPrice($orderDetails, $articleNumber)
+    {
+        foreach($orderDetails as $orderDetail) {
+            if($orderDetail->getArticleNumber() === $articleNumber) {
+                return $orderDetail->getPrice();
+            }
+        }
+        return 0.0;
+    }
 }

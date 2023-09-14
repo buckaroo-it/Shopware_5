@@ -451,21 +451,6 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
         SimpleLog::log('Billink-capturePush', $data);
     }
 
-    public function refundPushAction($data = false)
-    {
-        if(!$data){
-            return $this->sendResponse('Refund Push - no data');
-        }
-        
-        $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
-        if (count($order)) {
-            $refundOrder = Shopware()->Modules()->Order();
-            $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
-        }
-
-        $data = "POST:\n" . print_r($_POST, true) . "\n";
-        SimpleLog::log('Billink-refundPush', $data);
-    }
 
     public function cancelAuthorizePushAction()
     {
