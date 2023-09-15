@@ -82,6 +82,7 @@ class Shopware_Controllers_Frontend_BuckarooBillink extends SimplePaymentControl
                         PaymentStatus::RESERVED,
                         false// sendStatusMail
                     );
+                    $this->setOrderInSession($orderNumber);
                 }
 
                 $transaction->setOrderNumber($orderNumber)
