@@ -101,7 +101,7 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
                     $this->setRefundedItems($transaction, $items);
                 }
 
-                $isFullyRefunded = $this->isFullyRefunded($order, $transaction);
+                $isFullyRefunded = $transaction->isFullyRefunded($order);
 
                 $orderStatus = $isFullyRefunded ? PaymentStatus::REFUNDED : PaymentStatus::PARTIALLY_PAID;
 
@@ -143,6 +143,10 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
 
     public function executeRefund($request, $transaction, $refundValue, $class, $order, $refundedArticleIds, $orderDetailId)
     {
+        $remaining = $transaction->getRemainingAmount($order);
+        if ($refundValue > $remaining) {
+            $refundValue = $remaining;
+        }
 
         $request->setCurrency($transaction->getCurrency());
         $request->setAmountCredit($refundValue);
@@ -204,6 +208,10 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
                 $amountCredit += (number_format($order->getInvoiceShipping(), 2));
             }
 
+            if ($amountCredit > $remaining) {
+                $amountCredit = $remaining;
+            }
+
             // Recalculate based on items to avoid rounding issues
             $request->setAmountCredit($amountCredit);
 
@@ -238,24 +246,6 @@ class Shopware_Controllers_Backend_BuckarooRefund extends Shopware_Controllers_A
 
         $em->flush();
 
-    }
-
-
-    private function isFullyRefunded($order, $transaction)
-    {
-
-        $details = $order->getDetails();
-
-        $orderedItems = array();
-        foreach ($details as $detail) {
-            for ($quantitytId = 1; $quantitytId <= $detail->getQuantity(); $quantitytId++) {
-                $orderedItems[] = $detail->getArticleNumber() . '-' . $quantitytId;
-            }
-        }
-
-        $refundedItems = $transaction->getRefundedItems();
-
-        return (count((array_diff($orderedItems, $refundedItems))) == 0);
     }
 
     public function setTransactionStatus($transaction, $orderStatus)

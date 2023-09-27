@@ -137,7 +137,7 @@ class Shopware_Controllers_Backend_BuckarooKlarnaRefund extends Shopware_Control
                     $this->setRefundedItems($transaction, $items);
                 }
 
-                $isFullyRefunded = $this->isFullyRefunded($order, $transaction);
+                $isFullyRefunded = $transaction->isFullyRefunded($order);
 
                 $orderStatus = $isFullyRefunded ? PaymentStatus::REFUNDED : PaymentStatus::PARTIALLY_PAID;
 
@@ -179,6 +179,11 @@ class Shopware_Controllers_Backend_BuckarooKlarnaRefund extends Shopware_Control
 
     public function executeRefund($request, $transaction, $refundValue, $class, $order, $invoice)
     {
+
+        $remaining = $transaction->getRemainingAmount($order);
+        if ($refundValue > $remaining) {
+            $refundValue = $remaining;
+        }
 
         $refund_count = $transaction->getCountRefund();
         $amount_refund = empty($refund_count) ? '1' : (string)($refund_count + 1);
@@ -224,6 +229,11 @@ class Shopware_Controllers_Backend_BuckarooKlarnaRefund extends Shopware_Control
             if (in_array('SW8888', $invoice['itemIDs'])) {
                 $amountCredit += $order->getInvoiceShipping();
             }
+
+            if ($amountCredit > $remaining) {
+                $amountCredit = $remaining;
+            }
+
             // Recalculate based on items to avoid rounding issues
             $request->setAmountCredit(number_format($amountCredit, 2));
             $em->flush();
@@ -268,24 +278,6 @@ class Shopware_Controllers_Backend_BuckarooKlarnaRefund extends Shopware_Control
         $transaction->setCountRefund($amount_refund);
         $em->persist($transaction);
         $em->flush();
-    }
-
-
-    private function isFullyRefunded($order, $transaction)
-    {
-
-        $details = $order->getDetails();
-
-        $orderedItems = array();
-        foreach ($details as $detail) {
-            for ($quantitytId = 1; $quantitytId <= $detail->getQuantity(); $quantitytId++) {
-                $orderedItems[] = $detail->getArticleNumber() . '-' . $quantitytId;
-            }
-        }
-
-        $refundedItems = $transaction->getRefundedItems();
-
-        return (count((array_diff($orderedItems, $refundedItems))) == 0);
     }
 
     public function setTransactionStatus($transaction, $orderStatus)

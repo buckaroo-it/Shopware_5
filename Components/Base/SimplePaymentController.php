@@ -2,20 +2,21 @@
 
 namespace BuckarooPayment\Components\Base;
 
+use Exception;
+use Shopware\Models\Order\Order;
+use BuckarooPayment\Components\Helpers;
+use BuckarooPayment\Models\Transaction;
+use BuckarooPayment\Components\SimpleLog;
+use BuckarooPayment\Components\SessionCase;
+use Shopware\Models\Order\Status as OrderStatus;
+use Shopware\Bundle\StoreFrontBundle\Struct\Currency;
+use BuckarooPayment\Components\Constants\PaymentStatus;
+use BuckarooPayment\Components\JsonApi\Payload\Request;
+use BuckarooPayment\Components\Constants\ResponseStatus;
 use BuckarooPayment\Components\Base\AbstractPaymentMethod;
+
 use BuckarooPayment\Components\Base\AbstractPaymentController;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
-use BuckarooPayment\Components\JsonApi\Payload\Request;
-use BuckarooPayment\Components\Constants\PaymentStatus;
-use BuckarooPayment\Components\Constants\ResponseStatus;
-use BuckarooPayment\Components\Helpers;
-use BuckarooPayment\Components\SessionCase;
-use BuckarooPayment\Components\SimpleLog;
-use Shopware\Bundle\StoreFrontBundle\Struct\Currency;
-use Shopware\Models\Order\Order;
-use Shopware\Models\Order\Status as OrderStatus;
-
-use Exception;
 
 abstract class SimplePaymentController extends AbstractPaymentController
 {
@@ -696,12 +697,55 @@ abstract class SimplePaymentController extends AbstractPaymentController
         $order = $this->getOrderByInvoiceId(intval($data->getInvoice()));
         if(!empty($order)){
             $refundOrder = Shopware()->Modules()->Order();
-            $refundOrder->setPaymentStatus($order->getId(), PaymentStatus::REFUNDED, false);
+            $transaction = $this->updateTransactionWithRefundData($data);
+            $status = PaymentStatus::REFUNDED;
+            if ($transaction !== null) {
+                $status = $transaction->isFullyRefunded($order) ? PaymentStatus::REFUNDED : PaymentStatus::PARTIALLY_PAID;
+            }
+            $refundOrder->setPaymentStatus($order->getId(), $status, false);
         }
 
         $data = "POST:\n" . print_r($_POST, true) . "\n";
         SimpleLog::log('refundPush', $data);
         return $this->sendResponse('Refund Push - OK');
+    }
+
+
+    /**
+     * Update transaction with refund data
+     *
+     * @param \BuckarooPayment\Components\JsonApi\Payload\PaymentResult $data
+     *
+     * @return Transaction|null
+     */
+    private function updateTransactionWithRefundData($data) {
+        $transactionManager = $this->container->get('buckaroo_payment.transaction_manager');
+        if($transactionManager === null) {
+            return;
+        }
+        $transaction = $transactionManager->getByQuoteNumber($data->getInvoice());
+
+        if (!$transaction instanceof Transaction) {
+            SimpleLog::log('unknown transaction');
+            return;
+        }
+
+        $creditAmount = $data->getAmountCredit();
+        $transactionKey = $data->getTransactionKey();
+
+        if (!is_scalar($creditAmount) || !is_string($transactionKey))
+        {
+            return;
+        }
+
+        $transaction->addPushRefund(
+            $transactionKey,
+            [
+                "amount" => (float)$data->getAmountCredit(),
+                "status" => $data->getStatusCode() == '190' ? 'success': 'failed'
+            ]
+        );
+        return $transactionManager->save($transaction);
     }
 
     public function addArticlesStock()
