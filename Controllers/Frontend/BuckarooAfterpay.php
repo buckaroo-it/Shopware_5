@@ -336,6 +336,7 @@ class Shopware_Controllers_Frontend_BuckarooAfterpay extends SimplePaymentContro
                         false // sendStatusMail
                     );
                 }
+                $this->setOrderInSession($orderNumber);
 
                 $transaction->setOrderNumber($orderNumber)
                             ->setStatus(PaymentStatus::RESERVED)

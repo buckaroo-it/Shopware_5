@@ -37,6 +37,15 @@ abstract class SimplePaymentController extends AbstractPaymentController
         $this->Front()->Plugins()->ViewRenderer()->setNoRender();
     }
 
+    protected function setOrderInSession($orderNumber) {
+        $session = Shopware()->Session();
+        $orderVariables = $session->get('sOrderVariables');
+        $orderVariables->sOrderNumber = $orderNumber;
+        $session->set('sOrderVariables', $orderVariables);
+        $session->save();
+        $session->set('sOrderVariables', $orderVariables);
+    }
+
     /**
      * Get the paymentmethod-class with the payment name
      * 
@@ -253,6 +262,7 @@ abstract class SimplePaymentController extends AbstractPaymentController
 
                     $transaction->setOrderNumber($orderNumber);
                 }
+                $this->setOrderInSession($orderNumber);
 
                 $transaction->setStatus($this->getPaymentStatus($response->getStatusCode()));
                 $transactionManager->save($transaction);
