@@ -24,7 +24,7 @@ jobs:
             cd Media
             cp -R "Payment methods/SVG/." ${{ github.workspace }}/Views/frontend/_resources/images/payments/
             cd ${{ github.workspace }}/Views/frontend/_resources/images/payments/
-            rm -f ideal-qr.svg knaken.svg paylink.svg paybybank.svg pos.svg alipay.svg buckaroovoucher.svg creditclick.svg tinka.svg vouchers.svg wechatpay.svg payperemail.svg belfius.svg in3.svg trustly.svg
+            rm -f ideal-qr.svg knaken.svg paylink.svg paybybank.svg pos.svg alipay.svg buckaroovoucher.svg creditclick.svg tinka.svg vouchers.svg wechatpay.svg payperemail.svg belfius.svg in3.svg trustly.svg mbway.svg multibanco.svg pos-nfc.svg riverty.svg
       - name: Copy creditcards icons
         run: |
             cd Media

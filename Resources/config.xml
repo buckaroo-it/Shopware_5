@@ -59,6 +59,64 @@
             </store>
         </element>
 
+        <element type="combo" scope="shop">
+            <name>buckaroo_financial_warning</name>
+            <label lang="de">Consumer Financial Warning</label>
+            <label lang="en">Consumer Financial Warning</label>
+            <label lang="nl">Financiële Waarschuwing</label>
+            <value>all</value>
+            <description lang="de">Due to the regulations for BNPL methods in The Netherlands you’ll  have to warn customers about using a BNPL plan because it can be easy to get into debt. When enabled a warning will be showed in the checkout. Please note that this setting only applies for customers in The Netherlands.</description>
+            <description lang="en">Due to the regulations for BNPL methods in The Netherlands you’ll  have to warn customers about using a BNPL plan because it can be easy to get into debt. When enabled a warning will be showed in the checkout. Please note that this setting only applies for customers in The Netherlands.</description>
+            <description lang="nl">Vanwege de voorschriften voor achteraf betaalmethoden in Nederland dien je klanten te waarschuwen voor het gebruik van een achteraf betaalmethode omdat het gemakkelijk kan leiden tot schulden. Wanneer deze functie is ingeschakeld, wordt er een waarschuwing weergegeven tijdens het afrekenen. Let op dat deze instelling alleen van toepassing is op klanten in Nederland.</description>
+            <store>
+                <option>
+                    <value>all</value>
+                    <label lang="de">All</label>
+                    <label lang="en">All</label>
+                    <label lang="nl">All</label>
+                </option>
+                <option>
+                    <value>buckaroo_klarna</value>
+                    <label lang="de">Klarna</label>
+                    <label lang="en">Klarna</label>
+                    <label lang="nl">Klarna</label>
+                </option>
+                <option>
+                    <value>buckaroo_afterpayacceptgiro</value>
+                    <label lang="de">Riverty | AfterPay Eenmalige Machtiging</label>
+                    <label lang="en">Riverty | AfterPay Eenmalige Machtiging</label>
+                    <label lang="nl">Riverty | AfterPay Eenmalige Machtiging</label>
+                </option>
+                <option>
+                    <value>buckaroo_afterpaydigiaccept</value>
+                    <label lang="de">Riverty | AfterPay Digitale Factuur</label>
+                    <label lang="en">Riverty | AfterPay Digitale Factuur</label>
+                    <label lang="nl">Riverty | AfterPay Digitale Factuur</label>
+                </option>
+                <option>
+                    <value>buckaroo_afterpayb2bdigiaccept</value>
+                    <label lang="de">Riverty | AfterPay Digitale Factuur B2B</label>
+                    <label lang="en">Riverty | AfterPay Digitale Factuur B2B</label>
+                    <label lang="nl">Riverty | AfterPay Digitale Factuur B2B</label>
+                </option>
+                <option>
+                    <value>buckaroo_afterpaynew</value>
+                    <label lang="de">Riverty | AfterPay</label>
+                    <label lang="en">Riverty | AfterPay</label>
+                    <label lang="nl">Riverty | AfterPay</label>
+                </option>
+                <option>
+                    <value>buckaroo_billink</value>
+                    <label lang="de">Billink - achteraf betalen</label>
+                    <label lang="en">Billink - achteraf betalen</label>
+                    <label lang="nl">Billink - achteraf betalen</label>
+                </option>
+            </store>
+            <options>
+                <multiSelect>true</multiSelect>
+            </options>
+        </element>
+
         <element type="select" scope="shop">
             <name>buckaroo_ideal_env</name>
             <label lang="de">iDEAL</label>

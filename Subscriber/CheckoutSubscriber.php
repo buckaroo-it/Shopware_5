@@ -144,9 +144,31 @@ class CheckoutSubscriber implements SubscriberInterface
             'paymentKey' => $paymentKey,
             'paymentFee' => Helpers::floatToPrice($paymentFee),
             'isEncrypted' => $isEncrypted,
+            'showFinancialWarning' => $this->canShowFinancialWarning($config, $paymentData['name']),
             'buckarooExtraFields' => (!empty($userId)) ? $this->loadExtraFields() : null,
             'vatId' => $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] ? $this->session->sOrderVariables['sUserData']['billingaddress']['vatId'] : ''
         ]);
+    }
+
+    private function canShowFinancialWarning($config, $paymentName)
+    {
+        $showOnMethods = $config->getShowFinancialWarningMethods();
+        
+        $isAll = is_array($showOnMethods) && count($showOnMethods) === 1 && end($showOnMethods) === 'all';
+
+        return in_array($paymentName, [
+            'buckaroo_klarna',
+            'buckaroo_afterpayacceptgiro',
+            'buckaroo_afterpaydigiaccept',
+            'buckaroo_afterpayb2bdigiaccept',
+            'buckaroo_afterpaynew',
+            'buckaroo_billink',
+        ]) && (
+            $isAll || (
+                is_array($showOnMethods) &&
+                in_array($paymentName, $showOnMethods)
+            )
+        );
     }
 
     /**
