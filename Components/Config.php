@@ -140,6 +140,11 @@ class Config
         return $this->get('buckaroo_creditcard_handling', 'redirect') == 'encrypt';
     }
 
+    public function getShowFinancialWarningMethods()
+    {
+        return $this->get('buckaroo_financial_warning', ['all']);
+    }
+
     /**
      * Whether to use pay or authorize/capture method for Afterpay
      * true = pay

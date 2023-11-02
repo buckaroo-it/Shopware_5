@@ -310,4 +310,11 @@
 
     {/if}
 
+
+    {if $billingCountryIso eq 'NL' && $showFinancialWarning}
+        {block name='frontend_checkout_confirm_financial_warning'}
+            <p style="margin-top:5px;font-size:0.8rem">Je moet minimaal 18+ zijn om deze dienst te gebruiken. Als je op tijd betaalt, voorkom je extra kosten en zorg je dat je in de toekomst nogmaals gebruik kunt maken van de diensten van {$sUserData.additional.payment.description}. Door verder te gaan, accepteer je de Algemene Voorwaarden en bevestig je dat je de Privacyverklaring en Cookieverklaring hebt gelezen.</p>
+        {/block}
+    {/if}
+
 {/block}
