@@ -11,7 +11,7 @@ class Shopware_Controllers_Frontend_BuckarooIdeal extends SimplePaymentControlle
     public function indexActionPreHandler()
     {
         SimpleLog::log(__METHOD__ . "|1|" , $this->getPaymentMethodClass()->getSelectedIssuer());
-        if ($this->getPaymentMethodClass()->getSelectedIssuer()) {
+        if ($this->getPaymentMethodClass()->getSelectedIssuer() || !$this->getPaymentMethodClass()->canShowIdealIssuers()) {
             return true;
         } else {
             $namespace = $this->container->get('snippets')->getNamespace('frontend/buckaroo/status_messages');
@@ -41,7 +41,9 @@ class Shopware_Controllers_Frontend_BuckarooIdeal extends SimplePaymentControlle
     {
         parent::fillRequest($paymentMethod, $request);
 
-        // set ideal issuer
-        $request->setServiceParameter('issuer', $paymentMethod->getSelectedIssuer());
+        if ($paymentMethod->canShowIdealIssuers()) {
+            // set ideal issuer
+            $request->setServiceParameter('issuer', $paymentMethod->getSelectedIssuer());
+        }
     }
 }
