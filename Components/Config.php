@@ -289,4 +289,14 @@ class Config
     {
         return $this->get('buckaroo_applepay_merchant_guid');
     }
+
+     /**
+     * Can show ideal issuers
+     *
+     * @return boolean
+     */
+    public function canShowIdealIssuers()
+    {
+        return $this->get('buckaroo_ideal_show_issuers', "yes") !== "no";
+    }
 }

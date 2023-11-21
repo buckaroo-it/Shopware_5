@@ -227,6 +227,7 @@ class Ideal extends AbstractPaymentMethod
         });
 
         $fields['lists']['issuers'] = $issuers;
+        $fields['lists']['canShowIssuers'] = $this->canShowIdealIssuers();
 
         return $fields;
     }
@@ -256,8 +257,15 @@ class Ideal extends AbstractPaymentMethod
         return $checkData;
     }
 
+    public function canShowIdealIssuers() {
+        return Shopware()->Container()->get('buckaroo_payment.config')->canShowIdealIssuers();
+    }
+
     public function getValidations()
     {
+        if (!$this->canShowIdealIssuers()) {
+            return [];
+        }
         $snippetManager = Shopware()->Container()->get('snippets');
         $validationMessages = $snippetManager->getNamespace('frontend/buckaroo/validation');
 
