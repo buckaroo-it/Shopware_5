@@ -2,12 +2,13 @@
 
 namespace BuckarooPayment\PaymentMethods;
 
+use BuckarooPayment\Components\Helpers;
+use BuckarooPayment\Components\Validation\Validator;
 use BuckarooPayment\Components\Base\AbstractPaymentMethod;
 use BuckarooPayment\Components\JsonApi\Payload\DataRequest;
 use BuckarooPayment\Components\JsonApi\Payload\DataResponse;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionRequest;
 use BuckarooPayment\Components\JsonApi\Payload\TransactionResponse;
-use BuckarooPayment\Components\Validation\Validator;
 
 class AfterPayNew extends AbstractPaymentMethod
 {
@@ -66,7 +67,7 @@ class AfterPayNew extends AbstractPaymentMethod
      */
     public function validCountries()
     {
-        return [ 'BE', 'NL' ];
+        return [ 'BE', 'NL', "DE" ];
     }
 
     /**
@@ -194,6 +195,15 @@ class AfterPayNew extends AbstractPaymentMethod
             $billingCountryIso = empty($billingCountry) ? '' : $billingCountry->getIso();
         }
 
+        $birthDayValidation = [
+            [ 
+                'birthday',  
+                'notEmpty', 
+                $validationMessages->get('ValidationUserBirthdayRequired', 'User should have an birthday'), 
+                'ValidationUserBirthdayRequired'
+            ],
+        ];
+
         if(in_array($billingCountryIso, ["NL", "BE"])){
 
             return [
@@ -204,15 +214,12 @@ class AfterPayNew extends AbstractPaymentMethod
                         $validationMessages->get('ValidationBillingPhoneRequired', 'Billingaddress has no phone'),              
                         'ValidationBillingPhoneRequired' ],
                 ],
-                'user' => [
-                    [ 
-                        'birthday',  
-                        'notEmpty', 
-                        $validationMessages->get('ValidationUserBirthdayRequired', 'User should have an birthday'), 
-                        'ValidationUserBirthdayRequired' ],
-                ]
+                'user' => $birthDayValidation
             ];
-
+        } else if ($billingCountryIso == "DE"){
+            return [
+                'user' => $birthDayValidation
+            ];
         } else if ($billingCountryIso == "FI"){
 
             return [
@@ -225,12 +232,7 @@ class AfterPayNew extends AbstractPaymentMethod
                 ]
             ];
 
-        } else {
-
-            return [];
         }
-
-
-
+        return [];
     }
 }
