@@ -171,15 +171,17 @@
 
         <li class="block-group row--tos">
 
-            {if $paymentName|strstr:"buckaroo_afterpaynew" ne false && ($billingCountryIso eq 'NL' || $billingCountryIso eq 'BE')}
+            {if $paymentName|strstr:"buckaroo_afterpaynew" ne false && ($billingCountryIso eq 'NL' || $billingCountryIso eq 'BE' || $billingCountryIso eq 'DE')}
             
                 {assign var="name" value="afterpaynew"}
 
                 {include file='frontend/_includes/fields/user_id.tpl'       name=$name}
                 {include file='frontend/_includes/fields/user_birthday.tpl' name=$name}
 
-                {include file='frontend/_includes/fields/billing_id.tpl'    name=$name}
-                {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
+                {if $billingCountryIso ne 'DE'}
+                    {include file='frontend/_includes/fields/billing_id.tpl'    name=$name}
+                    {include file='frontend/_includes/fields/billing_phone.tpl' name=$name}
+                {/if}
 
                 <input type="hidden" name="payment" value="{$paymentId}">
             {/if}

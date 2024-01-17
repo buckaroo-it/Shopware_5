@@ -52,6 +52,21 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
     }
 
     /**
+     * Action to create a payment
+     * And redirect to Buckaroo
+     */
+    public function payAction()
+    {
+
+        $validationMessage = $this->validateHouseNumbers();
+        
+        if ($validationMessage !== null && strlen($validationMessage) > 0) {
+            return $this->redirectBackToCheckout()->addMessage($validationMessage);
+        }
+        return parent::payAction();
+    }
+
+    /**
      * Action to reserve a payment
      */
     public function authorizeAction()
@@ -60,6 +75,11 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
         $em = $this->container->get('models');
         $transaction = null;
 
+        $validationMessage = $this->validateHouseNumbers();
+        
+        if ($validationMessage !== null && strlen($validationMessage) > 0) {
+            return $this->redirectBackToCheckout()->addMessage($validationMessage);
+        }
         try
         {
             $request = $this->createRequest();
@@ -138,6 +158,23 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
                 'Error creating payment. ' . ($this->shouldDisplayErrors() ? $ex->getMessage() : "Contact plugin author.")
             );
         }
+    }
+
+    private function validateHouseNumbers() {
+         $userData = Shopware()->Container()->get('session')->sOrderVariables['sUserData'];
+        if (!isset($userData['billingaddress']) || !$this->isValidHouseNumber($userData['billingaddress'])) {
+            return 'Invalid billing address, a house number is required for this payment method';
+        }
+
+        if (!isset($userData['shippingaddress']) || !$this->isValidHouseNumber($userData['shippingaddress'])) {
+            return 'Invalid shipping address, a house number is required for this payment method';
+        }
+        return null;
+    }
+
+    private function isValidHouseNumber($address) {
+        $parts = Helpers::stringSplitStreet($address['street']);
+        return is_string($parts['number']) && !empty(trim($parts['number']));
     }
 
     /**
@@ -368,6 +405,8 @@ class Shopware_Controllers_Frontend_BuckarooAfterpayNew extends SimplePaymentCon
                 $request->setServiceParameter($typeBelgiumPhone, Helpers::stringFormatPhone($shipping['phone']), 'ShippingCustomer');
             }
         
+        } else if ($shippingCountryIso == "DE"){
+            $request->setServiceParameter('BirthDate', $birthDay, 'ShippingCustomer');
         } else if ($shippingCountryIso == "FI"){
             // Finland required field:
             $request->setServiceParameter('IdentificationNumber',   $paymentMethod->getUserUserIdentification(),            'ShippingCustomer');
